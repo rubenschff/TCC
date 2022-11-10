@@ -7,11 +7,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int     @id @default(autoincrement())
-  name     String? @db.VarChar(255)
-  email    String  @unique @db.VarChar(255)
-  password String  @db.VarChar(255)
-  createdAt DateTime @updatedAt
+model tb_alternativa {
+  id_alternativa                                         Int               @id(map: "pk_tb_alternativa") @default(autoincrement())
+  tx_descricao                                           String            @db.VarChar(255)
+  id_problema                                            Int
+  tb_problema_tb_alternativa_id_problemaTotb_problema    tb_problema       @relation("tb_alternativa_id_problemaTotb_problema", fields: [id_problema], references: [id_problema], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_problema")
+  tb_problema_tb_alternativaTotb_problema_id_alternativa tb_problema[]     @relation("tb_alternativaTotb_problema_id_alternativa")
+  tb_resposta                                            tb_resposta[]
+  tb_resposta_log                                        tb_resposta_log[]
 }
 
+model tb_explicacao {
+  id_explicacao Int         @id(map: "pk_tb_explicacao") @default(autoincrement())
+  tx_descricao  String      @db.VarChar(255)
+  id_problema   Int
+  tb_problema   tb_problema @relation(fields: [id_problema], references: [id_problema], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_problema")
+}
+
+model tb_problema {
+  id_problema                                               Int               @id(map: "pk_id_problema") @default(autoincrement())
+  tx_descricao                                              String            @db.VarChar(255)
+  id_alternativa                                            Int
+  tb_alternativa_tb_alternativaTotb_problema_id_alternativa tb_alternativa    @relation("tb_alternativaTotb_problema_id_alternativa", fields: [id_alternativa], references: [id_alternativa], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_alternativa")
+  tb_alternativa_tb_alternativa_id_problemaTotb_problema    tb_alternativa[]  @relation("tb_alternativa_id_problemaTotb_problema")
+  tb_explicacao                                             tb_explicacao[]
+  tb_resposta                                               tb_resposta[]
+  tb_resposta_log                                           tb_resposta_log[]
+}
+
+model tb_resposta {
+  id_resposta    Int            @id(map: "pk_tb_resposta") @default(autoincrement())
+  nr_tentativas  Int
+  id_problema    Int
+  id_usuario     Int
+  id_alternativa Int
+  tb_alternativa tb_alternativa @relation(fields: [id_alternativa], references: [id_alternativa], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_alternativa")
+  tb_problema    tb_problema    @relation(fields: [id_problema], references: [id_problema], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_problema")
+  tb_usuario     tb_usuario     @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_usuario")
+}
+
+model tb_resposta_log {
+  id_resposta_log Int            @id(map: "pk_tb_resposta_log") @default(autoincrement())
+  dt_cadastro     DateTime       @db.Timestamp(6)
+  id_usuario      Int
+  id_problema     Int
+  id_alternativa  Int
+  tb_alternativa  tb_alternativa @relation(fields: [id_alternativa], references: [id_alternativa], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_alternativa")
+  tb_problema     tb_problema    @relation(fields: [id_problema], references: [id_problema], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_problema")
+  tb_usuario      tb_usuario     @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "fk_id_usuario")
+}
+
+model tb_usuario {
+  id_usuario      Int               @id(map: "pk_tb_usuario") @default(autoincrement())
+  tx_nome         String            @db.VarChar(255)
+  tx_senha        String            @db.VarChar(255)
+  nr_token        Int
+  dt_nascimento   DateTime          @db.Timestamp(6)
+  tb_resposta     tb_resposta[]
+  tb_resposta_log tb_resposta_log[]
+}

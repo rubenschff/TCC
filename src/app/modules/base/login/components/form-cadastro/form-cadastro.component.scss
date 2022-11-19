@@ -1,0 +1,23 @@
+@import 'src/sass/_placeholders';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 280px;
+
+  h1, a {
+    display: block;
+    margin: 0px auto;
+  }
+
+  ac-input-text, a, h1, ac-input-date {
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: $laranja;
+    font-weight: bold;
+    font-size: 30px;
+  }
+}

@@ -1,0 +1,14 @@
+<label [ngClass]="picker['nzDisabled'] ? 'desabilitado' : null">
+    {{ label }}
+</label>
+<nz-date-picker #picker
+  [(ngModel)]="value"
+  [ngClass]="[datePickerClass, widthClass]"
+  [nzPlaceHolder]="placeholder"
+  [nzDisabled]="this.estado === inputEstadoEnum.DESABILITADO"
+  [nzInputReadOnly]="this.estado === inputEstadoEnum.READONLY"
+  [nzDropdownClassName]="picker['nzInputReadOnly'] ? 'ocultar-calendario' : ''"
+  [nzAutoFocus]="focused"
+  nzFormat="dd/MM/yyyy">
+</nz-date-picker>
+

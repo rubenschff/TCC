@@ -1,0 +1,74 @@
+@import 'variables';
+/************** TIPO DA FONTES ***********************/
+%font-bold-11 {
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+%font-medium-12 {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+}
+
+%font-normal-13 {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+%font-normal-14 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+}
+
+%font-italic-14 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    font-style: italic;
+}
+
+%font-semibold-14 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+}
+
+%font-bold-18 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+%font-bold-20 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+%font-bold-22 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+/************** COR DO TEXTO ***********************/
+%texto-escuro {
+    color: $texto-escuro !important;
+}
+
+%texto-claro {
+    color: $texto-claro !important;
+}
+
+%link {
+    @extend %font-medium-12;
+    color: $link !important;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

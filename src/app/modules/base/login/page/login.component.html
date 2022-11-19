@@ -1,0 +1,12 @@
+<div class="imagem">
+  <img [src]="URL_IMAGEM" alt="Cofre de porquinho. Imagem de Login."/>
+</div>
+<div *ngIf="mostrarLogin else formCadastro" class="form">
+  <ac-form-login (eventAbrirCadastro)="trocarLoginCadastro()"></ac-form-login>
+</div>
+
+<ng-template #formCadastro>
+  <div class="form">
+    <ac-form-cadastro (eventAbrirLogin)="trocarLoginCadastro()"></ac-form-cadastro>
+  </div>
+</ng-template>

@@ -1,0 +1,31 @@
+@import 'variables';
+
+:host {
+    display: flex;
+    line-height: 60px;
+
+    img {
+        margin: auto 40px;
+        width: 90px;
+        height: 32px;
+    }
+
+    div {
+        margin: 10px 40px 10px auto;
+        height: 40px;
+        width: 104px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        line-height: 40px;
+
+        span {
+            font-size: 24px;
+            color: $tema-azul-01;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<h1>Entrar</h1>
+
+<ac-input-text
+  label="Token ID"
+  placeholder="Informa seu TOKEN ID..."
+  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
+
+<ac-input-text
+  label="Senha"
+  placeholder="Informa sua senha..."
+  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
+
+<a (click)="eventAbrirCadastro.emit()">Criar cadastro</a>
+
+<ac-button text="Login"></ac-button>

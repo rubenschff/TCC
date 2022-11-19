@@ -1,0 +1,20 @@
+<h1>Cadastro</h1>
+
+<ac-input-text
+  label="Nome"
+  placeholder="Informa seu Nome..."
+  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
+
+<ac-input-text
+  label="Senha"
+  placeholder="Informa sua senha..."
+  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
+
+<ac-input-date
+  label="Data de Nascimento"
+  placeholder="Informa sua data de nascimento..."
+  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-date>
+
+<a (click)="eventAbrirLogin.emit()">Realizar login</a>
+
+<ac-button text="Salvar"></ac-button>

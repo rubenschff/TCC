@@ -1,0 +1,16 @@
+<label [ngClass]="input.disabled ? 'desabilitado' : null">
+    {{ label }}
+</label>
+<nz-input-group [nzSuffix]="mostrarIconeSenha ? suffixPassword : undefined" [ngClass]="[inputGroupClass, focusClass]">
+    <input nz-input #input [ngClass]="[inputClass, widthClass]" [(ngModel)]="value" [placeholder]="placeholder"
+        [disabled]="this.estado === inputEstadoEnum.DESABILITADO"
+        [readonly]="this.estado === inputEstadoEnum.READONLY"
+        [type]="this.tipo === inputTextTipoEnum.SENHA && !this.senhaVisivel ? 'password' : 'text'"
+        (focus)="focusClass = 'focus'" (blur)="focusClass = ''" />
+</nz-input-group>
+<ng-template #suffixPassword>
+    <em nz-icon
+        [nzType]="senhaVisivel ? 'eye-invisible' : 'eye'"
+        (click)="senhaVisivel = !senhaVisivel"
+    ></em>
+</ng-template>

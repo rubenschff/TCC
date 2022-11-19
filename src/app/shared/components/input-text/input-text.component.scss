@@ -1,0 +1,67 @@
+@import 'src/sass/_placeholders';
+@import 'src/sass/_variables';
+
+$responsivo: responsivo;
+
+$width-array: 90 160 230 300 360 $responsivo;
+
+label {
+    @extend %font-medium-12;
+    @extend %texto-claro;
+    margin-bottom: 3px !important;
+    display: block;
+
+    &.desabilitado {
+        opacity: 0.4;
+    }
+}
+
+input,
+.corrigir-input-group {
+    @extend %texto-escuro;
+    @extend %font-normal-14;
+    border: 2px solid $cinza-02;
+    border-radius: 4px !important;
+    padding: 9px 12px;
+    box-shadow: none !important;
+
+    @each $width in $width-array {
+        &.width-#{$width} {
+            @if $width==$responsivo {
+                width: 100%;
+            } @else {
+                width: #{$width}px;
+            }
+        }
+    }
+
+    &:hover {
+        border-color: $cinza-01;
+    }
+
+    &::placeholder {
+        @extend %font-italic-14;
+        @extend %texto-claro;
+    }
+
+    &.obrigatorio {
+        border-left: 5px solid $laranja !important;
+    }
+
+    &:disabled {
+        background: $cinza-02;
+        border-color: $cinza-02;
+        opacity: 0.4;
+    }
+
+    &[readonly] {
+        background: $cinza-02;
+        border-color: $cinza-02;
+        cursor: auto;
+    }
+}
+
+input:not(:disabled, [readonly]):focus,
+.focus:not(:disabled, [readonly]) {
+    border-color: $tema-azul-01;
+}

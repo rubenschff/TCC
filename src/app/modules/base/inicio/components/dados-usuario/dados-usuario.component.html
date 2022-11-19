@@ -1,0 +1,28 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm()" nzLayout="vertical" autocomplete="off">
+    <div>
+        <nz-form-item>
+            <nz-form-control>
+                <ac-input-text label="Nome" [value]="nome" [focused]="true" formControlName="nome" placeholder="Nome">
+                </ac-input-text>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <ac-input-text label="CNPJ" [value]="cnpj" [estado]="_inputTextEstadoEnum.READONLY" [width]="230">
+                </ac-input-text>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <ac-input-text label="E-mail" [value]="email" formControlName="email" placeholder="E-mail">
+                </ac-input-text>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+
+    <ly-img-cropper class="image-cropper" [config]="myConfig" (ready)="ready = true" (cleaned)="ready = false"
+        (cropped)="onCropped($event)" (loaded)="onLoaded($event)" (error)="onError($event)">
+        <span>Drag and drop image</span>
+    </ly-img-cropper>
+
+</form>

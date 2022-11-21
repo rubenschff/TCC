@@ -1,8 +1,11 @@
-<img [src]="LOGO_SYSMO" />
+<span nz-popover
+  nzPopoverTrigger="click" [nzPopoverContent]="contentTemplate"
+  nzPopoverOverlayClassName="popover"> Opções
+</span>
 
-<div>
-    <nz-badge [nzCount]="5" class="icone-notificacao">
-        <span nz-icon nzType="bell" nzTheme="outline" (click)="abrirNotificacoes()"></span>
-    </nz-badge>
-    <ac-usuario></ac-usuario>
-</div>
+<ng-template #contentTemplate>
+  <nz-list>
+    <nz-list-item>Meus dados</nz-list-item>
+    <nz-list-item>Sair</nz-list-item>
+  </nz-list>
+</ng-template>

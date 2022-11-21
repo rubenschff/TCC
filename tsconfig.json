@@ -9,7 +9,8 @@
         "@modules/*": ["app/modules/*"],
         "@models/*": ["app/models/*"],
         "@shared/*": ["app/shared/*"],
-        "@static/*": ["app/static/*"]
+        "@static/*": ["app/static/*"],
+        "@assets/*": ["assets/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

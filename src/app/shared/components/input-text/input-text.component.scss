@@ -6,7 +6,7 @@ $responsivo: responsivo;
 $width-array: 90 160 230 300 360 $responsivo;
 
 label {
-    @extend %font-medium-12;
+    @extend %font-normal-12;
     @extend %texto-claro;
     margin-bottom: 3px !important;
     display: block;

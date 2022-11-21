@@ -6,7 +6,7 @@
     line-height: 13px;
 }
 
-%font-medium-12 {
+%font-normal-12 {
     font-size: 12px;
     font-weight: 500;
     line-height: 15px;
@@ -65,7 +65,7 @@
 }
 
 %link {
-    @extend %font-medium-12;
+    @extend %font-normal-12;
     color: $link !important;
 
     &:hover {

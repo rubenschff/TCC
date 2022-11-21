@@ -4,14 +4,17 @@ import { InicioComponent } from '@modules/base/inicio/page/inicio.component';
 
 const routes: Routes = [
     {
-        path: '',
-        component: InicioComponent,
-        children: [
-        ]
-    },
-    {
-        path: '**',
-        redirectTo: ''
+      path: '',
+      component: InicioComponent,
+      children: [
+        {
+          path: '',
+          loadChildren: () => import('@modules/features/mapa-jogo/mapa-jogo.module').then(m => m.MapaJogoModule)
+        }
+      ]
+    }, {
+      path: '**',
+      redirectTo: ''
     }
 ];
 

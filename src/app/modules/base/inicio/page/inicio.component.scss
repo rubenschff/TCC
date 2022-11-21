@@ -1,0 +1,29 @@
+@import 'src/sass/_placeholders';
+
+nz-header {
+  background-color: $verde;
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.342);
+
+  span {
+    @extend %font-normal-14;
+    display: block;
+    box-sizing: content-box;
+    margin: auto 0px;
+    padding: 5px;
+    color: white;
+    &:hover {
+      cursor: pointer;
+      border: 1px solid white;
+      border-radius: 2px;
+    }
+  }
+}
+
+nz-layout, nz-content, router-outlet, ac-mapa-jogo {
+  height: 100%;
+  width: 100%;
+}
+

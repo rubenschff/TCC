@@ -6,6 +6,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { HeaderComponent } from './components/header/header.component';
+import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { HeaderComponent } from './components/header/header.component';
       InicioRoutingModule,
       NzLayoutModule,
       NzPopoverModule,
-      NzListModule
+      NzListModule,
+      NzSegmentedModule
     ],
     declarations: [InicioComponent, HeaderComponent]
 })

@@ -1,7 +1,4 @@
-<span nz-popover
-  nzPopoverTrigger="click" [nzPopoverContent]="contentTemplate"
-  nzPopoverOverlayClassName="popover"> Opções
-</span>
+<nz-segmented [nzOptions]="['Inicio', 'Responda para ganhar moedas', 'Invista moedas para ter mais', 'Conta', 'Sair']"></nz-segmented>
 
 <ng-template #contentTemplate>
   <nz-list>

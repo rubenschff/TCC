@@ -3,6 +3,17 @@
 :host {
   display: flex;
   justify-content: flex-end;
+  padding: 10px;
+
+  nz-segmented {
+    display: flex;
+    height: 100%;
+    background-color: transparent !important;
+
+    & > div {
+      color: red;
+    }
+  }
 
   span {
     @extend %font-normal-14;

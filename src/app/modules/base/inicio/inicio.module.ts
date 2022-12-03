@@ -7,10 +7,13 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { HeaderComponent } from './components/header/header.component';
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
       CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
       InicioRoutingModule,
       NzLayoutModule,
       NzPopoverModule,

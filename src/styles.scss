@@ -97,6 +97,7 @@ nz-segmented label {
   color: white;
   padding: 0px 15px;
 
-  &.ant-segmented-item-selected {
+  &.ant-segmented-item:hover {
+    color: rgb(208, 204, 204);
   }
 }

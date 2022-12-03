@@ -1,13 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ac-questoes',
   templateUrl: './questoes.component.html',
   styleUrls: ['./questoes.component.scss']
 })
-export class QuestoesComponent {
+export class QuestoesComponent implements OnInit {
 
-  visivelPerguntas = false;
+  visivelPerguntas = true;
 
-  constructor() {}
+  ngOnInit(): void {
+    this.visivelPerguntas = true;
+  }
+
+  clickPergunta(numero: number) {
+    this.visivelPerguntas = false;
+  }
 }

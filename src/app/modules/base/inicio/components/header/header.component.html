@@ -1,8 +1,6 @@
-<nz-segmented [nzOptions]="['Inicio', 'Responda para ganhar moedas', 'Invista moedas para ter mais', 'Conta', 'Sair']"></nz-segmented>
+<nz-segmented
+  [nzOptions]="listaItensNavBar"
+  [ngModel]="indexNavBarSelecionado"
+  (nzValueChange)="clickItemNavBar($event)"
+  ></nz-segmented>
 
-<ng-template #contentTemplate>
-  <nz-list>
-    <nz-list-item>Meus dados</nz-list-item>
-    <nz-list-item>Sair</nz-list-item>
-  </nz-list>
-</ng-template>

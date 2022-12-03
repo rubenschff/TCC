@@ -1,20 +1,29 @@
 <h1>Cadastro</h1>
+<form nz-form [formGroup]="form" (ngSubmit)="cadastrar()" nzLayout="vertical" autocomplete="off">
+  <nz-form-item>
+    <nz-form-control>
+        <ac-input-text label="Nome" placeholder="Informa seu Nome..." [estado]="inputEstadoEnum.OBRIGATORIO"
+          [focused]="true" formControlName="nome">
+        </ac-input-text>
+    </nz-form-control>
+  </nz-form-item>
 
-<ac-input-text
-  label="Nome"
-  placeholder="Informa seu Nome..."
-  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
+  <nz-form-item>
+    <nz-form-control>
+        <ac-input-text label="Senha" placeholder="Informa sua senha..." [estado]="inputEstadoEnum.OBRIGATORIO"
+          formControlName="senha" [tipo]="inputTextTipoEnum.SENHA">
+        </ac-input-text>
+    </nz-form-control>
+  </nz-form-item>
 
-<ac-input-text
-  label="Senha"
-  placeholder="Informa sua senha..."
-  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
+  <nz-form-item>
+    <nz-form-control>
+        <ac-input-date label="Data de Nascimento" placeholder="Informa sua data de nascimento..."
+          [estado]="inputEstadoEnum.OBRIGATORIO" formControlName="dataNascimento">
+        </ac-input-date>
+    </nz-form-control>
+  </nz-form-item>
 
-<ac-input-date
-  label="Data de Nascimento"
-  placeholder="Informa sua data de nascimento..."
-  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-date>
-
-<a (click)="eventAbrirLogin.emit()">Realizar login</a>
-
-<ac-button text="Salvar"></ac-button>
+  <a (click)="eventAbrirLogin.emit()">Realizar login</a>
+  <ac-button text="Salvar"></ac-button>
+</form>

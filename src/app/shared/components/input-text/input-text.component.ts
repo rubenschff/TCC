@@ -73,7 +73,8 @@ export class InputTextComponent implements OnInit, AfterViewInit, ControlValueAc
         this.focused && setTimeout(() => this.input?.nativeElement.focus(), 500);
     }
 
-    private _onChange = (_: string | null) => {};
+    private _onChange = (_: string | null) => {
+    };
 
     public registerOnChange(fn: (value: string | null) => void): void {
         this._onChange = fn;

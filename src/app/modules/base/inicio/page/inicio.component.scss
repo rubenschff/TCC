@@ -26,8 +26,12 @@ nz-layout, nz-content, router-outlet, nz-content > * {
   width: 100%;
 }
 
+nz-content {
+  min-height: 663px;
+}
+
 nz-layout {
-  background: #5e5eb9c7 url('../../../../../assets/universo.jpg') no-repeat fixed center;
+  background: #5e5eb9c7 url('../../../../../assets/universo.jpg') repeat fixed center;
   background-size: cover;
 }
 

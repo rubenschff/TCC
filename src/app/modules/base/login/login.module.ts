@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '@shared/components/button/button.module';
 import { InputDateModule } from '@shared/components/input-date/input-date.module';
 import { InputTextModule } from '@shared/components/input-text/input-text.module';
@@ -15,12 +16,15 @@ import { LoginComponent } from './page/login.component';
         LoginRoutingModule,
         InputTextModule,
         ButtonModule,
-        InputDateModule
+        InputDateModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
       LoginComponent,
       FormLoginComponent,
       FormCadastroComponent
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginModule {}

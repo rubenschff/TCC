@@ -1,6 +1,6 @@
 @import 'src/sass/_placeholders';
 
-:host {
+form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -11,7 +11,7 @@
     margin: 0px auto;
   }
 
-  ac-input-text, a, h1, ac-input-date {
+  nz-form-item, a, h1 {
     margin-bottom: 20px;
   }
 

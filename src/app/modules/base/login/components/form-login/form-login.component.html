@@ -1,15 +1,25 @@
 <h1>Entrar</h1>
+<form nz-form [formGroup]="form" (ngSubmit)="login()" nzLayout="vertical" autocomplete="off">
+  <nz-form-item>
+    <nz-form-control>
+        <ac-input-text
+          label="Token ID" placeholder="Informa seu TOKEN ID..." [estado]="inputEstadoEnum.OBRIGATORIO"
+          formControlName="token" [focused]="true">
+        </ac-input-text>
+    </nz-form-control>
+  </nz-form-item>
 
-<ac-input-text
-  label="Token ID"
-  placeholder="Informa seu TOKEN ID..."
-  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
 
-<ac-input-text
-  label="Senha"
-  placeholder="Informa sua senha..."
-  [estado]="inputEstadoEnum.OBRIGATORIO"></ac-input-text>
+  <nz-form-item>
+    <nz-form-control>
+        <ac-input-text
+          label="Senha" placeholder="Informa sua senha..." [estado]="inputEstadoEnum.OBRIGATORIO"
+          formControlName="senha" [tipo]="inputTextTipoEnum.SENHA">
+        </ac-input-text>
+    </nz-form-control>
+  </nz-form-item>
 
-<a (click)="eventAbrirCadastro.emit()">Criar cadastro</a>
+  <a (click)="eventAbrirCadastro.emit()">Criar cadastro</a>
 
-<ac-button text="Login"></ac-button>
+  <ac-button text="Login"></ac-button>
+</form>

@@ -1,10 +1,10 @@
 <ng-container *ngIf="visivelPerguntas; else painelPergunta">
   <div class="container">
-    <div class="questao" *ngFor="let numero of [1,2,3,4,5]; index as i;">
+    <button class="questao" *ngFor="let numero of [1,2,3,4,5]; index as i;" (click)="clickPergunta(numero)">
       <span>
         {{ numero }}
       </span>
-    </div>
+    </button>
   </div>
 </ng-container>
 

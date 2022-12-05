@@ -1,4 +1,6 @@
+import { SituacaoPerguntaEnum } from '@static/enumerators/situacao-pergunta.enum';
 import { DateHelper } from '@static/helpers/date.helper';
+import { ListaRespostaDTO } from '@static/models/pergunta/lista-resposta.dto';
 import { PerguntaRespostaDTO } from '@static/models/pergunta/pergunta-resposta.dto';
 import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
 import { RespostaDTO } from '@static/models/pergunta/resposta.dto';
@@ -99,20 +101,32 @@ export class PerguntaMock {
     return [q1, q2, q3];
   }
 
-  static find(codigoUsuario: number): PerguntaRespostaDTO {
-    // let respostas = this.respostas
-    //   .filter(x => {
-    //     let filtro = x.codigoUsuario == codigoUsuario
+  static find(codigoUsuario: number, codigoPergunta?: number): PerguntaRespostaDTO {
 
-    //     return filtro;
-    //   })
-    //   .sort((x1: RespostaDTO, x2: RespostaDTO) => DateHelper.parseStringToDate(x1.dataCadastro).getTime() - DateHelper.parseStringToDate(x2.dataCadastro).getTime())
-    //   .map(x => x.codigoAlternativa);
+    let perguntas = this.getPerguntas();
 
-    let respostas = new Array<number>();
+    let respostas = this.respostas
+      .filter(x => {
+        let filtro = x.codigoUsuario == codigoUsuario
 
+        return filtro;
+      })
+      .sort((x1: RespostaDTO, x2: RespostaDTO) =>
+        DateHelper.parseStringToDate(x1.dataCadastro).getTime() - DateHelper.parseStringToDate(x2.dataCadastro).getTime()
+      );
 
-    let pergunta = this.getPerguntas()[0];
+    let codigoRespostas = new Array<number>();
+    let pergunta = perguntas[0];
+
+    if (respostas.length > 0) {
+      if (!codigoPergunta) {
+        codigoPergunta = respostas[respostas.length - 1].codigoPergunta;
+      }
+
+      codigoRespostas = respostas.filter(x => x.codigoPergunta == codigoPergunta).map(x => x.codigoAlternativa);
+
+      pergunta = this.getPerguntas().find(x => x.id == codigoPergunta)!;
+    }
 
     if (!pergunta) {
       throw Error('Pergunta não encontrada!');
@@ -121,19 +135,56 @@ export class PerguntaMock {
     let perguntaResposta: PerguntaRespostaDTO = {
       codigoUsuario,
       pergunta,
-      respostas
+      respostas: codigoRespostas
     }
 
     return perguntaResposta;
   }
 
-  static add(codigoUsuario: number, codigoPergunta: number, codigoAlternativa: number): boolean {
+  static findAll(codigoUsuario: number): Array<ListaRespostaDTO> {
+    let retorno = new Array<ListaRespostaDTO>();
 
+    let ultimaFinalizada = true;
+
+    this.getPerguntas().forEach(pergunta => {
+      let respostas = this.respostas
+      .filter(x => x.codigoUsuario == codigoUsuario && x.codigoPergunta == pergunta.id)
+      .map(x => x.codigoAlternativa);
+
+      let situacao!: number;
+
+      if (respostas.includes(pergunta.alternativaCorreta) && respostas.length < 3) {
+        situacao = SituacaoPerguntaEnum.ACERTOU;
+        ultimaFinalizada = true;
+      } else if (respostas.length == 3) {
+        situacao = SituacaoPerguntaEnum.ERROU;
+        ultimaFinalizada = true;
+      } else if (!respostas.includes(pergunta.alternativaCorreta) && ultimaFinalizada) {
+        situacao = SituacaoPerguntaEnum.EM_ABERTO;
+        ultimaFinalizada = false;
+      } else if (!ultimaFinalizada) {
+        situacao = SituacaoPerguntaEnum.BLOQUEADO;
+      }
+
+      let perguntaRetorno: ListaRespostaDTO = {
+        codigoUsuario: codigoUsuario,
+        respostas,
+        codigoPergunta: pergunta.id,
+        situacao
+      }
+
+      retorno.push(perguntaRetorno);
+    });
+
+    return retorno;
+  }
+
+  static add(codigoUsuario: number, codigoPergunta: number, codigoAlternativa: number): boolean {
     let respota: RespostaDTO = {
       codigoUsuario,
       codigoPergunta,
       codigoAlternativa,
-      dataCadastro: DateHelper.dateTime
+      dataCadastro: DateHelper.formatDateTime(new Date())
     }
 
     this.respostas.push(respota);

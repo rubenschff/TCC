@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { AlternativaDTO } from '@static/models/pergunta/alternativa.dto';
 import { PerguntaRespostaDTO } from '@static/models/pergunta/pergunta-resposta.dto';
@@ -13,9 +13,13 @@ import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.c
 })
 export class QuestaoComponent implements OnInit {
 
-  readonly URL_DOLLAR_ASTRONAUTA = '../../../../../assets/dollar_astronauta.png';
-  readonly URL_TERRA = '../../../../../assets/terra.png';
-  readonly URL_LUA = '../../../../../assets/lua.png';
+  @Input() codigoPergunta?: number;
+  @Output() eventHistoricoClick = new EventEmitter<void>();
+
+  readonly URL_COMETA = './assets/cometa.png';
+  readonly URL_DOLLAR_ASTRONAUTA = './assets/dollar_astronauta.png';
+  readonly URL_TERRA = './assets/terra.png';
+  readonly URL_LUA = './assets/lua.png';
 
   alternativaSelecionada = 0;
   desabilitarResponder = true;
@@ -25,8 +29,6 @@ export class QuestaoComponent implements OnInit {
 
   perguntaResposta!: PerguntaRespostaDTO;
 
-  @ViewChild('radiogroup', { static: true }) input?: ElementRef<HTMLInputElement>;
-
   constructor(
     private modal: NzModalService) {}
 
@@ -35,7 +37,23 @@ export class QuestaoComponent implements OnInit {
   }
 
   atualizar() {
-    this.perguntaResposta = PerguntaMock.find(StorageHelper.codigoUsuario);
+    this.perguntaResposta = PerguntaMock.find(StorageHelper.codigoUsuario, this.codigoPergunta);
+    this.desabilitarAlternativa = this.perguntaResposta.respostas;
+
+    let pergunta = this.perguntaResposta.pergunta;
+
+    if (!this.codigoPergunta) {
+      this.codigoPergunta = pergunta.id;
+    }
+    debugger
+    if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
+      this.alternativaSelecionada = pergunta.alternativaCorreta;
+      this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
+    } else {
+      this.alternativaSelecionada = 0;
+      this.desabilitarResponder = true;
+      this.desabilitarProximo = true;
+    }
   }
 
   changeAlternativa() {
@@ -51,6 +69,10 @@ export class QuestaoComponent implements OnInit {
     let alternativa = pergunta.alternativas.find(x => x.id == this.alternativaSelecionada)!;
 
     let respostaCerta = pergunta.alternativaCorreta == alternativa.id;
+
+    PerguntaMock.add(StorageHelper.codigoUsuario, pergunta.id, alternativa.id);
+
+    this.atualizar();
 
     if (respostaCerta) {
       this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
@@ -81,5 +103,11 @@ export class QuestaoComponent implements OnInit {
       },
       nzFooter: []
     });
+  }
+
+  proximo() {
+    debugger
+    this.codigoPergunta!++;
+    this.atualizar();
   }
 }

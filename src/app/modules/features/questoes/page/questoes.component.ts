@@ -7,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestoesComponent implements OnInit {
 
-  visivelPerguntas = true;
+  visivelPerguntas!: boolean;
+
+  codigoPergunta?: number;
 
   ngOnInit(): void {
-    this.visivelPerguntas = true;
+    this.visivelPerguntas = false;
   }
 
-  clickPergunta(numero: number) {
-    this.visivelPerguntas = false;
+  trocarVisualizacao() {
+    this.visivelPerguntas = !this.visivelPerguntas;
   }
 }

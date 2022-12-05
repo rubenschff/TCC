@@ -19,16 +19,23 @@
     </div>
   </div>
   <div class="inferior">
-      <img [src]="URL_DOLLAR_ASTRONAUTA" alt="Astronauta contando dolar">
-      <div>
-        <button [disabled]="desabilitarResponder" (click)="responder()">
-          <img [src]="URL_TERRA">
-          <span>Responder</span>
-        </button>
-        <button [disabled]="desabilitarProximo">
-          <img [src]="URL_LUA">
-          <span>Próxima</span>
-        </button>
-      </div>
+    <div>
+      <button (click)="eventHistoricoClick.emit()"
+        [style.display]="perguntaResposta.pergunta.id == 1 && perguntaResposta.respostas.length == 0 ? 'none' : 'block'">
+        <img [src]="URL_COMETA">
+        <span>Histórico de respostas</span>
+      </button>
+    </div>
+    <img [src]="URL_DOLLAR_ASTRONAUTA" alt="Astronauta contando dolar">
+    <div>
+      <button [disabled]="desabilitarResponder" (click)="responder()">
+        <img [src]="URL_TERRA">
+        <span>Responder</span>
+      </button>
+      <button [disabled]="desabilitarProximo" (click)="proximo()">
+        <img [src]="URL_LUA">
+        <span>Próxima</span>
+      </button>
+    </div>
   </div>
 </div>

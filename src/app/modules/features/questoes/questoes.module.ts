@@ -12,6 +12,7 @@ import { ExplicacaoPopupComponent } from './components/explicacao-popup/explicac
 import { QuestionCircleTwoTone } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ListaQuestoesComponent } from './components/lista-questoes/lista-questoes.component';
 
 const icons: IconDefinition[] = [ QuestionCircleTwoTone ];
 
@@ -27,7 +28,7 @@ const icons: IconDefinition[] = [ QuestionCircleTwoTone ];
       NzIconModule.forRoot(icons),
       NzModalModule
     ],
-    declarations: [QuestoesComponent, QuestaoComponent, ExplicacaoPopupComponent]
+    declarations: [QuestoesComponent, QuestaoComponent, ExplicacaoPopupComponent, ListaQuestoesComponent]
 })
 export class QuestoesModule {
 

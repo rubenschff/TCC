@@ -1,13 +1,7 @@
 <ng-container *ngIf="visivelPerguntas; else painelPergunta">
-  <div class="container">
-    <button class="questao" *ngFor="let numero of [1,2,3,4,5]; index as i;" (click)="clickPergunta(numero)">
-      <span>
-        {{ numero }}
-      </span>
-    </button>
-  </div>
+  <ac-lista-questoes (eventPerguntaClick)="codigoPergunta = $event; trocarVisualizacao()"></ac-lista-questoes>
 </ng-container>
 
 <ng-template #painelPergunta>
-  <ac-questao></ac-questao>
+  <ac-questao (eventHistoricoClick)="trocarVisualizacao()" [codigoPergunta]="codigoPergunta"></ac-questao>
 </ng-template>

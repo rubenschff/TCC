@@ -10,7 +10,7 @@ export class DateHelper {
     }
 
     static formatDateTime(data: Date): string {
-        return data ? dateFormat(data, 'yyyy-mm-dd HH:MM:00') : '';
+        return data ? dateFormat(data, 'yyyy-mm-dd HH:MM:ss') : '';
     }
     /**
      * Caso a string possua apenas a data.
@@ -18,7 +18,7 @@ export class DateHelper {
      * @returns Objeto data correto.
      */
     static parseStringToDate(date: string): Date {
-        return new Date(`${date} 00:00:00`);
+        return new Date(`${date}`);
     }
 
     static addHoraMinuto(date: Date, horaMinuto?: string): Date {

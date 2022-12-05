@@ -39,7 +39,6 @@ export class UsuarioMock {
   }
 
   static login(token: number, senha: string, validar = true): UsuarioDTO | undefined {
-    debugger
     let retorno = this.usuarios.find(x => x.token! === token && x.senha === senha);
 
     if (validar && !retorno) {

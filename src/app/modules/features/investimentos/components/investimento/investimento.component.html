@@ -1,0 +1,16 @@
+<nz-card nzHoverable [nzCover]="coverTemplate" [nzActions]="[tplSobre, tplComprar, tplVender]" (click)="cardClick()">
+  <nz-card-meta [nzTitle]="investimento.descricao"></nz-card-meta>
+</nz-card>
+
+<ng-template #coverTemplate>
+  <img [src]="investimento.imagem">
+</ng-template>
+<ng-template #tplSobre>
+  <span>Sobre</span>
+</ng-template>
+<ng-template #tplComprar>
+  <span>Comprar</span>
+</ng-template>
+<ng-template #tplVender>
+  <span>Vender</span>
+</ng-template>

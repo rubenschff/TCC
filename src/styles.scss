@@ -51,21 +51,16 @@ main {
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    display: none;
-
-    &-button {
-        display: none;
-    }
 
     &-thumb,
     &-thumb:hover {
-        background-color: #c0c0c0;
+        background-color: #8c8f8c;
         border-radius: 10px;
     }
 
     &-track,
     &-track:hover {
-        background-color: #e2e2e2;
+        background-color: transparent !important;
     }
 }
 
@@ -99,5 +94,88 @@ nz-segmented label {
 
   &.ant-segmented-item:hover {
     color: rgb(208, 204, 204);
+  }
+}
+
+/**** RADIO QUESTÃO ****/
+.questao nz-radio-group label {
+  & > span:first-child {
+
+    input:focus + span {
+      box-shadow: inset;
+    }
+
+    span {
+      border: 1px solid #472a98;
+    }
+
+    &:hover span {
+      border-color: #5470af;
+    }
+
+    &.ant-radio-checked span {
+      border-color: #5470af;
+      box-shadow: 0 0 0 2px #5470af5c;
+
+      &::after {
+        background-color: #5470af;
+      }
+    }
+  }
+
+  & > span:last-child {
+    display: flex;
+
+    #text {
+      display: block;
+    }
+  }
+}
+
+/****** CARDS *******/
+nz-card ul {
+  width: 100%;
+  background-color: transparent !important;
+}
+
+ac-comparacao nz-input-number input {
+  height: 25px !important;
+  @extend %font-normal-13;
+}
+
+.conceito p, .pergunta p {
+  text-indent: 40px;
+  text-align: justify;
+  margin-bottom: 0px;
+}
+
+
+
+/******* POPUP EXPLICACAO ********/
+.explicacao-popup {
+  &.errou {
+    .ant-modal-content {
+      background-color: #ffb7b7;
+    }
+
+    div[nz-modal-title] {
+      background-color: #ffb7b7;
+      border-bottom-color: #b2b2b2;
+    }
+  }
+
+  &.acertou {
+    .ant-modal-content {
+      background-color: #96de96;
+    }
+
+    div[nz-modal-title] {
+      background-color: #96de96;
+      border-bottom-color: #b2b2b2;
+    }
+  }
+
+  div[nz-modal-footer] {
+    display: none;
   }
 }

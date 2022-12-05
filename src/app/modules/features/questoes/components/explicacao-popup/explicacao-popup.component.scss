@@ -1,0 +1,16 @@
+@import 'src/sass/_placeholders';
+
+:host {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    text-indent: 40px;
+    text-align: justify;
+    width: 190px;
+  }
+
+  img {
+    width: 150px;
+  }
+}

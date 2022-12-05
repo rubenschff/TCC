@@ -1,0 +1,34 @@
+@import 'src/sass/_placeholders';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+
+  & > * {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px !important;
+    color: white;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0px !important;
+  }
+
+  h1 {
+    @extend %font-bold-18;
+  }
+
+  nz-divider {
+    border-color: white;
+  }
+
+  ac-button {
+    width: 100%;
+  }
+
+  span {
+    @extend %font-normal-14;
+  }
+}

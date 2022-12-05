@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RotasConstant } from '@static/constants/rotas.constant';
+import { StorageHelper } from '@static/helpers/storage.helper';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 
 @Component({
@@ -22,6 +23,7 @@ export class LoginComponent {
   }
 
   entrar(usuario: UsuarioDTO) {
+    StorageHelper.setCodigoUsuario(usuario.id!);
     this.router.navigate([RotasConstant.INICIO]);
   }
 }

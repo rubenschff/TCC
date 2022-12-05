@@ -11,8 +11,10 @@ const routes: Routes = [
         {
           path: RotasConstant.QUESTOES,
           loadChildren: () => import('@modules/features/questoes/questoes.module').then(m => m.QuestoesModule)
-        },
-        {
+        }, {
+          path: RotasConstant.INVESTIMENTOS,
+          loadChildren: () => import('@modules/features/investimentos/investimentos.module').then(m => m.InvestimentosModule)
+        }, {
             path: '**',
             loadChildren: () => import('@modules/features/mapa-jogo/mapa-jogo.module').then(m => m.MapaJogoModule)
         }

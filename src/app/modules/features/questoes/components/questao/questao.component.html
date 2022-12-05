@@ -1,45 +1,32 @@
 <div class="container">
   <div class="conceito">
-    <div class="explicacao">
-      <p>O dinheiro é o nosso mais forte aliado. Com ele, podemos sair com os amigos, comprar comida e roupas lindas de astronauta...
-        O dinheiro pode comprar experiências incríveis. Mas para isso acontecer, precisamos saber usar ele da melhor forma possível.  </p>
-      <p>
-        Por primeiro, vamos diferenciar preço e valor das coisas.
-        O preço é o quanto você vai pagar por algo ou o quanto vai ter que se esforçar para ter aquilo.
-        Já o valor representa quanto algo é importante para você.
-        Quando comparamos o preço e o valor, podemos decidir se o preço vale a pena ser pago para conseguir aquilo que é importante para nós.
-      </p>
-      <p>
-        • Se aquilo que vamos comprar é importante para nós, então vale a pena gastar nosso dinheiro.
-      </p>
-      <p>
-        • Se aquilo que vamos comprar não é tão importante, talvez não seja tão necessario gastar esse dinheiro.
-      </p>
-      <p>
-        • Se aquilo que vamos comprar não é importante, então não devemos comprar.
-      </p>
-    </div>
+    <div class="explicacao" [innerHTML]="perguntaResposta.pergunta.explicacao"></div>
     <div class="questao">
-      <p>
-        Se você tivesse dinheiro sobrando, quais das situações a seguir seriam as melhores opções para gastar esse dinheiro:
-      </p>
+      <div [innerHTML]="perguntaResposta.pergunta.descricao"></div>
+
       <nz-divider></nz-divider>
-      <mat-radio-group #radiogroup>
-        <mat-radio-button value="1">Comprar um sapato novo, mesmo possuindo varios sapatos que você gosta.</mat-radio-button>
-        <mat-radio-button value="2">Comer alguma coisa na lanchonete, ainda que não esteja com fome.</mat-radio-button>
-        <mat-radio-button value="3">Sair com seus melhores amigos.</mat-radio-button>
-      </mat-radio-group>
+      <nz-radio-group [(ngModel)]="alternativaSelecionada" (ngModelChange)="changeAlternativa()">
+        <div *ngFor="let alternativa of perguntaResposta.pergunta.alternativas">
+          <label #label nz-radio [nzValue]="alternativa.id" [nzDisabled]="desabilitarAlternativa.includes(alternativa.id)">
+            {{ alternativa.descricao }}
+          </label>
+
+          <span nz-icon nzType="question-circle" nzTheme="twotone" nzTwotoneColor="#2008B3"
+            [style.display]="label.nzDisabled? 'block' : 'none'"
+            (click)="abrirPopup(alternativa)"></span>
+        </div>
+      </nz-radio-group>
     </div>
   </div>
   <div class="inferior">
       <img [src]="URL_DOLLAR_ASTRONAUTA" alt="Astronauta contando dolar">
       <div>
-        <button class="historico">
-          <img [src]="URL_TERRA" alt="Folha de papiro">
+        <button [disabled]="desabilitarResponder" (click)="responder()">
+          <img [src]="URL_TERRA">
           <span>Responder</span>
         </button>
-        <button class="historico">
-          <img [src]="URL_LUA" alt="Folha de papiro">
+        <button [disabled]="desabilitarProximo">
+          <img [src]="URL_LUA">
           <span>Próxima</span>
         </button>
       </div>

@@ -1,7 +1,7 @@
 @import 'src/sass/_placeholders';
 
 .container {
-  padding: 50px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -25,11 +25,8 @@
     background-color: white;
     border-radius: 30px;
     padding: 30px;
-
-
     height: auto;
     position: relative;
-    margin-top: 30px;
 
     &:after {
       content: "";
@@ -42,27 +39,38 @@
       /*Aqui entra a cor da "aba" do balão */
       border-top: 20px solid white;
       top: 100%; /*localização. Experimente alterar para 'bottom'*/
-      left: 51%;
+      left: 48%;
     }
 
     .explicacao {
-      width: 45%;
+      width: 48%;
 
       p {
         margin-bottom: 0px;
       }
     }
     .questao {
-      width: 45%;
-      mat-radio-group {
+      width: 48%;
+
+      nz-radio-group {
         display: flex;
         flex-direction: column;
+        font-size: 14px;
 
-        mat-radio-button {
-          margin-bottom: 10px;
+        div {
+          display: flex;
 
-          &.mat-radio-checked .mat-radio-label {
-            background-color: red;
+          label {
+            margin-bottom: 10px;
+            width: 100%;
+          }
+
+          & > span {
+            margin-top: 5px;
+
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }
@@ -75,7 +83,7 @@
     flex-direction: row;
     justify-content: space-between;
     & > img {
-      width: 300px;
+      width: 200px;
     }
 
     & > div {
@@ -96,6 +104,13 @@
           cursor: pointer;
           background-color: white;
           color: black;
+        }
+
+        &:disabled {
+          cursor: auto;
+          background-color: transparent;
+          color: white;
+          opacity: 0.8;
         }
       }
       img {

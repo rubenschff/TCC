@@ -1,16 +1,32 @@
-<nz-card nzHoverable [nzCover]="coverTemplate" [nzActions]="[tplSobre, tplComprar, tplVender]" (click)="cardClick()">
-  <nz-card-meta [nzTitle]="investimento.descricao"></nz-card-meta>
+<nz-card nzHoverable [class.ocultar-actions]="!(mostrarInvestir || mostrarResgatar)"
+[class.ocultar-investir]="!mostrarInvestir" [class.ocultar-resgatar]="!mostrarResgatar"
+  [nzActions]="[tplSobre, tplComprar, tplVender]">
+  <nz-card-tab>
+    <nz-tabset nzSize="small">
+      <nz-tab nzTitle="Comparar">
+        <nz-card-meta [nzTitle]="investimento.descricao" [nzAvatar]="coverTemplate" (click)="cardClick()"></nz-card-meta>
+      </nz-tab>
+      <nz-tab nzTitle="Acompanhar">
+        <ac-acompanhamento [codigoInvestimento]="investimento.id"></ac-acompanhamento>
+      </nz-tab>
+    </nz-tabset>
+  </nz-card-tab>
+
 </nz-card>
 
 <ng-template #coverTemplate>
   <img [src]="investimento.imagem">
 </ng-template>
 <ng-template #tplSobre>
-  <span>Sobre</span>
+  <span class="bottom-items">Sobre</span>
 </ng-template>
 <ng-template #tplComprar>
-  <span>Comprar</span>
+  <ng-container *ngIf="mostrarInvestir">
+    <span class="bottom-items" (click)="clickOperar(true)">Investir</span>
+  </ng-container>
 </ng-template>
 <ng-template #tplVender>
-  <span>Vender</span>
+  <ng-container *ngIf="mostrarResgatar">
+    <span class="bottom-items" (click)="clickOperar(false)">Resgatar</span>
+  </ng-container>
 </ng-template>

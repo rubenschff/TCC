@@ -28,10 +28,10 @@ export class ComparacaoComponent {
   }
 
   formatterDollar(value: number): string {
-    return `$ ${value?.toFixed(2).toString().replace('.', ',')}`;
+    return `${value?.toFixed(2).toString().replace('.', ',')}`;
   }
   parserDollar(value: string): string {
-    return value?.replace('R$ ', '');
+    return value;
   }
 
   ajustarValorTotal() {

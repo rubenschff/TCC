@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { AlternativaDTO } from '@static/models/pergunta/alternativa.dto';
 import { PerguntaRespostaDTO } from '@static/models/pergunta/pergunta-resposta.dto';
+import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import { PerguntaMock } from 'app/mocks/pergunta.mocks';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.component';
@@ -45,7 +46,7 @@ export class QuestaoComponent implements OnInit {
     if (!this.codigoPergunta) {
       this.codigoPergunta = pergunta.id;
     }
-    debugger
+
     if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
       this.alternativaSelecionada = pergunta.alternativaCorreta;
       this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
@@ -75,6 +76,7 @@ export class QuestaoComponent implements OnInit {
     this.atualizar();
 
     if (respostaCerta) {
+      this.adicionarValor();
       this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
       this.desabilitarProximo = false;
       this.desabilitarResponder = true;
@@ -106,8 +108,15 @@ export class QuestaoComponent implements OnInit {
   }
 
   proximo() {
-    debugger
     this.codigoPergunta!++;
     this.atualizar();
+  }
+
+  adicionarValor() {
+    let tentativas = this.perguntaResposta.respostas.length;
+
+    if (tentativas < 3) {
+      InvestimentoMock.addValor(StorageHelper.codigoUsuario, this.perguntaResposta.pergunta.recompensa / tentativas);
+    }
   }
 }

@@ -16,7 +16,11 @@ import { ButtonModule } from '@shared/components/button/button.module';
 import { CloseCircleOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { AcompanhamentoComponent } from './components/acompanhamento/acompanhamento.component';
+import { OperarComponent } from './components/operar/operar.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 const icons: IconDefinition[] = [ CloseCircleOutline ];
 
 @NgModule({
@@ -33,8 +37,14 @@ const icons: IconDefinition[] = [ CloseCircleOutline ];
       DecimalPipe,
       NzDividerModule,
       NzIconModule.forRoot(icons),
-      ButtonModule
+      ButtonModule,
+      NzTabsModule,
+      NzModalModule,
+      NzMessageModule
     ],
-    declarations: [InvestimentosComponent, InvestimentoComponent, ComparacaoComponent, DadosFinanceirosComponent]
+    declarations: [
+      InvestimentosComponent, InvestimentoComponent, ComparacaoComponent,
+      DadosFinanceirosComponent, AcompanhamentoComponent, OperarComponent
+    ]
 })
 export class InvestimentosModule {}

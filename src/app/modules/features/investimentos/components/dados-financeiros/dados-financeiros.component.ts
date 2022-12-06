@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { StorageHelper } from '@static/helpers/storage.helper';
 import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
+import { FinanceiroDTO } from '@static/models/investimento/financeiro.dto';
+import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 
 @Component({
   selector: 'ac-dados-financeiros',
@@ -8,37 +11,9 @@ import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
 })
 export class DadosFinanceirosComponent implements OnInit {
 
-  @Input() comparacao!: ComparacaoModel;
-
-  demoValue = 100;
-
-  modelValorInicial = 0;
-  modelTempo = 0;
-  modelJuros = 0;
-  modelValorFinal = 0;
+  dadosFinanceiros!: FinanceiroDTO;
 
   ngOnInit(): void {
-    this.modelValorInicial = this.comparacao.valorInicial;
-    this.modelTempo = this.comparacao.tempo;
-    this.modelJuros = this.comparacao.juro;
-    this.modelValorFinal = this.comparacao.valorFinal();
-  }
-
-  formatterPercent(value: number): string {
-    return `${value?.toFixed(2).toString().replace('.', ',')}% semana`;
-  }
-  parserPercent(value: string): string {
-    return value?.replace('% semana', '');
-  }
-
-  formatterDollar(value: number): string {
-    return `$ ${value?.toFixed(2).toString().replace('.', ',')}`;
-  }
-  parserDollar(value: string): string {
-    return value?.replace('R$ ', '');
-  }
-
-  ajustarValorTotal() {
-    this.modelValorFinal = this.comparacao.valorFinal();
+    this.dadosFinanceiros = InvestimentoMock.findFinanceiro(StorageHelper.codigoUsuario);
   }
 }

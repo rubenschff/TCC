@@ -3,7 +3,6 @@
   <div class="investimentos">
     <div class="titulos">
       <ng-container *ngFor="let investimento of investimentos">
-
         <ac-investimento [investimento]="investimento" (eventCardClick)="adicionarComparar($event)"></ac-investimento>
       </ng-container>
     </div>

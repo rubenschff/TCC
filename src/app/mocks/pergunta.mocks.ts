@@ -102,7 +102,6 @@ export class PerguntaMock {
   }
 
   static find(codigoUsuario: number, codigoPergunta?: number): PerguntaRespostaDTO {
-
     let perguntas = this.getPerguntas();
 
     let respostas = this.respostas

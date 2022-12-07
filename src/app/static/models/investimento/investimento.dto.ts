@@ -5,4 +5,5 @@ export interface InvestimentoDTO {
   juro: number;
   liquidez: number;
   imagem: string;
+  explicacao?: string;
 }

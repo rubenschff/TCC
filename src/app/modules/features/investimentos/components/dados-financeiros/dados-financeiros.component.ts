@@ -3,6 +3,8 @@ import { StorageHelper } from '@static/helpers/storage.helper';
 import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
 import { FinanceiroDTO } from '@static/models/investimento/financeiro.dto';
 import { InvestimentoMock } from 'app/mocks/investimento.mocks';
+import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'ac-dados-financeiros',
@@ -11,7 +13,13 @@ import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 })
 export class DadosFinanceirosComponent implements OnInit {
 
+  readonly URL_ASTRONAUTA = './assets/astronauta-diamante.png';
+
   dadosFinanceiros!: FinanceiroDTO;
+
+  constructor(
+    private modal: NzModalService
+  ) {}
 
   ngOnInit(): void {
     this.dadosFinanceiros = InvestimentoMock.findFinanceiro(StorageHelper.codigoUsuario);

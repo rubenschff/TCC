@@ -21,6 +21,7 @@ import { AcompanhamentoComponent } from './components/acompanhamento/acompanhame
 import { OperarComponent } from './components/operar/operar.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 const icons: IconDefinition[] = [ CloseCircleOutline ];
 
 @NgModule({
@@ -40,7 +41,8 @@ const icons: IconDefinition[] = [ CloseCircleOutline ];
       ButtonModule,
       NzTabsModule,
       NzModalModule,
-      NzMessageModule
+      NzMessageModule,
+      NzDrawerModule
     ],
     declarations: [
       InvestimentosComponent, InvestimentoComponent, ComparacaoComponent,

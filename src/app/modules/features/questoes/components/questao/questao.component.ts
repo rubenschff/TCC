@@ -101,7 +101,7 @@ export class QuestaoComponent implements OnInit {
       nzMaskClosable: false,
       nzComponentParams: {
         explicacao: alternativa?.explicacao,
-        img: respostaCerta ? './assets/dollar_astronauta.png' : './assets/dollar_astronauta.png',
+        img: alternativa.imagem,
       },
       nzFooter: []
     });

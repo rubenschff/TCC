@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '@shared/components/button/button.module';
 import { InputDateModule } from '@shared/components/input-date/input-date.module';
 import { InputTextModule } from '@shared/components/input-text/input-text.module';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { FormCadastroComponent } from './components/form-cadastro/form-cadastro.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { LoginRoutingModule } from './login.routing.module';
@@ -18,7 +19,8 @@ import { LoginComponent } from './page/login.component';
         ButtonModule,
         InputDateModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NzModalModule
     ],
     declarations: [
       LoginComponent,

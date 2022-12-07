@@ -18,7 +18,7 @@
   <img [src]="investimento.imagem">
 </ng-template>
 <ng-template #tplSobre>
-  <span class="bottom-items">Sobre</span>
+  <span class="bottom-items" (click)="drawerVisivel = true">Sobre</span>
 </ng-template>
 <ng-template #tplComprar>
   <ng-container *ngIf="mostrarInvestir">
@@ -30,3 +30,14 @@
     <span class="bottom-items" (click)="clickOperar(false)">Resgatar</span>
   </ng-container>
 </ng-template>
+
+<nz-drawer
+  [nzVisible]="drawerVisivel"
+  [nzPlacement]="placement"
+  [nzTitle]="investimento.descricao"
+  (nzOnClose)="drawerVisivel = false"
+>
+  <ng-container *nzDrawerContent>
+    <div [innerHTML]="investimento.explicacao"></div>
+  </ng-container>
+</nz-drawer>

@@ -245,3 +245,15 @@ ac-comparacao nz-input-number input {
     display: none;
   }
 }
+
+
+.ant-drawer-content-wrapper {
+  .ant-drawer-header-title {
+    flex-direction: row-reverse;
+  }
+
+  p {
+    text-indent: 40px;
+    text-align: justify;
+  }
+}

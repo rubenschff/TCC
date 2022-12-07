@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, Template
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { InvestimentoDTO } from '@static/models/investimento/investimento.dto';
 import { InvestimentoMock } from 'app/mocks/investimento.mocks';
+import { NzDrawerPlacement } from 'ng-zorro-antd/drawer';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { OperarComponent } from '../operar/operar.component';
@@ -24,6 +25,8 @@ export class InvestimentoComponent implements OnInit {
   mostrarInvestir!: boolean;
   mostrarResgatar!: boolean;
 
+  placement: NzDrawerPlacement = 'right';
+  drawerVisivel = false;
 
   constructor(
     private modal: NzModalService,
@@ -37,7 +40,6 @@ export class InvestimentoComponent implements OnInit {
   cardClick() {
     this.eventCardClick.emit(this.investimento);
   }
-
 
   clickOperar(flagCompra: boolean) {
     this.ref = this.modal.create({

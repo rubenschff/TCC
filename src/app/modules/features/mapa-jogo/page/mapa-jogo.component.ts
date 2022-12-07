@@ -7,10 +7,7 @@ import { Component } from '@angular/core';
 })
 export class MapaJogoComponent {
 
-  readonly URL_INVESTIMENTO = '../../../../../assets/investimento.png';
-  readonly URL_HISTORICO = '../../../../../assets/historico.png';
-  readonly URL_QUESTOES = '../../../../../assets/questoes.png';
-  readonly URL_COIN = '../../../../../assets/coins.png';
+  readonly URL_ASTRONAUTA = './assets/astronauta-pose.png';
 
   constructor() {}
 }

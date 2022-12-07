@@ -20,6 +20,7 @@
     <label>Tempo (Semana):</label>
     <nz-input-number
       [(ngModel)]="comparacao.tempo"
+      (ngModelChange)="ajustarValorTotal()"
       [nzMin]="1"
       [nzStep]="1"
       nzInputMode="numeric"

@@ -18,7 +18,7 @@ export class DateHelper {
      * @returns Objeto data correto.
      */
     static parseStringToDate(date: string): Date {
-        return new Date(`${date}`);
+        return new Date(`${date} 00:00:00`);
     }
 
     static addHoraMinuto(date: Date, horaMinuto?: string): Date {

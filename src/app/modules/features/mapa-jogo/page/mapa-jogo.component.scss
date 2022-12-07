@@ -1,127 +1,47 @@
 @import 'src/sass/_placeholders';
 
 .container {
-  height: 100%;
-  width: 100%;
-  padding: 50px;
-  background: url('../../../../../assets/background/1.png') no-repeat fixed center;
-  background-size: contain;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  padding: 200px 200px 0 200px;
 
-  & > div {
+  div {
+    width: 300px;
     height: 100px;
+    padding: 17px;
+    background-color: white;
+    border-radius: 10px;
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    align-content: flex-end;
     justify-content: space-between;
+    position: relative;
+    p {
+      @extend %font-normal-14;
+      font-size: 16px;
+      text-align: justify;
+      text-indent: 40px;
 
-    & > * {
-      border-radius: 5px;
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.342);
-      padding: 10px;
     }
 
-    .moedas {
-      position: relative;
-      width: 300px;
-      background-color: white;
-
-      &::after {
-        content: "";
-        background-image: url('../../../../../assets/dollars.png');
-        background-size: cover;
-        background-position: 0px -10px;
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        opacity: 0.4;
-        z-index: 0;
-      }
-
-      span {
-        @extend %font-bold-18;
-        color: $texto-escuro;
-        position: relative;
-        display: block;
-        margin-bottom: 5px;
-        z-index: 1;
-      }
-    }
-
-    .investimento {
-      height: 100%;
-      width: 200px;
-      display: flex;
-      flex-direction: row;
-      border: none;
-      background-color: #3b39b3da;
-      cursor: pointer;
-      img {
-        height: 80px;
-      }
-      span {
-        display: block;
-        margin: 0px auto;
-        line-height: 80px;
-        color: $texto-escuro;
-        @extend %font-bold-18;
-        color: white;
-      }
-    }
-
-    .historico {
-      height: 100%;
-      width: 250px;
-      display: flex;
-      flex-direction: row;
-      border: none;
-      background-color: #b2b439;
-      cursor: pointer;
-      img {
-        height: 80px;
-      }
-      span {
-        display: block;
-        margin: 0px auto;
-        line-height: 80px;
-        color: $texto-escuro;
-        @extend %font-bold-18 ;
-      }
-    }
-
-    .questoes {
-      height: 100%;
-      width: 300px;
-      display: flex;
-      flex-direction: row;
-      border: none;
-      background-color: white;
-      cursor: pointer;
-      img {
-        height: 80px;
-        z-index: 0;
-
-        &.img-coins {
-          height: 40px;
-          position: absolute;
-          right: 250px;
-          bottom: 55px;
-          z-index: 1;
-        }
-      }
-      span {
-        display: block;
-        margin: 0px auto;
-        width: 190px;
-        line-height: 40px;
-        color: $texto-escuro;
-        @extend %font-bold-18;
-        word-break: break-word;
-      }
+    &:after {
+      content: "";
+      width: 15px;
+      height: 0;
+      position: absolute;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 40px solid white;
+      top: 82%;
+      left: 92%;
+      transform: rotate(0.89turn);
     }
   }
+  img {
+    width: 300px;
+    transform: rotate(0.1turn);
 
-
+  }
 }

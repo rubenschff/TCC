@@ -18,7 +18,7 @@ label {
 
 nz-date-picker {
   border: 2px solid $cinza-02;
-  border-radius: 4px !important;
+  border-radius: 5px !important;
   padding: 9px 12px;
   box-shadow: none !important;
   height: 39px;
@@ -38,7 +38,7 @@ nz-date-picker {
   }
 
   &.obrigatorio {
-    border-left: 5px solid $laranja !important;
+    border-left: 5px solid $roxo-padrao !important;
   }
 
   &[nzdisabled=true] {
@@ -48,6 +48,6 @@ nz-date-picker {
   }
 
   &[ng-reflect-nz-auto-focus=true] {
-    border-color: $tema-azul-01;
+    border-color: $tema-branco-01;
   }
 }

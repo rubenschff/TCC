@@ -1,5 +1,5 @@
-<h1>Cadastro</h1>
 <form nz-form [formGroup]="form" (ngSubmit)="cadastrar()" nzLayout="vertical" autocomplete="off">
+  <h1>Cadastro</h1>
   <nz-form-item>
     <nz-form-control>
         <ac-input-text label="Nome" placeholder="Informa seu Nome..." [estado]="inputEstadoEnum.OBRIGATORIO"
@@ -25,5 +25,5 @@
   </nz-form-item>
 
   <a (click)="eventAbrirLogin.emit()">Realizar login</a>
-  <ac-button text="Salvar"></ac-button>
+  <ac-button text="Cadastrar"></ac-button>
 </form>

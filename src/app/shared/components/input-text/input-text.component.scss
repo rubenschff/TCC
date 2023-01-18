@@ -21,7 +21,7 @@ input,
     @extend %texto-escuro;
     @extend %font-normal-14;
     border: 2px solid $cinza-02;
-    border-radius: 4px !important;
+    border-radius: 5px !important;
     padding: 9px 12px;
     box-shadow: none !important;
 
@@ -45,7 +45,7 @@ input,
     }
 
     &.obrigatorio {
-        border-left: 5px solid $laranja !important;
+        border-left: 5px solid $roxo-padrao !important;
     }
 
     &:disabled {
@@ -63,5 +63,5 @@ input,
 
 input:not(:disabled, [readonly]):focus,
 .focus:not(:disabled, [readonly]) {
-    border-color: $tema-azul-01;
+    border-color: $tema-branco-01;
 }

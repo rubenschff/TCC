@@ -2,7 +2,7 @@
 
 nz-header {
   background-color: transparent;
-  display: flex;
+  display: block;
   justify-content: flex-end;
   height: 50px;
 
@@ -27,11 +27,17 @@ nz-layout, nz-content, router-outlet, nz-content > * {
 }
 
 nz-content {
-  min-height: 663px;
+color: transparent;
+
+
 }
 
 nz-layout {
   background: #5e5eb9c7 url('../../../../../assets/universo.jpg') repeat fixed center;
   background-size: cover;
+  background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 

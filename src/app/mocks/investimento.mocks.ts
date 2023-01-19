@@ -10,7 +10,7 @@ export class InvestimentoMock {
       risco: 10,
       juro: 2.5,
       liquidez: 0,
-      imagem: './assets/piggy-bank.png'
+      imagem: './assets/poupança.png'
     }
 
     let tesouroDireto: InvestimentoDTO = {
@@ -19,7 +19,7 @@ export class InvestimentoMock {
       risco: 0.5,
       juro: 6.0,
       liquidez: 1,
-      imagem: './assets/capitol.png'
+      imagem: './assets/tesouro_direto.png'
     }
 
     let cdb: InvestimentoDTO = {
@@ -28,7 +28,7 @@ export class InvestimentoMock {
       risco: 0.5,
       juro: 8.4,
       liquidez: 14,
-      imagem: './assets/bank.png'
+      imagem: './assets/CDB.png'
     }
 
     return [poupanca, tesouroDireto, cdb];

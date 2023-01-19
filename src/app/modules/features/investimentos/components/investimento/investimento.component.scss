@@ -1,15 +1,41 @@
-@import 'src/sass/_placeholders';
-
 nz-card {
-  width: 250px;
-  padding: 10px 10px 0px;
+  width: 100%;
+  min-width: 300px;
+  height: 100%;
+  padding: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: #575A96;
+  border-radius: 30px;
+  border-color: none;
+
 
   img {
-    height: 100px;
-    width: 100px;
+    height: 300px;
+    width: 300px;
   }
+
+  .cardButton{
+    display: flex;
+    height: 100%;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 5px 5px;
+    color: #575A96;
+  }
+
+
 }
+
+
+
+
+
+
+

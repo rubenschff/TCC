@@ -1,34 +1,62 @@
-nz-card {
-  width: 100%;
-  min-width: 300px;
-  height: 100%;
-  padding: 10px;
+.card {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  width: 300px;
+  height: 100%;
   flex-direction: column;
-  background-color: #575A96;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background: #575A96;
   border-radius: 30px;
-  border-color: none;
+  gap: 10px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  //border-color: none;
 
 
   img {
-    height: 300px;
-    width: 300px;
+    height: 250px;
+    width: 250px;
+  }
+.options{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+
+  .buttonOptions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+
+    .cardButton{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 4px 15px;
+      gap: 8px;
+      width: 100%;
+      height: 30px;
+      background: #FFFFFF;
+      border: none;
+      color: #575A96;
+      border-radius: 100px;
+    }
   }
 
-  .cardButton{
-    display: flex;
-    height: 100%;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #ffffff;
-    border: none;
-    border-radius: 30px;
-    padding: 5px 5px;
-    color: #575A96;
-  }
+
+}
+
 
 
 }

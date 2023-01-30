@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RotasConstant } from '@static/constants/rotas.constant';
 
+
 @Component({
   selector: 'ac-header',
   templateUrl: './header.component.html',

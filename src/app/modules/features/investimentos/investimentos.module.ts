@@ -21,19 +21,22 @@ const icons: IconDefinition[] = [ CloseCircleOutline ];
 
 @NgModule({
     imports: [
-      CommonModule,
-      NzFormModule,
-      FormsModule,
-      ReactiveFormsModule,
-      InvestimentosRoutingModule,
-      NzCardModule,
-      NzListModule,
-      DragDropModule,
-      NzInputNumberModule,
-      DecimalPipe,
-      NzDividerModule,
-      NzIconModule.forRoot(icons),
-      ButtonModule
+        CommonModule,
+        NzFormModule,
+        FormsModule,
+        ReactiveFormsModule,
+        InvestimentosRoutingModule,
+        NzCardModule,
+        NzListModule,
+        DragDropModule,
+        NzInputNumberModule,
+        DecimalPipe,
+        NzDividerModule,
+        NzIconModule.forRoot(icons),
+        ButtonModule
+    ],
+    exports: [
+        DadosFinanceirosComponent
     ],
     declarations: [InvestimentosComponent, InvestimentoComponent, ComparacaoComponent, DadosFinanceirosComponent]
 })

@@ -15,10 +15,5 @@ export class InvestimentoComponent {
   cardClick() {
     this.eventCardClick.emit(this.investimento);
   }
-  gridStyle = {
-    height: '100%',
-    width: '100%',
-    textAlign: 'center'
-  };
 }
 

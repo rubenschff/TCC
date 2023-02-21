@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
 import { InvestimentoDTO } from '@static/models/investimento/investimento.dto';
 import { InvestimentoMock } from 'app/mocks/investimento.mocks';
-import {InvestimentoService} from "../../../../services/investimento/InvestimentoService";
+import {InvestimentoService} from "../../../../services/investimento/investimento.service";
 
 @Component({
   selector: 'ac-investimentos',
@@ -11,15 +11,14 @@ import {InvestimentoService} from "../../../../services/investimento/Investiment
 })
 export class InvestimentosComponent implements OnInit {
   loading = false;
-  investimentos!: Array<InvestimentoDTO>;
+  investimentos?: InvestimentoDTO[];
   comparacoes = new Array<ComparacaoModel>();
 
   constructor(private investimentoService: InvestimentoService) {
-    this.ngOnInit();
+    this.getAllInvestimentos()
   }
 
   ngOnInit(): void{
-    this.investimentoService.getAll().subscribe((investimentos) => (this.investimentos = investimentos));
   }
 
   adicionarComparar(investimento: InvestimentoDTO) {
@@ -29,8 +28,10 @@ export class InvestimentosComponent implements OnInit {
   removerComparacao(comparacao: ComparacaoModel) {
     this.comparacoes.splice(this.comparacoes.indexOf(comparacao), 1);
   }
+  getAllInvestimentos(): void{
+    this.investimentoService.getAll().subscribe((investimentos:InvestimentoDTO[]) => {
+      this.investimentos = investimentos;
+    });
 
-  // getAllInvestimentos(): void{
-  //   this.investimentoService.getAll().subscribe((investimentos) => (this.investimentos = investimentos));
-  // }
+  }
 }

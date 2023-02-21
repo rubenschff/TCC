@@ -18,10 +18,10 @@ export class DadosFinanceirosComponent implements OnInit {
   modelValorFinal = 0;
 
   ngOnInit(): void {
-    this.modelValorInicial = this.comparacao.valorInicial;
-    this.modelTempo = this.comparacao.tempo;
-    this.modelJuros = this.comparacao.juro;
-    this.modelValorFinal = this.comparacao.valorFinal();
+    this.modelValorInicial = this.comparacao?.valorInicial ?? 0;
+    this.modelTempo = this.comparacao?.tempo;
+    this.modelJuros = this.comparacao?.juro;
+    this.modelValorFinal = this.comparacao?.valorFinal();
   }
 
   formatterPercent(value: number): string {

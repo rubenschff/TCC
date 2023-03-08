@@ -22,10 +22,10 @@ export class DadosFinanceirosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.modelValorInicial = this.comparacao?.valorInicial ?? 0;
-    this.modelTempo = this.comparacao?.tempo;
-    this.modelJuros = this.comparacao?.juro;
-    this.modelValorFinal = this.comparacao?.valorFinal();
+    // this.modelValorInicial = this.comparacao?.valorInicial ?? 0;
+    // this.modelTempo = this.comparacao?.tempo;
+    // this.modelJuros = this.comparacao?.juro;
+    // this.modelValorFinal = this.comparacao?.valorFinal();
     this.dadosFinanceiros = InvestimentoMock.findFinanceiro(StorageHelper.codigoUsuario);
   }
 }

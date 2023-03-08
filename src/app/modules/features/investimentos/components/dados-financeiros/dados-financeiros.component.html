@@ -1,26 +1,17 @@
 <div class="body">
   <div class = "titulo">
-    <h1>Moedas recebidas</h1>
-    <h2>R$3000,00</h2>
+    <span>Moedas recebidas</span>
+    <h2>R${{ dadosFinanceiros.valorArrecadado.toFixed(2) }}</h2>
   </div>
 
   <div class = "titulo">
-    <h1>Moedas totais</h1>
-    <h2>R$4250,00</h2>
+    <span>Moedas totais</span>
+    <h2>R${{ dadosFinanceiros.valorAcumulado.toFixed(2) }}</h2>
   </div>
 
   <div class = "titulo">
-    <h1>Moedas disponíveis</h1>
-    <h2>R$300,00</h2>
+    <span>Moedas disponíveis</span>
+    <h2>R${{ dadosFinanceiros.valorDisponivel.toFixed(2) }}</h2>
   </div>
 </div>
-<span> Moedas recebidas: {{ dadosFinanceiros.valorArrecadado.toFixed(2) }}</span>
-<span>Moedas totais: {{ dadosFinanceiros.valorAcumulado.toFixed(2) }} </span>
-<span>Moedas disponíveis: {{ dadosFinanceiros.valorDisponivel.toFixed(2) }}</span>
 
-<!--<div class="button">-->
-<!--  <ac-button text="Abrir histórico de operações" [tipo]="1"></ac-button>-->
-<!--</div>-->
-
-
-<img [src]="URL_ASTRONAUTA">

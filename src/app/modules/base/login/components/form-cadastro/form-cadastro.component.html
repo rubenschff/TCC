@@ -2,7 +2,7 @@
   <h1>Cadastro</h1>
   <nz-form-item>
     <nz-form-control>
-        <ac-input-text label="Nome" placeholder="Informa seu Nome..." [estado]="inputEstadoEnum.OBRIGATORIO"
+        <ac-input-text label="Nome" placeholder="Informa seu Nome..."
           [focused]="true" formControlName="nome">
         </ac-input-text>
     </nz-form-control>
@@ -19,7 +19,7 @@
   <nz-form-item>
     <nz-form-control>
         <ac-input-date label="Data de Nascimento" placeholder="Informa sua data de nascimento..."
-          [estado]="inputEstadoEnum.OBRIGATORIO" formControlName="dataNascimento">
+          formControlName="dataNascimento">
         </ac-input-date>
     </nz-form-control>
   </nz-form-item>
@@ -27,3 +27,10 @@
   <a (click)="eventAbrirLogin.emit()">Realizar login</a>
   <ac-button text="Cadastrar"></ac-button>
 </form>
+
+
+<ng-template #popupCadastro let-usuario>
+  <p>Agora você tem acesso ao Primo Plata!</p>
+  <p>Esse é o seu TOKEN ID: <strong>{{ usuario.token }}</strong>.</p>
+  <p>Ele será necessário para acessar o sistema, guarde-o em segurança! Divirta-se!</p>
+</ng-template>

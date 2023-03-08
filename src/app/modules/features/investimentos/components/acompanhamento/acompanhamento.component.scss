@@ -1,0 +1,20 @@
+@import 'src/sass/_placeholders';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 0px 0px;
+
+  & > * {
+    margin-bottom: 25px !important;
+    color: black;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0px !important;
+  }
+  span {
+    @extend %font-normal-14;
+    justify-content: flex-start;
+  }
+}

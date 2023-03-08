@@ -133,9 +133,75 @@ nz-segmented label {
 }
 
 /****** CARDS *******/
-nz-card ul {
-  width: 100%;
-  background-color: transparent !important;
+ac-investimento nz-card {
+
+  & > div:first-of-type {
+    height: 100%;
+  }
+
+  nz-tabs-nav {
+    margin-bottom: 0px !important;
+  }
+
+  .ant-card-body {
+    padding: 0px;
+  }
+
+  nz-card-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+
+    & > * {
+      margin: 0 0 10px;
+    }
+
+    & > *:first-child {
+      padding-right: 0px;
+    }
+  }
+
+  ul {
+    width: 100%;
+    background-color: transparent !important;
+  }
+
+  &.ocultar-actions > ul, &.ocultar-investir > ul, &.ocultar-resgatar > ul {
+    display: flex;
+    justify-content: center;
+  }
+
+  &.ocultar-actions > ul {
+    & li:first-child {
+      border-right: none;
+    }
+
+    & li:not(:first-of-type) {
+      display: none;
+    }
+  }
+
+  &.ocultar-investir > ul {
+    & li:nth-of-type(2) {
+      display: none;
+    }
+
+    & li:nth-of-type(3) {
+      border-right: none;
+    }
+  }
+
+  &.ocultar-resgatar > ul {
+    & li:nth-of-type(3) {
+      display: none;
+    }
+
+    & li:nth-of-type(2) {
+      border-right: none;
+    }
+  }
 }
 
 ac-comparacao nz-input-number input {
@@ -177,5 +243,17 @@ ac-comparacao nz-input-number input {
 
   div[nz-modal-footer] {
     display: none;
+  }
+}
+
+
+.ant-drawer-content-wrapper {
+  .ant-drawer-header-title {
+    flex-direction: row-reverse;
+  }
+
+  p {
+    text-indent: 40px;
+    text-align: justify;
   }
 }

@@ -16,15 +16,16 @@
       ></nz-input-number>
     </div>
 
-    <div>
-      <label>Tempo (Semana):</label>
-      <nz-input-number
-        [(ngModel)]="comparacao.tempo"
-        [nzMin]="1"
-        [nzStep]="1"
-        nzInputMode="numeric"
-      ></nz-input-number>
-    </div>
+  <div>
+    <label>Tempo (Semana):</label>
+    <nz-input-number
+      [(ngModel)]="comparacao.tempo"
+      (ngModelChange)="ajustarValorTotal()"
+      [nzMin]="1"
+      [nzStep]="1"
+      nzInputMode="numeric"
+    ></nz-input-number>
+  </div>
 
     <div>
       <label>Juros:</label>

@@ -14,8 +14,13 @@
     <h2>R$300,00</h2>
   </div>
 </div>
+<span> Moedas recebidas: {{ dadosFinanceiros.valorArrecadado.toFixed(2) }}</span>
+<span>Moedas totais: {{ dadosFinanceiros.valorAcumulado.toFixed(2) }} </span>
+<span>Moedas disponíveis: {{ dadosFinanceiros.valorDisponivel.toFixed(2) }}</span>
 
 <!--<div class="button">-->
 <!--  <ac-button text="Abrir histórico de operações" [tipo]="1"></ac-button>-->
 <!--</div>-->
 
+
+<img [src]="URL_ASTRONAUTA">

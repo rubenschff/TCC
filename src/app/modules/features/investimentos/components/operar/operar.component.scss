@@ -1,0 +1,37 @@
+@import 'src/sass/_placeholders';
+
+.dados {
+  display: flex;
+  justify-content: space-between;
+
+  & > * {
+    display: block;
+  }
+
+  margin-bottom: 25px;
+}
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    align-content: stretch;
+    width: 100%;
+
+    nz-input-number {
+      width: 150px;
+    }
+
+    margin-bottom: 5px;
+  }
+
+  span {
+    display: block;
+    @extend %font-normal-12;
+  }
+}

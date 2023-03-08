@@ -15,6 +15,9 @@ const routes: Routes = [
           path: RotasConstant.INVESTIMENTOS,
           loadChildren: () => import('@modules/features/investimentos/investimentos.module').then(m => m.InvestimentosModule)
         }, {
+          path: RotasConstant.CONTA,
+          loadChildren: () => import('@modules/features/conta/conta.module').then(m => m.ContaModule)
+        }, {
             path: '**',
             loadChildren: () => import('@modules/features/mapa-jogo/mapa-jogo.module').then(m => m.MapaJogoModule)
         }

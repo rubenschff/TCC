@@ -1,0 +1,45 @@
+@import 'src/sass/_placeholders';
+
+.container {
+  padding: 100px 100px;
+  display: flex;
+  justify-content: space-between;
+
+  .planetas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  img {
+    opacity: 0.8;
+  }
+
+  .jupiter {
+    width: 300px;
+  }
+  .saturno {
+    width: 200px;
+  }
+  .marte {
+    width: 200px;
+  }
+  .plutao {
+    width: 50px;
+  }
+
+  form {
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+
+    div {
+
+      span {
+        @extend %font-bold-18;
+        display: block;
+        margin-bottom: 24px;
+      }
+    }
+  }
+}

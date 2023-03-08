@@ -43,6 +43,10 @@ export class HeaderComponent implements OnInit {
         this.router.navigate([`${RotasConstant.INICIO}/${RotasConstant.INVESTIMENTOS}`]);
         break;
       }
+      case 3: {
+        this.router.navigate([`${RotasConstant.INICIO}/${RotasConstant.CONTA}`]);
+        break;
+      }
       case 4:
         this.router.navigate([RotasConstant.LOGIN]);
         break

@@ -1,17 +1,19 @@
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
+import {DateHelper} from "@static/helpers/date.helper";
 
 export class UsuarioMock {
   static usuarios = new Array<UsuarioDTO>({
     id: 1,
     nome: 'Gabriel Rosenbach',
-    dataNascimento: '2000-11-17',
+    nickName: 'teste123',
+    dataNascimento: DateHelper.parseStringToDate('2022-02-02'),
     senha: '123456',
     token: 5264
   });
 
   static tokens = new Array<number>(5341, 7869, 5073, 6450, 1073);
 
-  static add(nome: string, dataNascimento: string, senha: string, id?: number) {
+  static add(nome: string, dataNascimento: Date,nickName: string, senha: string, id?: number) {
     let usuario: UsuarioDTO;
 
     if (id) {
@@ -19,10 +21,11 @@ export class UsuarioMock {
       usuario = UsuarioMock.find(id)!!;
 
       usuario.nome = nome;
+      usuario.nickName = nickName;
       usuario.dataNascimento = dataNascimento;
-      usuario.dataNascimento = senha;
+      usuario.senha = senha;
     } else {
-      usuario = { nome, dataNascimento, senha }
+      usuario = { nome, dataNascimento, senha, nickName }
     }
 
     return this.persist(usuario);

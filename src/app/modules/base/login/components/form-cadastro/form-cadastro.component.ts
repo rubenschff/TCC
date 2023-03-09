@@ -34,18 +34,22 @@ export class FormCadastroComponent implements OnInit {
 
     this.form = this.fb.group({
         nome: ['', Validators.compose([Validators.required])],
+        nickName:['', Validators.compose([Validators.required])],
         senha: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
         dataNascimento: ['', Validators.compose([Validators.required])]
     });
   }
 
   cadastrar() {
-    let values = this.form.value;
-    let data = DateHelper.getDateYYYYMMDDFormat(values.dataNascimento);
+    let usuario: UsuarioDTO = this.form.value;
+    await usuario.dataNascimento = DateHelper.parseStringToDate(DateHelper.getDateYYYYMMDDFormat(usuario.dataNascimento));
+    console.log(usuario);
 
-    let usuario = UsuarioMock.add(values.nome, data, values.senha);
+    //let data = DateHelper.getDateYYYYMMDDFormat(values.dataNascimento);
 
-    this.abrirPopup(usuario);
+    // let usuario = UsuarioMock.add(values.nome, data, values.senha);
+
+    // this.abrirPopup(usuario);
   }
 
   abrirPopup(usuario: UsuarioDTO) {

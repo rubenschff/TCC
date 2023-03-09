@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
-import { FinanceiroDTO } from '@static/models/investimento/financeiro.dto';
 import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import {FinanceiroDTO} from "@static/models/investimento/financeiro.dto";
 
 @Component({
   selector: 'ac-dados-financeiros',
@@ -12,8 +12,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./dados-financeiros.component.scss']
 })
 export class DadosFinanceirosComponent implements OnInit {
-
-  readonly URL_ASTRONAUTA = './assets/astronauta-diamante.png';
 
   dadosFinanceiros!: FinanceiroDTO;
 

@@ -3,7 +3,6 @@ export class StorageHelper {
 
   static get codigoUsuario(): number {
     const value = window.localStorage.getItem(StorageHelper.CODIGO_USUARIO);
-
     return parseInt(value!, 10)!;
   }
 

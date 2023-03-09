@@ -10,6 +10,14 @@
 
   <nz-form-item>
     <nz-form-control>
+      <ac-input-text label="Nick" placeholder="Informa seu Nick..."
+           formControlName="nickName">
+      </ac-input-text>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
         <ac-input-text label="Senha" placeholder="Informa sua senha..." [estado]="inputEstadoEnum.OBRIGATORIO"
           formControlName="senha" [tipo]="inputTextTipoEnum.SENHA">
         </ac-input-text>

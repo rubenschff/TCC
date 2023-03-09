@@ -26,6 +26,7 @@ export class ContaComponent implements OnInit {
 
 
   nome!: string;
+  nick!: string;
   senha!: string;
   token!: number;
   dataNascimento!: Date;
@@ -41,12 +42,14 @@ export class ContaComponent implements OnInit {
     let usuario = UsuarioMock.find(StorageHelper.codigoUsuario)!;
 
     this.nome = usuario.nome;
+    this.nick = usuario.nickName;
     this.senha = usuario.senha;
     this.token = usuario.token!;
-    this.dataNascimento = DateHelper.parseStringToDate(usuario.dataNascimento);
+    this.dataNascimento = usuario.dataNascimento;
 
     this.form = this.fb.group({
         nome: [this.nome, Validators.compose([Validators.required])],
+        nickName: [this.nome, Validators.compose([Validators.required])],
         dataNascimento: [this.dataNascimento, Validators.compose([Validators.required])],
         senha: [this.senha, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
     });
@@ -58,7 +61,7 @@ export class ContaComponent implements OnInit {
     let values = this.form.value;
     let data = DateHelper.getDateYYYYMMDDFormat(values.dataNascimento);
 
-    UsuarioMock.add(values.nome, data, values.senha, StorageHelper.codigoUsuario);
+    // UsuarioMock.add(values.nome, data, values.senha, StorageHelper.codigoUsuario);
 
     this.message.success(`Alteração realizada com sucesso!`);
   }

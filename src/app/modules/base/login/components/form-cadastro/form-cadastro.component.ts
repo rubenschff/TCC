@@ -2,10 +2,9 @@ import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InputEstadoEnum } from '@static/enumerators/components/input-estados.enum';
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
-import { DateHelper } from '@static/helpers/date.helper';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
-import { UsuarioMock } from 'app/mocks/usuario.mocks';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import {CadastroService} from "../../../../../services/cadastro/cadastro.service";
 
 @Component({
   selector: 'ac-form-cadastro',
@@ -26,6 +25,7 @@ export class FormCadastroComponent implements OnInit {
   modalRef!: NzModalRef;
 
   constructor(
+    private cadastroService: CadastroService,
     private fb: FormBuilder,
     private modal: NzModalService
   ) {}
@@ -33,23 +33,20 @@ export class FormCadastroComponent implements OnInit {
   ngOnInit() {
 
     this.form = this.fb.group({
-        nome: ['', Validators.compose([Validators.required])],
+        name: ['', Validators.compose([Validators.required])],
         nickName:['', Validators.compose([Validators.required])],
-        senha: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
-        dataNascimento: ['', Validators.compose([Validators.required])]
+        password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
+        dateOfBirth: ['', Validators.compose([Validators.required])]
     });
   }
 
   cadastrar() {
     let usuario: UsuarioDTO = this.form.value;
-    await usuario.dataNascimento = DateHelper.parseStringToDate(DateHelper.getDateYYYYMMDDFormat(usuario.dataNascimento));
-    console.log(usuario);
 
-    //let data = DateHelper.getDateYYYYMMDDFormat(values.dataNascimento);
+       this.cadastroService.cadastro(usuario);
+       console.log(usuario);
 
-    // let usuario = UsuarioMock.add(values.nome, data, values.senha);
-
-    // this.abrirPopup(usuario);
+    this.abrirPopup(usuario);
   }
 
   abrirPopup(usuario: UsuarioDTO) {

@@ -3,7 +3,7 @@
   <nz-form-item>
     <nz-form-control>
         <ac-input-text label="Nome" placeholder="Informa seu Nome..."
-          [focused]="true" formControlName="nome">
+          [focused]="true" formControlName="name">
         </ac-input-text>
     </nz-form-control>
   </nz-form-item>
@@ -19,7 +19,7 @@
   <nz-form-item>
     <nz-form-control>
         <ac-input-text label="Senha" placeholder="Informa sua senha..." [estado]="inputEstadoEnum.OBRIGATORIO"
-          formControlName="senha" [tipo]="inputTextTipoEnum.SENHA">
+          formControlName="password" [tipo]="inputTextTipoEnum.SENHA">
         </ac-input-text>
     </nz-form-control>
   </nz-form-item>
@@ -27,7 +27,7 @@
   <nz-form-item>
     <nz-form-control>
         <ac-input-date label="Data de Nascimento" placeholder="Informa sua data de nascimento..."
-          formControlName="dataNascimento">
+          formControlName="dateOfBirth">
         </ac-input-date>
     </nz-form-control>
   </nz-form-item>
@@ -38,7 +38,6 @@
 
 
 <ng-template #popupCadastro let-usuario>
+  <p>Seja bem vindo <strong>{{ usuario.nickName }}</strong>.</p>
   <p>Agora você tem acesso ao Primo Plata!</p>
-  <p>Esse é o seu TOKEN ID: <strong>{{ usuario.token }}</strong>.</p>
-  <p>Ele será necessário para acessar o sistema, guarde-o em segurança! Divirta-se!</p>
 </ng-template>

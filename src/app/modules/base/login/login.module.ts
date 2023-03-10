@@ -9,6 +9,7 @@ import { FormCadastroComponent } from './components/form-cadastro/form-cadastro.
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { LoginRoutingModule } from './login.routing.module';
 import { LoginComponent } from './page/login.component';
+import {NzFormModule} from "ng-zorro-antd/form";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LoginComponent } from './page/login.component';
         InputDateModule,
         FormsModule,
         ReactiveFormsModule,
-        NzModalModule
+        NzModalModule,
+        NzFormModule
     ],
     declarations: [
       LoginComponent,

@@ -1,8 +1,8 @@
 export interface UsuarioDTO {
   id?: number;
-  nome: string;
+  name: string;
   nickName: string;
-  senha: string;
-  dataNascimento: Date;
+  password: string;
+  dateOfBirth: Date;
   token?: number;
 }

@@ -41,11 +41,11 @@ export class ContaComponent implements OnInit {
   ngOnInit() {
     let usuario = UsuarioMock.find(StorageHelper.codigoUsuario)!;
 
-    this.nome = usuario.nome;
+    this.nome = usuario.name;
     this.nick = usuario.nickName;
-    this.senha = usuario.senha;
+    this.senha = usuario.password;
     this.token = usuario.token!;
-    this.dataNascimento = usuario.dataNascimento;
+    this.dataNascimento = usuario.dateOfBirth;
 
     this.form = this.fb.group({
         nome: [this.nome, Validators.compose([Validators.required])],

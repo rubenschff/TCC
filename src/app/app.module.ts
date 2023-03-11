@@ -7,6 +7,7 @@ import { LoaderService } from './core/services/loader.service';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
+import {CookieService} from "ngx-cookie-service";
 
 registerLocaleData(localePt);
 
@@ -14,6 +15,6 @@ registerLocaleData(localePt);
   declarations: [AppComponent],
   imports: [CoreModule, AppRoutingModule, NzSpinModule, HttpClientModule],
   bootstrap: [AppComponent],
-  providers: [LoaderService, {provide: LOCALE_ID, useValue: 'pt-BR' }]
+  providers: [LoaderService, {provide: LOCALE_ID, useValue: 'pt-BR' },CookieService]
 })
 export class AppModule { }

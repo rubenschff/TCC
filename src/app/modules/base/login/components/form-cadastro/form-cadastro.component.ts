@@ -44,7 +44,7 @@ export class FormCadastroComponent implements OnInit {
     let usuario: UsuarioDTO = this.form.value;
 
        this.cadastroService.cadastro(usuario);
-       console.log(usuario);
+       //console.log(usuario);
 
     this.abrirPopup(usuario);
   }

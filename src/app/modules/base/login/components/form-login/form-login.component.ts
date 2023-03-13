@@ -4,6 +4,9 @@ import { InputEstadoEnum } from '@static/enumerators/components/input-estados.en
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { UsuarioMock } from 'app/mocks/usuario.mocks';
+import {LoginService} from "../../../../../services/login/login.service";
+import {error} from "@ant-design/icons-angular";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'ac-form-login',
@@ -20,21 +23,37 @@ export class FormLoginComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private  cookieService: CookieService,
   ) {}
 
   ngOnInit() {
 
     this.form = this.fb.group({
-        token: ['', Validators.compose([Validators.required])],
-        senha: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
+        nickName: ['', Validators.compose([Validators.required])],
+        password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
     });
   }
 
   login() {
-    let value = this.form.value;
-    let usuario = UsuarioMock.login(parseInt(value.token, 10), value.senha);
+    let values: UsuarioDTO = this.form.value;
+    let login = this.loginService.login(values)
+    login.subscribe(
+      (data)=>{
+        this.cookieService.set('userId',JSON.stringify(data.id))
+        this.cookieService.set('accessToken',data.accessToken)
+        this.eventLogin.emit(data);
+      },
+      (error)=>{
+        if (error.status == 404){
+          console.log('Usuario não encontrado');
+        }else if(error.status == 401){
+          console.log('Senha incorreta');
+        }
+      }
+    )
 
-    this.eventLogin.emit(usuario);
+
   }
 }

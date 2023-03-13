@@ -7,13 +7,14 @@ export class UsuarioMock {
     name: 'Gabriel Rosenbach',
     nickName: 'teste123',
     dateOfBirth: DateHelper.parseStringToDate('2022-02-02'),
+    accessToken: '',
     password: '123456',
     token: 5264
   });
 
   static tokens = new Array<number>(5341, 7869, 5073, 6450, 1073);
 
-  static add(name: string, dateOfBirth: Date,nickName: string, password: string, id?: number) {
+  static add(name: string, dateOfBirth: Date,nickName: string, password: string,accessToken: string, id?: number) {
     let usuario: UsuarioDTO;
 
     if (id) {
@@ -22,10 +23,11 @@ export class UsuarioMock {
 
       usuario.name = name;
       usuario.nickName = nickName;
+      usuario.accessToken = accessToken
       usuario.dateOfBirth = dateOfBirth;
       usuario.password = password;
     } else {
-      usuario = { name, dateOfBirth, password, nickName }
+      usuario = { name, dateOfBirth, password, nickName, accessToken }
     }
 
     return this.persist(usuario);

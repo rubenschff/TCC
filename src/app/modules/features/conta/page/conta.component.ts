@@ -71,6 +71,7 @@ export class ContaComponent implements OnInit {
 
   alterar() {
     let values = this.form.value;
+    let data = DateHelper.getDateYYYYMMDDFormat(values.dataNascimento);
 
     // UsuarioMock.add(values.nome, data, values.senha, StorageHelper.codigoUsuario);
 

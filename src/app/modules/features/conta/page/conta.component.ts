@@ -7,6 +7,8 @@ import { StorageHelper } from '@static/helpers/storage.helper';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { UsuarioMock } from 'app/mocks/usuario.mocks';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {UsuarioService} from "../../../../services/usuario/usuario.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'ac-conta',
@@ -28,24 +30,34 @@ export class ContaComponent implements OnInit {
   nome!: string;
   nick!: string;
   senha!: string;
-  token!: number;
   dataNascimento!: Date;
 
   form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private usuarioService: UsuarioService,
+    private cookieService: CookieService,
   ) {}
 
   ngOnInit() {
-    let usuario = UsuarioMock.find(StorageHelper.codigoUsuario)!;
+    const accessToken= this.cookieService.get('accessToken');
+    const userId= this.cookieService.get('userId');
+    let usuario = this.usuarioService.getById(parseInt(userId),accessToken);
 
-    this.nome = usuario.name;
-    this.nick = usuario.nickName;
-    this.senha = usuario.password;
-    this.token = usuario.token!;
-    this.dataNascimento = usuario.dateOfBirth;
+    usuario.subscribe(
+      (data)=>{
+        console.log(data);
+        this.nome = data.name;
+        this.nick = data.nickName;
+        this.senha = data.password;
+        this.dataNascimento = data.dateOfBirth;
+      },
+      (error)=>{
+        console.log(error)}
+    )
+
 
     this.form = this.fb.group({
         nome: [this.nome, Validators.compose([Validators.required])],

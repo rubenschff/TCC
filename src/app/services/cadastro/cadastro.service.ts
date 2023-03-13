@@ -19,6 +19,12 @@ export class CadastroService {
     return this.http.post<UsuarioDTO>(this.apiUrl + '/cadastrar', usuario).subscribe(
       (response) => {
         console.log(response);
+
+        this.http.post(this.apiUrl + '/comparativo', {usuarioId: response.id})
+          .subscribe(
+            ()=>{console.log('Comparativo Criado')},
+            (error) =>{console.log(error)}
+          )
         this.cookieService.set('accessToken', response.accessToken); //ToDo passar o id e token para o cookie
         this.cookieService.set('userId',JSON.stringify(response.id))
       },

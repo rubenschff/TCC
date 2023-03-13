@@ -4,5 +4,6 @@ export interface UsuarioDTO {
   nickName: string;
   password: string;
   dateOfBirth: Date;
+  accessToken: string;
   token?: number;
 }

@@ -5,6 +5,7 @@ import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tip
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import {CadastroService} from "../../../../../services/cadastro/cadastro.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'ac-form-cadastro',
@@ -25,6 +26,7 @@ export class FormCadastroComponent implements OnInit {
   modalRef!: NzModalRef;
 
   constructor(
+    private cookieService: CookieService,
     private cadastroService: CadastroService,
     private fb: FormBuilder,
     private modal: NzModalService
@@ -44,9 +46,9 @@ export class FormCadastroComponent implements OnInit {
     let usuario: UsuarioDTO = this.form.value;
 
        this.cadastroService.cadastro(usuario);
-       //console.log(usuario);
 
-    this.abrirPopup(usuario);
+
+    this.abrirPopup({...usuario, id: parseInt(this.cookieService.get('userId'))});
   }
 
   abrirPopup(usuario: UsuarioDTO) {

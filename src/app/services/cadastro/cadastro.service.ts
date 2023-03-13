@@ -19,7 +19,8 @@ export class CadastroService {
     return this.http.post<UsuarioDTO>(this.apiUrl + '/cadastrar', usuario).subscribe(
       (response) => {
         console.log(response);
-        this.cookieService.set('accessToken', ''); //ToDo passar o id e token para o cookie
+        this.cookieService.set('accessToken', response.accessToken); //ToDo passar o id e token para o cookie
+        this.cookieService.set('userId',JSON.stringify(response.id))
       },
       error => {console.log(error.message)},
       () =>{console.log('Passou!')}

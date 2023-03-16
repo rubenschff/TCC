@@ -1,28 +1,33 @@
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
+import {DateHelper} from "@static/helpers/date.helper";
 
 export class UsuarioMock {
   static usuarios = new Array<UsuarioDTO>({
     id: 1,
-    nome: 'Gabriel Rosenbach',
-    dataNascimento: '2000-11-17',
-    senha: '123456',
+    name: 'Gabriel Rosenbach',
+    nickName: 'teste123',
+    dateOfBirth: DateHelper.parseStringToDate('2022-02-02'),
+    accessToken: '',
+    password: '123456',
     token: 5264
   });
 
   static tokens = new Array<number>(5341, 7869, 5073, 6450, 1073);
 
-  static add(nome: string, dataNascimento: string, senha: string, id?: number) {
+  static add(name: string, dateOfBirth: Date,nickName: string, password: string,accessToken: string, id?: number) {
     let usuario: UsuarioDTO;
 
     if (id) {
 
       usuario = UsuarioMock.find(id)!!;
 
-      usuario.nome = nome;
-      usuario.dataNascimento = dataNascimento;
-      usuario.dataNascimento = senha;
+      usuario.name = name;
+      usuario.nickName = nickName;
+      usuario.accessToken = accessToken
+      usuario.dateOfBirth = dateOfBirth;
+      usuario.password = password;
     } else {
-      usuario = { nome, dataNascimento, senha }
+      usuario = { name, dateOfBirth, password, nickName, accessToken }
     }
 
     return this.persist(usuario);
@@ -39,7 +44,7 @@ export class UsuarioMock {
   }
 
   static login(token: number, senha: string, validar = true): UsuarioDTO | undefined {
-    let retorno = this.usuarios.find(x => x.token! === token && x.senha === senha);
+    let retorno = this.usuarios.find(x => x.token! === token && x.password === senha);
 
     if (validar && !retorno) {
       throw Error("Usuário não Encontrado!");

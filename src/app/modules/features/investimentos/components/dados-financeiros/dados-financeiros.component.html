@@ -1,11 +1,17 @@
-<h1>Dados Financeiros</h1>
+<div class="body">
+  <div class = "titulo">
+    <span>Moedas recebidas</span>
+    <h2>R${{ dadosFinanceiros.valorArrecadado.toFixed(2) }}</h2>
+  </div>
 
-<nz-divider></nz-divider>
+  <div class = "titulo">
+    <span>Moedas totais</span>
+    <h2>R${{ dadosFinanceiros.valorAcumulado.toFixed(2) }}</h2>
+  </div>
 
-<span>Moedas recebidas: 3000</span>
-<span>Moedas totais: 4250</span>
-<span>Moedas disponíveis: 300</span>
+  <div class = "titulo">
+    <span>Moedas disponíveis</span>
+    <h2>R${{ dadosFinanceiros.valorDisponivel.toFixed(2) }}</h2>
+  </div>
+</div>
 
-<nz-divider></nz-divider>
-
-<ac-button text="Abrir histórico de operações" [tipo]="1"></ac-button>

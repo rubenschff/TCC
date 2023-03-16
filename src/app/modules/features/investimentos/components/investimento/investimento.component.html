@@ -1,16 +1,37 @@
-<nz-card nzHoverable [nzCover]="coverTemplate" [nzActions]="[tplSobre, tplComprar, tplVender]" (click)="cardClick()">
-  <nz-card-meta [nzTitle]="investimento.descricao"></nz-card-meta>
-</nz-card>
 
-<ng-template #coverTemplate>
-  <img [src]="investimento.imagem">
-</ng-template>
-<ng-template #tplSobre>
-  <span>Sobre</span>
-</ng-template>
-<ng-template #tplComprar>
-  <span>Comprar</span>
-</ng-template>
-<ng-template #tplVender>
-  <span>Vender</span>
-</ng-template>
+<div class="card">
+    <img [src]="investimento.imagem">
+  <div class="options">
+    <div class="buttonOptions">
+      <button class="cardButton" (click)="cardClick()">Simular</button>
+      <button class="cardButton" >Sobre</button>
+    </div>
+    <div class="buttonOptions">
+      <button class="cardButton" >Comprar</button>
+      <button class="cardButton" >Vender</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!--  <ng-template #coverTemplate>-->
+<!--    <img [src]="investimento.imagem" />-->
+<!--  </ng-template>-->
+
+<!--  <ng-template #tplSimular>-->
+<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Simular</div>-->
+<!--  </ng-template>-->
+<!--  <ng-template #tplSobre>-->
+<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Sobre</div>-->
+<!--  </ng-template>-->
+<!--  <ng-template #tplComprar>-->
+<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Comprar</div>-->
+<!--  </ng-template>-->
+<!--  <ng-template #tplVender>-->
+<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Vender</div>-->
+<!--  </ng-template>-->
+
+
+
+

@@ -22,9 +22,9 @@ export class InputDateComponent implements OnInit, ControlValueAccessor {
     @Input() focused = false;
     @Input() width?: number;
 
-    private _value = '';
+    private _value!: Date;
     @Input()
-    set value(value: string) {
+    set value(value: Date) {
         this._value = value;
         this._onChange(this._value);
     }
@@ -64,9 +64,9 @@ export class InputDateComponent implements OnInit, ControlValueAccessor {
       }
     }
 
-    private _onChange = (_: string | null) => {};
+    private _onChange = (_: Date | null) => {};
 
-    public registerOnChange(fn: (value: string | null) => void): void {
+    public registerOnChange(fn: (value: Date | null) => void): void {
         this._onChange = fn;
     }
 
@@ -74,7 +74,7 @@ export class InputDateComponent implements OnInit, ControlValueAccessor {
 
     public setDisabledState(): void {}
 
-    public writeValue(value: string | null): void {
+    public writeValue(value: Date | null): void {
         this.control.setValue(value);
     }
 

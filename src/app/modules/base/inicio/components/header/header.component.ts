@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RotasConstant } from '@static/constants/rotas.constant';
 
+
 @Component({
   selector: 'ac-header',
   templateUrl: './header.component.html',
@@ -40,6 +41,10 @@ export class HeaderComponent implements OnInit {
       }
       case 2: {
         this.router.navigate([`${RotasConstant.INICIO}/${RotasConstant.INVESTIMENTOS}`]);
+        break;
+      }
+      case 3: {
+        this.router.navigate([`${RotasConstant.INICIO}/${RotasConstant.CONTA}`]);
         break;
       }
       case 4:

@@ -6,6 +6,9 @@ form {
   flex-direction: column;
   width: 100%;
   min-width: 280px;
+  padding: 15px;
+  background-color: rgb(255, 255, 255,0.8);
+  border-radius: 30px;
 
   h1, a {
     display: block;
@@ -20,6 +23,7 @@ form {
   h1 {
     color: $laranja;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 35px;
   }
+
 }

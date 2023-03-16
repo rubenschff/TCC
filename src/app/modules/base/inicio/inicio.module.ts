@@ -8,17 +8,19 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { HeaderComponent } from './components/header/header.component';
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {InvestimentosModule} from "@modules/features/investimentos/investimentos.module";
 
 @NgModule({
     imports: [
-      CommonModule,
-      FormsModule,
-      ReactiveFormsModule,
-      InicioRoutingModule,
-      NzLayoutModule,
-      NzPopoverModule,
-      NzListModule,
-      NzSegmentedModule
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        InicioRoutingModule,
+        NzLayoutModule,
+        NzPopoverModule,
+        NzListModule,
+        NzSegmentedModule,
+        InvestimentosModule
     ],
     declarations: [InicioComponent, HeaderComponent]
 })

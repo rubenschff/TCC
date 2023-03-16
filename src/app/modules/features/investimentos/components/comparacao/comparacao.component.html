@@ -1,49 +1,55 @@
 <div class="container">
   <div>
     <span> {{ comparacao.investimento }} </span>
-    <span nz-icon nzType="close-circle" nzTheme="outline" (click)="clickClose()"></span>
   </div>
 
-  <div>
-    <label>Investimento Inicial:</label>
-    <nz-input-number
-      [(ngModel)]="comparacao.valorInicial"
-      (ngModelChange)="ajustarValorTotal()"
-      [nzMin]="1"
-      [nzStep]="1"
-      [nzFormatter]="formatterDollar"
-      [nzParser]="parserDollar"
-    ></nz-input-number>
-  </div>
+  <div class="group">
+    <div>
+      <label>Investimento Inicial:</label>
+      <nz-input-number
+        [(ngModel)]="comparacao.valorInicial"
+        (ngModelChange)="ajustarValorTotal()"
+        [nzMin]="1"
+        [nzStep]="1"
+        [nzFormatter]="formatterDollar"
+        [nzParser]="parserDollar"
+      ></nz-input-number>
+    </div>
 
   <div>
     <label>Tempo (Semana):</label>
     <nz-input-number
       [(ngModel)]="comparacao.tempo"
+      (ngModelChange)="ajustarValorTotal()"
       [nzMin]="1"
       [nzStep]="1"
       nzInputMode="numeric"
     ></nz-input-number>
   </div>
 
-  <div>
-    <label>Juros:</label>
-    <nz-input-number
-      [(ngModel)]="comparacao.juro"
-      [nzReadOnly]="true"
-      [nzFormatter]="formatterPercent"
-      [nzParser]="parserPercent"
-    ></nz-input-number>
+    <div>
+      <label>Juros:</label>
+      <nz-input-number
+        [(ngModel)]="comparacao.juro"
+        [nzReadOnly]="true"
+        [nzFormatter]="formatterPercent"
+        [nzParser]="parserPercent"
+      ></nz-input-number>
+    </div>
+
+    <div>
+      <label>Valor Final:</label>
+      <nz-input-number
+        [(ngModel)]="modelValorFinal"
+        [nzReadOnly]="true"
+        [nzFormatter]="formatterDollar"
+        [nzParser]="parserDollar"
+      ></nz-input-number>
+    </div>
+    <button nz-button nzType="primary" (click)="clickClose()">Fechar</button>
+    
   </div>
 
-  <div>
-    <label>Valor Final:</label>
-    <nz-input-number
-      [(ngModel)]="modelValorFinal"
-      [nzReadOnly]="true"
-      [nzFormatter]="formatterDollar"
-      [nzParser]="parserDollar"
-    ></nz-input-number>
-  </div>
+    
+  
 </div>
-

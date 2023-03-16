@@ -1,0 +1,16 @@
+<div class="dados">
+  <span>Ativo: {{ investimento.descricao }}</span>
+  <span>Juros: {{ investimento.juro.toFixed(2) }}% semana</span>
+</div>
+
+<div class="coluna">
+  <div class="linha">
+    <label>Valor do investimento:</label>
+    <nz-input-number
+        [(ngModel)]="valor"
+        [nzMin]="1"
+        [nzStep]="10"
+      ></nz-input-number>
+  </div>
+  <span>Valor dispnível: {{ disponivel.toFixed(2) }}</span>
+</div>

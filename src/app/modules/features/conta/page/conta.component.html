@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="planetas">
+    <img class="plutao" [src]="URL_PLUTAO">
+    <img class="jupiter" [src]="URL_JUPITER">
+  </div>
+  <form nz-form [formGroup]="form" (ngSubmit)="alterar()" nzLayout="vertical" autocomplete="off">
+    <div>
+      <span>NICK: {{ nick }}</span>
+      <nz-form-item>
+        <nz-form-control>
+            <ac-input-text label="Nome" placeholder="Informa seu Nome..."
+              [focused]="true" formControlName="nome" [width]="120" [value]="nome">
+            </ac-input-text>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div>
+      <nz-form-item>
+        <nz-form-control>
+            <ac-input-date label="Data de Nascimento" placeholder="Informa sua data de nascimento..."
+              formControlName="dataNascimento" [width]="120" [value]="dataNascimento">
+            </ac-input-date>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <ac-input-text label="Senha" placeholder="Informa sua senha..." [estado]="inputEstadoEnum.OBRIGATORIO"
+            formControlName="senha" [tipo]="inputTextTipoEnum.SENHA" [width]="120" [value]="senha">
+          </ac-input-text>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <ac-button text="Salvar"></ac-button>
+  </form>
+  <div class="planetas">
+    <img class="saturno" [src]="URL_SATURNO">
+    <img class="marte" [src]="URL_MARTE">
+  </div>
+</div>

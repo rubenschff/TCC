@@ -16,4 +16,8 @@ export class ComparativoService {
   getComparativos(userId: number):Observable<ComparativoDTO>{
     return this.http.get<ComparativoDTO>(this.urlApi+'/comparativo/'+userId)
   }
+
+  create(userId: number){
+    return this.http.post(this.urlApi + '/comparativo', {usuarioId: userId})
+  }
 }

@@ -6,6 +6,7 @@ import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import {CadastroService} from "../../../../../services/cadastro/cadastro.service";
 import {CookieService} from "ngx-cookie-service";
+import {ComparativoService} from "../../../../../services/comparativo/comparativo.service";
 
 @Component({
   selector: 'ac-form-cadastro',
@@ -28,6 +29,7 @@ export class FormCadastroComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private cadastroService: CadastroService,
+    private comparativoService: ComparativoService,
     private fb: FormBuilder,
     private modal: NzModalService
   ) {}
@@ -43,12 +45,37 @@ export class FormCadastroComponent implements OnInit {
   }
 
   cadastrar() {
-    let usuario: UsuarioDTO = this.form.value;
+    const usuario: UsuarioDTO = this.form.value;
 
-       this.cadastroService.cadastro(usuario);
+    const cadastro = this.cadastroService.cadastro(usuario);
 
+    cadastro.subscribe(
+      (response) => {
+        console.log(response);
+        const comparativo = this.comparativoService.create(response.id!)
 
-    this.abrirPopup({...usuario, id: parseInt(this.cookieService.get('userId'))});
+        comparativo.subscribe((response)=>{
+          console.log('Comparativo criado!')
+        },(error)=>{
+          return error.message
+        })
+
+        const usuario:number = response.id!
+        this.cookieService.set('accessToken', response.accessToken); //ToDo passar o id e token para o cookie
+        this.cookieService.set('userId',usuario.toString())
+
+        this.abrirPopup({...response, id: parseInt(this.cookieService.get('userId'))});
+      },
+      error => {
+        console.log(error.message)
+        if (error.status == 401){
+          console.log("Usuário ja cadastrado")
+          return error.message
+        }
+      },
+      () =>{console.log('Passou!')}
+    )
+
   }
 
   abrirPopup(usuario: UsuarioDTO) {

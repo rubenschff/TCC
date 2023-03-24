@@ -39,9 +39,11 @@ export class FormLoginComponent implements OnInit {
   login() {
     let values: UsuarioDTO = this.form.value;
     let login = this.loginService.login(values)
+
     login.subscribe(
       (data)=>{
-        this.cookieService.set('userId',JSON.stringify(data.id))
+        const user:number = data.id!
+        this.cookieService.set('userId', user.toString())
         this.cookieService.set('accessToken',data.accessToken)
         this.eventLogin.emit(data);
       },

@@ -15,6 +15,7 @@ export class LoginService {
 
 
   login (usuario: Omit<UsuarioDTO, 'id'|'token'>) {
+      console.log(usuario)
       return this.http.post<UsuarioDTO>(this.urlApi + '/entrar', usuario);
   }
 }

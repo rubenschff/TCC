@@ -7,6 +7,7 @@ import { UsuarioMock } from 'app/mocks/usuario.mocks';
 import {LoginService} from "../../../../../services/login/login.service";
 import {error} from "@ant-design/icons-angular";
 import {CookieService} from "ngx-cookie-service";
+import {Cookie} from "@static/enumerators/cookie.enum";
 
 @Component({
   selector: 'ac-form-login',
@@ -44,7 +45,7 @@ export class FormLoginComponent implements OnInit {
       (data)=>{
         const user:number = data.id!
         this.cookieService.set('userId', user.toString())
-        this.cookieService.set('accessToken',data.accessToken)
+        this.cookieService.set(Cookie.SESSION_ID,data.accessToken)
         this.eventLogin.emit(data);
       },
       (error)=>{

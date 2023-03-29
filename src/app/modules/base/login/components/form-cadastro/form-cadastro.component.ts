@@ -7,6 +7,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import {CadastroService} from "../../../../../services/cadastro/cadastro.service";
 import {CookieService} from "ngx-cookie-service";
 import {ComparativoService} from "../../../../../services/comparativo/comparativo.service";
+import {Cookie} from "@static/enumerators/cookie.enum";
 
 @Component({
   selector: 'ac-form-cadastro',
@@ -61,8 +62,8 @@ export class FormCadastroComponent implements OnInit {
         })
 
         const usuario:number = response.id!
-        this.cookieService.set('accessToken', response.accessToken); //ToDo passar o id e token para o cookie
-        this.cookieService.set('userId',usuario.toString())
+        this.cookieService.set(Cookie.SESSION_ID, response.accessToken); //ToDo passar o id e token para o cookie
+
 
         this.abrirPopup({...response, id: parseInt(this.cookieService.get('userId'))});
       },

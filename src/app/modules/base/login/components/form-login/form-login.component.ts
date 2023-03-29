@@ -43,8 +43,6 @@ export class FormLoginComponent implements OnInit {
 
     login.subscribe(
       (data)=>{
-        const user:number = data.id!
-        this.cookieService.set('userId', user.toString())
         this.cookieService.set(Cookie.SESSION_ID,data.accessToken)
         this.eventLogin.emit(data);
       },

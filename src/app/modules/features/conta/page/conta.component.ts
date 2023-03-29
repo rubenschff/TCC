@@ -9,6 +9,7 @@ import { UsuarioMock } from 'app/mocks/usuario.mocks';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {UsuarioService} from "../../../../services/usuario/usuario.service";
 import {CookieService} from "ngx-cookie-service";
+import {Cookie} from "@static/enumerators/cookie.enum";
 
 @Component({
   selector: 'ac-conta',
@@ -42,9 +43,10 @@ export class ContaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const accessToken= this.cookieService.get('accessToken');
-    const userId= this.cookieService.get('userId');
-    let usuario = this.usuarioService.getById(parseInt(userId),accessToken);
+
+    const usuario = this.usuarioService
+      .getById(this.cookieService
+        .get(Cookie.SESSION_ID));
 
     usuario.subscribe(
       (data)=>{

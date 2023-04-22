@@ -1,13 +1,12 @@
 @import 'src/sass/_placeholders';
 
+:host {
+  width: 100%;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-width: 280px;
-  padding: 15px;
-  background-color: rgb(255, 255, 255,0.8);
-  border-radius: 30px;
 
   h1, a {
     display: block;

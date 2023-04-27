@@ -4,10 +4,11 @@ import { InputEstadoEnum } from '@static/enumerators/components/input-estados.en
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import {CadastroService} from "../../../../../services/cadastro/cadastro.service";
 import {CookieService} from "ngx-cookie-service";
 import {ComparativoService} from "../../../../../services/comparativo/comparativo.service";
 import {Cookie} from "@static/enumerators/cookie.enum";
+import { UsuarioService } from 'app/services/usuario.service';
+import { CadastroDTO } from '@static/models/usuario/cadastro.dto';
 
 @Component({
   selector: 'ac-form-cadastro',
@@ -29,7 +30,7 @@ export class FormCadastroComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private cadastroService: CadastroService,
+    private usuarioService: UsuarioService,
     private comparativoService: ComparativoService,
     private fb: FormBuilder,
     private modal: NzModalService
@@ -46,37 +47,35 @@ export class FormCadastroComponent implements OnInit {
   }
 
   cadastrar() {
-    const usuario: UsuarioDTO = this.form.value;
+    const cadastroDTO: CadastroDTO = this.form.value;
 
-    const cadastro = this.cadastroService.cadastro(usuario);
+    this.usuarioService.cadastro(cadastroDTO).subscribe(
+      {
+        next: (response) => {
+          console.log(response);
+          const comparativo = this.comparativoService.create(response.id!)
 
-    cadastro.subscribe(
-      (response) => {
-        console.log(response);
-        const comparativo = this.comparativoService.create(response.id!)
+          comparativo.subscribe((response)=>{
+            console.log('Comparativo criado!')
+          },(error)=>{
+            return error.message
+          })
 
-        comparativo.subscribe((response)=>{
-          console.log('Comparativo criado!')
-        },(error)=>{
-          return error.message
-        })
-
-        const usuario:number = response.id!
-        this.cookieService.set(Cookie.SESSION_ID, response.accessToken); //ToDo passar o id e token para o cookie
+          const usuario:number = response.id!
+          this.cookieService.set(Cookie.SESSION_ID, response.accessToken); //ToDo passar o id e token para o cookie
 
 
-        this.abrirPopup({...response, id: parseInt(this.cookieService.get('userId'))});
-      },
-      error => {
-        console.log(error.message)
-        if (error.status == 401){
-          console.log("Usuário ja cadastrado")
-          return error.message
+          this.abrirPopup({...response, id: parseInt(this.cookieService.get('userId'))});
+        },
+        error: (error) => {
+          console.log(error.message)
+          if (error.status == 401){
+            console.log("Usuário ja cadastrado")
+            return error.message
+          }
         }
-      },
-      () =>{console.log('Passou!')}
+      }
     )
-
   }
 
   abrirPopup(usuario: UsuarioDTO) {

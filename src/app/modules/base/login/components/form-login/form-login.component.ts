@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InputEstadoEnum } from '@static/enumerators/components/input-estados.enum';
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
-import { UsuarioMock } from 'app/mocks/usuario.mocks';
-import {LoginService} from "../../../../../services/login/login.service";
-import {error} from "@ant-design/icons-angular";
 import {CookieService} from "ngx-cookie-service";
 import {Cookie} from "@static/enumerators/cookie.enum";
+import { UsuarioService } from 'app/services/usuario.service';
+import { LoginDTO } from '@static/models/usuario/login.dto';
 
 @Component({
   selector: 'ac-form-login',
@@ -25,36 +24,33 @@ export class FormLoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService,
-    private  cookieService: CookieService,
+    private usuarioService: UsuarioService,
+    private cookieService: CookieService,
   ) {}
 
   ngOnInit() {
 
     this.form = this.fb.group({
-        nickname: ['', Validators.compose([Validators.required])],
+        nickName: ['', Validators.compose([Validators.required])],
         password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
     });
   }
 
   login() {
-    let values: UsuarioDTO = this.form.value;
-    let login = this.loginService.login(values)
+    let loginDTO: LoginDTO = this.form.value;
 
-    login.subscribe(
-      (data)=>{
+    this.usuarioService.login(loginDTO).subscribe({
+      next: (data) => {
         this.cookieService.set(Cookie.SESSION_ID,data.accessToken)
         this.eventLogin.emit(data);
       },
-      (error)=>{
+      error: (error) => {
         if (error.status == 404){
           console.log('Usuario não encontrado');
         }else if(error.status == 401){
           console.log('Senha incorreta');
         }
       }
-    )
-
-
+    });
   }
 }

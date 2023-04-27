@@ -1,8 +1,6 @@
-export interface UsuarioDTO {
-  id: number;
+export interface CadastroDTO {
   name: string;
   nickName: string;
   password: string;
   dateOfBirth: Date;
-  accessToken: string;
 }

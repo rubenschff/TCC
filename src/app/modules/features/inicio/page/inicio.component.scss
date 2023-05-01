@@ -7,7 +7,7 @@
 
   div {
     width: 300px;
-    height: 100px;
+    height: min-content;
     padding: 17px;
     background-color: white;
     border-radius: 10px;
@@ -18,7 +18,8 @@
     align-content: flex-end;
     justify-content: space-between;
     position: relative;
-    p {
+
+    span {
       @extend %font-normal-14;
       font-size: 16px;
       text-align: justify;
@@ -42,6 +43,5 @@
   img {
     width: 300px;
     transform: rotate(0.1turn);
-
   }
 }

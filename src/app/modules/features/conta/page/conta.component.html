@@ -5,11 +5,11 @@
   </div>
   <form nz-form [formGroup]="form" (ngSubmit)="alterar()" nzLayout="vertical" autocomplete="off">
     <div>
-      <span>NICK: {{ nick }}</span>
+      <span>APELIDO: {{ nick }}</span>
       <nz-form-item>
         <nz-form-control>
-            <ac-input-text label="Nome" placeholder="Informa seu Nome..."
-              [focused]="true" formControlName="nome" [width]="120" [value]="nome">
+            <ac-input-text label="Nome" placeholder="Informa seu nome..."
+              [focused]="true" formControlName="name" [width]="120" [value]="name">
             </ac-input-text>
         </nz-form-control>
       </nz-form-item>
@@ -18,16 +18,28 @@
     <div>
       <nz-form-item>
         <nz-form-control>
-            <ac-input-date label="Data de Nascimento" placeholder="Informa sua data de nascimento..."
-              formControlName="dataNascimento" [width]="120" [value]="dataNascimento">
+            <ac-input-date label="Data de nascimento" placeholder="Informa sua data de nascimento..."
+              formControlName="dateOfBirth" [width]="120" [value]="dateOfBirth">
             </ac-input-date>
         </nz-form-control>
       </nz-form-item>
+    </div>
 
+    <div>
       <nz-form-item>
         <nz-form-control>
-          <ac-input-text label="Senha" placeholder="Informa sua senha..." [estado]="inputEstadoEnum.OBRIGATORIO"
-            formControlName="senha" [tipo]="inputTextTipoEnum.SENHA" [width]="120" [value]="senha">
+          <ac-input-text label="Nova senha" placeholder="Informa sua nova senha..." [estado]="inputEstadoEnum.OBRIGATORIO"
+            formControlName="password" [tipo]="inputTextTipoEnum.SENHA" [width]="120">
+          </ac-input-text>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div>
+      <nz-form-item>
+        <nz-form-control>
+          <ac-input-text label="Senha antiga" placeholder="Informa sua senha antiga..." [estado]="inputEstadoEnum.OBRIGATORIO"
+            formControlName="oldPassword" [tipo]="inputTextTipoEnum.SENHA" [width]="120">
           </ac-input-text>
         </nz-form-control>
       </nz-form-item>

@@ -6,7 +6,8 @@ export class EndpointsConstant {
 
   public static USUARIO = {
     LOGIN: URL_API + '/entrar',
-    CADASTRO: URL_API + '/cadastrar'
+    CADASTRO: URL_API + '/cadastrar',
+    USUARIO: URL_API + '/usuario'
   }
 
 }

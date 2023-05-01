@@ -8,6 +8,4 @@ import { Component } from '@angular/core';
 export class InicioComponent {
 
   readonly URL_ASTRONAUTA = './assets/astronauta-pose.png';
-
-  constructor() {}
 }

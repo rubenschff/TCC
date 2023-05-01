@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
     templateUrl: './inicio.component.html',
     styleUrls: ['./inicio.component.scss']
 })
-export class InicioComponent {
-    constructor() {}
-}
+export class InicioComponent {}

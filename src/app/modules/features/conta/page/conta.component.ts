@@ -4,9 +4,10 @@ import { InputEstadoEnum } from '@static/enumerators/components/input-estados.en
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
 import { DateHelper } from '@static/helpers/date.helper';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {UsuarioService} from "../../../../services/usuario/usuario.service";
+import {UsuarioService} from "../../../../services/usuario.service";
 import {CookieService} from "ngx-cookie-service";
 import {Cookie} from "@static/enumerators/cookie.enum";
+import { EditarDTO } from '@static/models/usuario/editar.dto';
 
 @Component({
   selector: 'ac-conta',
@@ -25,10 +26,10 @@ export class ContaComponent implements OnInit {
 
 
 
-  nome!: string;
+  name!: string;
   nick!: string;
-  senha!: string;
-  dataNascimento!: Date;
+  password!: string;
+  dateOfBirth!: Date;
 
   form!: FormGroup;
 
@@ -40,41 +41,39 @@ export class ContaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-    const usuario = this.usuarioService
-      .getById(this.cookieService
-        .get(Cookie.SESSION_ID));
-
-    usuario.subscribe(
-      (data)=>{
+    this.usuarioService.get().subscribe({
+      next: data => {
         console.log(data);
-        this.nome = data.name;
+        this.name = data.name;
         this.nick = data.nickName;
-        this.senha = data.password;
-        this.dataNascimento = data.dateOfBirth;
+        this.dateOfBirth = data.dateOfBirth;
       },
-      (error)=>{
-        console.log(error)}
-    )
+      error: error => {
+        console.log(error)
+      }
+    });
 
 
     this.form = this.fb.group({
-        nome: [this.nome, Validators.compose([Validators.required])],
-        nickName: [this.nome, Validators.compose([Validators.required])],
-        dataNascimento: [this.dataNascimento, Validators.compose([Validators.required])],
-        senha: [this.senha, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
+      name: [this.name, Validators.compose([Validators.required])],
+      dateOfBirth: [this.dateOfBirth, Validators.compose([Validators.required])],
+      password: ['', Validators.compose([Validators.required])],
+      oldPassword: ['', Validators.compose([Validators.required])],
     });
   }
 
-
-
   alterar() {
-    let values = this.form.value;
-    let data = DateHelper.getDateYYYYMMDDFormat(values.dataNascimento);
+    let values: EditarDTO = this.form.value;
 
-    // UsuarioMock.add(values.nome, data, values.senha, StorageHelper.codigoUsuario);
+    this.usuarioService.update(values).subscribe({
+      next: data => {
+        this.message.success(`Alteração realizada com sucesso!`);
+      },
+      error: error => {
+        console.log(error.message);
+      }
+    })
 
-    this.message.success(`Alteração realizada com sucesso!`);
   }
 
 }

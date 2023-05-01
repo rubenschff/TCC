@@ -48,7 +48,7 @@ export class FormCadastroComponent implements OnInit {
 
   cadastrar() {
     const cadastroDTO: CadastroDTO = this.form.value;
-
+    debugger
     this.usuarioService.cadastro(cadastroDTO).subscribe(
       {
         next: (response) => {

@@ -18,8 +18,8 @@ const routes: Routes = [
           path: RotasConstant.CONTA,
           loadChildren: () => import('@modules/features/conta/conta.module').then(m => m.ContaModule)
         }, {
-            path: '**',
-            loadChildren: () => import('@modules/features/mapa-jogo/mapa-jogo.module').then(m => m.MapaJogoModule)
+          path: '**',
+          loadChildren: () => import('@modules/features/inicio/inicio.module').then(m => m.InicioModule)
         }
       ]
     }, {

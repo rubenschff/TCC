@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InputEstadoEnum } from '@static/enumerators/components/input-estados.enum';
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
-import { DateHelper } from '@static/helpers/date.helper';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {UsuarioService} from "../../../../services/usuario.service";
-import {CookieService} from "ngx-cookie-service";
-import {Cookie} from "@static/enumerators/cookie.enum";
 import { EditarDTO } from '@static/models/usuario/editar.dto';
+import { UsuarioService } from 'app/services/http/usuario.service';
 
 @Component({
   selector: 'ac-conta',
@@ -37,7 +34,6 @@ export class ContaComponent implements OnInit {
     private fb: FormBuilder,
     private message: NzMessageService,
     private usuarioService: UsuarioService,
-    private cookieService: CookieService,
   ) {}
 
   ngOnInit() {

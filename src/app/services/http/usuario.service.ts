@@ -6,9 +6,8 @@ import { EndpointsConstant } from '@static/constants/endpoints.constant';
 import { Observable } from 'rxjs';
 import { CadastroDTO } from '@static/models/usuario/cadastro.dto';
 import { DateHelper } from '@static/helpers/date.helper';
-import { CookieService } from 'ngx-cookie-service';
-import { Cookie } from '@static/enumerators/cookie.enum';
 import { EditarDTO } from '@static/models/usuario/editar.dto';
+import { HttpHelper } from '@static/helpers/http.helper';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class UsuarioService {
 
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService
+    private utilHelper: HttpHelper
   ) { }
 
   login(loginDTO: LoginDTO): Observable<UsuarioDTO> {
@@ -30,14 +29,10 @@ export class UsuarioService {
   }
 
   get(): Observable<UsuarioDTO> {
-    return this.http.get<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, {
-      headers: { authorization: this.cookieService.get(Cookie.SESSION_ID) }
-    });
+    return this.http.get<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, this.utilHelper.getHttpOptions());
   }
 
   update(editarDTO: EditarDTO): Observable<UsuarioDTO> {
-    return this.http.put<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, editarDTO, {
-      headers: { authorization: this.cookieService.get(Cookie.SESSION_ID) }
-    });
+    return this.http.put<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, editarDTO, this.utilHelper.getHttpOptions());
   }
 }

@@ -143,43 +143,43 @@ export class PerguntaMock {
     return perguntaResposta;
   }
 
-  static findAll(codigoUsuario: number): Array<ListaRespostaDTO> {
-    let retorno = new Array<ListaRespostaDTO>();
+  // static findAll(codigoUsuario: number): Array<ListaRespostaDTO> {
+  //   let retorno = new Array<ListaRespostaDTO>();
 
-    let ultimaFinalizada = true;
+  //   let ultimaFinalizada = true;
 
-    this.getPerguntas().forEach(pergunta => {
-      let respostas = this.respostas
-      .filter(x => x.codigoUsuario == codigoUsuario && x.codigoPergunta == pergunta.id)
-      .map(x => x.codigoAlternativa);
+  //   this.getPerguntas().forEach(pergunta => {
+  //     let respostas = this.respostas
+  //     .filter(x => x.codigoUsuario == codigoUsuario && x.codigoPergunta == pergunta.id)
+  //     .map(x => x.codigoAlternativa);
 
-      let situacao!: number;
+  //     let situacao!: number;
 
-      if (respostas.includes(pergunta.alternativaCorreta) && respostas.length < 3) {
-        situacao = SituacaoPerguntaEnum.ACERTOU;
-        ultimaFinalizada = true;
-      } else if (respostas.length == 3) {
-        situacao = SituacaoPerguntaEnum.ERROU;
-        ultimaFinalizada = true;
-      } else if (!respostas.includes(pergunta.alternativaCorreta) && ultimaFinalizada) {
-        situacao = SituacaoPerguntaEnum.EM_ABERTO;
-        ultimaFinalizada = false;
-      } else if (!ultimaFinalizada) {
-        situacao = SituacaoPerguntaEnum.BLOQUEADO;
-      }
+  //     if (respostas.includes(pergunta.alternativaCorreta) && respostas.length < 3) {
+  //       situacao = SituacaoPerguntaEnum.ACERTOU;
+  //       ultimaFinalizada = true;
+  //     } else if (respostas.length == 3) {
+  //       situacao = SituacaoPerguntaEnum.ERROU;
+  //       ultimaFinalizada = true;
+  //     } else if (!respostas.includes(pergunta.alternativaCorreta) && ultimaFinalizada) {
+  //       situacao = SituacaoPerguntaEnum.EM_ABERTO;
+  //       ultimaFinalizada = false;
+  //     } else if (!ultimaFinalizada) {
+  //       situacao = SituacaoPerguntaEnum.BLOQUEADO;
+  //     }
 
-      let perguntaRetorno: ListaRespostaDTO = {
-        codigoUsuario: codigoUsuario,
-        respostas,
-        codigoPergunta: pergunta.id,
-        situacao
-      }
+  //     let perguntaRetorno: ListaRespostaDTO = {
+  //       codigoUsuario: codigoUsuario,
+  //       respostas,
+  //       codigoPergunta: pergunta.id,
+  //       situacao
+  //     }
 
-      retorno.push(perguntaRetorno);
-    });
+  //     retorno.push(perguntaRetorno);
+  //   });
 
-    return retorno;
-  }
+  //   return retorno;
+  // }
 
   static add(codigoUsuario: number, codigoPergunta: number, codigoAlternativa: number): boolean {
     let respota: RespostaDTO = {

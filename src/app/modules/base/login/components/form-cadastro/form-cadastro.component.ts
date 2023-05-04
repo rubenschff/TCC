@@ -4,11 +4,10 @@ import { InputEstadoEnum } from '@static/enumerators/components/input-estados.en
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import {CookieService} from "ngx-cookie-service";
 import {ComparativoService} from "../../../../../services/comparativo/comparativo.service";
-import {Cookie} from "@static/enumerators/cookie.enum";
-import { UsuarioService } from 'app/services/usuario.service';
+import { UsuarioService } from 'app/services/http/usuario.service';
 import { CadastroDTO } from '@static/models/usuario/cadastro.dto';
+import { CookieHelper } from '@static/helpers/cookie.helper';
 
 @Component({
   selector: 'ac-form-cadastro',
@@ -29,7 +28,7 @@ export class FormCadastroComponent implements OnInit {
   modalRef!: NzModalRef;
 
   constructor(
-    private cookieService: CookieService,
+    private cookieHelper: CookieHelper,
     private usuarioService: UsuarioService,
     private comparativoService: ComparativoService,
     private fb: FormBuilder,
@@ -48,34 +47,20 @@ export class FormCadastroComponent implements OnInit {
 
   cadastrar() {
     const cadastroDTO: CadastroDTO = this.form.value;
-    debugger
-    this.usuarioService.cadastro(cadastroDTO).subscribe(
-      {
-        next: (response) => {
-          console.log(response);
-          const comparativo = this.comparativoService.create(response.id!)
 
-          comparativo.subscribe((response)=>{
-            console.log('Comparativo criado!')
-          },(error)=>{
-            return error.message
-          })
-
-          const usuario:number = response.id!
-          this.cookieService.set(Cookie.SESSION_ID, response.accessToken); //ToDo passar o id e token para o cookie
-
-
-          this.abrirPopup({...response, id: parseInt(this.cookieService.get('userId'))});
-        },
-        error: (error) => {
-          console.log(error.message)
-          if (error.status == 401){
-            console.log("Usuário ja cadastrado")
-            return error.message
-          }
+    this.usuarioService.cadastro(cadastroDTO).subscribe({
+      next: (usarioDTO) => {
+        this.cookieHelper.sessionId = usarioDTO.accessToken;
+        this.abrirPopup(usarioDTO);
+      },
+      error: (error) => {
+        console.log(error.message)
+        if (error.status == 401){
+          console.log("Usuário ja cadastrado")
+          return error.message
         }
       }
-    )
+    });
   }
 
   abrirPopup(usuario: UsuarioDTO) {

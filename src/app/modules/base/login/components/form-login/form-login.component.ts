@@ -3,10 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InputEstadoEnum } from '@static/enumerators/components/input-estados.enum';
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
-import {CookieService} from "ngx-cookie-service";
-import {Cookie} from "@static/enumerators/cookie.enum";
-import { UsuarioService } from 'app/services/usuario.service';
+import { UsuarioService } from 'app/services/http/usuario.service';
 import { LoginDTO } from '@static/models/usuario/login.dto';
+import { CookieHelper } from '@static/helpers/cookie.helper';
 
 @Component({
   selector: 'ac-form-login',
@@ -25,7 +24,7 @@ export class FormLoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private cookieService: CookieService,
+    private cookieHelper: CookieHelper
   ) {}
 
   ngOnInit() {
@@ -41,7 +40,7 @@ export class FormLoginComponent implements OnInit {
 
     this.usuarioService.login(loginDTO).subscribe({
       next: (data) => {
-        this.cookieService.set(Cookie.SESSION_ID,data.accessToken)
+        this.cookieHelper.sessionId = data.accessToken;
         this.eventLogin.emit(data);
       },
       error: (error) => {

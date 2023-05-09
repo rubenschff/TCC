@@ -20,7 +20,7 @@ export class UsuarioService {
   ) { }
 
   getById (accessToken: string): Observable<Omit<UsuarioDTO, 'token'>> {
-    //const auth = this.header.append('Authorization', 'Bearer '+accessToken)
+
     return this.http.get<Omit<UsuarioDTO, 'token'>>(this.apiUrl + '/usuario',
       {headers:{
         authorization: this.cookieService.get(Cookie.SESSION_ID)

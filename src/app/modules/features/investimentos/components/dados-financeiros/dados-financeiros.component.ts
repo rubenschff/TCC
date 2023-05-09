@@ -1,10 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StorageHelper } from '@static/helpers/storage.helper';
-import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
-import { InvestimentoMock } from 'app/mocks/investimento.mocks';
-import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import {FinanceiroDTO} from "@static/models/investimento/financeiro.dto";
+import {FinanceiroService} from "../../../../../services/financeiro/financeiro.service";
+import {Router} from "@angular/router";
+import {Cookie} from "@static/enumerators/cookie.enum";
+import {RotasConstant} from "@static/constants/rotas.constant";
+import {CookieService} from "ngx-cookie-service";
+
+interface Financeiro {
+  arrecadado: number,
+  acumulado: number,
+  disponivel: number
+}
 
 @Component({
   selector: 'ac-dados-financeiros',
@@ -13,17 +19,34 @@ import {FinanceiroDTO} from "@static/models/investimento/financeiro.dto";
 })
 export class DadosFinanceirosComponent implements OnInit {
 
-  dadosFinanceiros!: FinanceiroDTO;
+   dadosFinanceiros: Financeiro = {
+     arrecadado: 0,
+     disponivel: 0,
+     acumulado: 0
+   }
 
   constructor(
-    private modal: NzModalService
+    private modal: NzModalService,
+    private FinanceiroService: FinanceiroService,
+    private router: Router,
+    private Cookie: CookieService
   ) {}
 
   ngOnInit(): void {
-    // this.modelValorInicial = this.comparacao?.valorInicial ?? 0;
-    // this.modelTempo = this.comparacao?.tempo;
-    // this.modelJuros = this.comparacao?.juro;
-    // this.modelValorFinal = this.comparacao?.valorFinal();
-    this.dadosFinanceiros = InvestimentoMock.findFinanceiro(StorageHelper.codigoUsuario);
+
+    let dadosFinanceiros = this.FinanceiroService.financeiroById()
+
+    dadosFinanceiros.subscribe(financeiro =>{
+      this.dadosFinanceiros.arrecadado = financeiro.arrecadado == undefined ? 0 : financeiro.arrecadado;
+      this.dadosFinanceiros.acumulado = financeiro.acumulado == undefined ? 0 : financeiro.acumulado;
+      this.dadosFinanceiros.disponivel = financeiro.disponivel == undefined ? 0 : financeiro.disponivel
+    },error => {
+      if (error.status == 401){
+        this.Cookie.delete(Cookie.SESSION_ID)
+        this.router.navigate([RotasConstant.LOGIN]);
+      }
+    })
+
+
   }
 }

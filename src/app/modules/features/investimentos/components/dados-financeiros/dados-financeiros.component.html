@@ -1,17 +1,17 @@
 <div class="body">
   <div class = "titulo">
     <span>Moedas recebidas</span>
-    <h2>R${{ dadosFinanceiros.valorArrecadado.toFixed(2) }}</h2>
+    <h2>R${{ dadosFinanceiros!.arrecadado }}</h2>
   </div>
 
   <div class = "titulo">
     <span>Moedas totais</span>
-    <h2>R${{ dadosFinanceiros.valorAcumulado.toFixed(2) }}</h2>
+    <h2>R${{ dadosFinanceiros!.acumulado }}</h2>
   </div>
 
   <div class = "titulo">
     <span>Moedas disponíveis</span>
-    <h2>R${{ dadosFinanceiros.valorDisponivel.toFixed(2) }}</h2>
+    <h2>R${{ dadosFinanceiros!.disponivel }}</h2>
   </div>
 </div>
 

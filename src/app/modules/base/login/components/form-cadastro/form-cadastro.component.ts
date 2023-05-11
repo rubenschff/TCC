@@ -4,7 +4,6 @@ import { InputEstadoEnum } from '@static/enumerators/components/input-estados.en
 import { InputTextTipoEnum } from '@static/enumerators/components/input-text-tipo.enum';
 import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import {ComparativoService} from "../../../../../services/comparativo/comparativo.service";
 import { UsuarioService } from 'app/services/http/usuario.service';
 import { CadastroDTO } from '@static/models/usuario/cadastro.dto';
 import { CookieHelper } from '@static/helpers/cookie.helper';
@@ -30,7 +29,6 @@ export class FormCadastroComponent implements OnInit {
   constructor(
     private cookieHelper: CookieHelper,
     private usuarioService: UsuarioService,
-    private comparativoService: ComparativoService,
     private fb: FormBuilder,
     private modal: NzModalService
   ) {}

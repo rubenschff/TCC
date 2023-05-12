@@ -13,22 +13,5 @@ import {Router} from "@angular/router";
 })
 export class InicioComponent {
 
-  constructor(
-    private inicio: InicioService,
-    private Cookie: CookieService,
-    private router: Router,
-    private cookieService: CookieService
-  ) { }
-
-
-  ngOnInit(){
-    this.inicio.inicio().subscribe(inicio =>{
-      console.log(inicio)
-    },error =>{
-      if (error.status == 401){
-        this.Cookie.delete(Cookie.SESSION_ID)
-        this.router.navigate([RotasConstant.LOGIN]);
-      }
-    })
-  }
+  constructor() {  }
 }

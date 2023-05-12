@@ -27,9 +27,7 @@ export class DadosFinanceirosComponent implements OnInit {
 
   constructor(
     private modal: NzModalService,
-    private FinanceiroService: FinanceiroService,
-    private router: Router,
-    private Cookie: CookieService
+    private FinanceiroService: FinanceiroService
   ) {}
 
   ngOnInit(): void {

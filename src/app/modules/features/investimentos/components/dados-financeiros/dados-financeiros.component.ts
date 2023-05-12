@@ -40,11 +40,6 @@ export class DadosFinanceirosComponent implements OnInit {
       this.dadosFinanceiros.arrecadado = financeiro.arrecadado == undefined ? 0 : financeiro.arrecadado;
       this.dadosFinanceiros.acumulado = financeiro.acumulado == undefined ? 0 : financeiro.acumulado;
       this.dadosFinanceiros.disponivel = financeiro.disponivel == undefined ? 0 : financeiro.disponivel
-    },error => {
-      if (error.status == 401){
-        this.Cookie.delete(Cookie.SESSION_ID)
-        this.router.navigate([RotasConstant.LOGIN]);
-      }
     })
 
 

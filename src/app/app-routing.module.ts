@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: RotasConstant.INICIO
+    redirectTo: RotasConstant.LOGIN
   }, {
     path: RotasConstant.INICIO,
     loadChildren: () => import('./modules/base/inicio/inicio.module').then(m => m.InicioModule),

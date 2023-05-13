@@ -50,14 +50,13 @@ export class ContaComponent implements OnInit {
 
     usuario.subscribe(
       (data)=>{
-        console.log(data);
         this.nome = data.name;
         this.nick = data.nickName;
         this.senha = data.password;
         this.dataNascimento = data.dateOfBirth;
       },
       (error)=>{
-        console.log(error)}
+        console.error(error)}
     )
 
 

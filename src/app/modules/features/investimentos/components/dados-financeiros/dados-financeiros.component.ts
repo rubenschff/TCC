@@ -27,7 +27,9 @@ export class DadosFinanceirosComponent implements OnInit {
 
   constructor(
     private modal: NzModalService,
-    private FinanceiroService: FinanceiroService
+    private FinanceiroService: FinanceiroService,
+    private Cookie: CookieService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,11 @@ export class DadosFinanceirosComponent implements OnInit {
       this.dadosFinanceiros.arrecadado = financeiro.arrecadado == undefined ? 0 : financeiro.arrecadado;
       this.dadosFinanceiros.acumulado = financeiro.acumulado == undefined ? 0 : financeiro.acumulado;
       this.dadosFinanceiros.disponivel = financeiro.disponivel == undefined ? 0 : financeiro.disponivel
+    },error => {
+      if (error.status == 401){
+      this.router.navigate([RotasConstant.LOGIN]);
+      this.Cookie.delete(Cookie.SESSION_ID)
+    }
     })
 
 

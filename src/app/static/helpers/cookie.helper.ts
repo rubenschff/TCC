@@ -16,6 +16,10 @@ export class CookieHelper {
     this.cookieService.set(Cookie.SESSION_ID, sessionId);
   }
 
+  removeSessionId() {
+    this.cookieService.delete(Cookie.SESSION_ID);
+  }
+
   get userId(): string {
     return this.cookieService.get(Cookie.USER_ID);
   }

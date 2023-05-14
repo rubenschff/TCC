@@ -6,6 +6,7 @@ import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import { PerguntaMock } from 'app/mocks/pergunta.mocks';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.component';
+import { PerguntaService } from 'app/services/http/pergunta.service';
 
 @Component({
   selector: 'ac-questao',
@@ -31,14 +32,17 @@ export class QuestaoComponent implements OnInit {
   perguntaResposta!: PerguntaRespostaDTO;
 
   constructor(
-    private modal: NzModalService) {}
+    private modal: NzModalService,
+    private perguntaService: PerguntaService) {}
 
   ngOnInit(): void {
     this.atualizar();
   }
 
   atualizar() {
-    this.perguntaResposta = PerguntaMock.find(StorageHelper.codigoUsuario, this.codigoPergunta);
+    this.perguntaResposta =
+
+    PerguntaMock.find(StorageHelper.codigoUsuario, this.codigoPergunta);
     this.desabilitarAlternativa = this.perguntaResposta.respostas;
 
     let pergunta = this.perguntaResposta.pergunta;

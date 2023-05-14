@@ -15,7 +15,8 @@ export class EndpointsConstant {
   }
 
   public static INVESTIMENTO = {
-    INVESTIMENTO: URL_API + 'investimento'
+    INVESTIMENTO: URL_API + 'investimento',
+    FINANCEIRO:  URL_API + 'financeiro'
   }
 
 }

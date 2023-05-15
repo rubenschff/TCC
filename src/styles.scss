@@ -46,6 +46,11 @@ main {
     height: 100%;
 }
 
+button:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 5px #2f2f2f;
+}
+
 // *ESTILO BARRA DE ROLAGEM (scroll)
 
 ::-webkit-scrollbar {
@@ -90,9 +95,9 @@ ac-input-date nz-date-picker input::placeholder {
 /**** SEGMENTED NAV BAR *****/
 nz-segmented label {
   color: white;
-  padding: 0px 15px;
+  padding: 0px 5px;
 
-  &.ant-segmented-item:hover {
+  &.ant-segmented-item:not(.ant-segmented-item-selected):hover {
     color: rgb(208, 204, 204);
   }
 }

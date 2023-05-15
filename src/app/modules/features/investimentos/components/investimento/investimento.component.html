@@ -1,37 +1,16 @@
-
 <div class="card">
     <img [src]="investimento.imagem">
   <div class="options">
-    <div class="buttonOptions">
-      <button class="cardButton" (click)="cardClick()">Simular</button>
-      <button class="cardButton" >Sobre</button>
+    <div class="button-options">
+      <button class="card-button" (click)="cardClick()">Simular</button>
+      <button class="card-button" >Sobre</button>
     </div>
-    <div class="buttonOptions">
-      <button class="cardButton" >Comprar</button>
-      <button class="cardButton" >Vender</button>
+    <div class="button-options">
+      <button class="card-button" (click)="clickOperar(true)">Comprar</button>
+      <button class="card-button" (click)="clickOperar(false)">Vender</button>
     </div>
   </div>
 </div>
-
-
-
-<!--  <ng-template #coverTemplate>-->
-<!--    <img [src]="investimento.imagem" />-->
-<!--  </ng-template>-->
-
-<!--  <ng-template #tplSimular>-->
-<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Simular</div>-->
-<!--  </ng-template>-->
-<!--  <ng-template #tplSobre>-->
-<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Sobre</div>-->
-<!--  </ng-template>-->
-<!--  <ng-template #tplComprar>-->
-<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Comprar</div>-->
-<!--  </ng-template>-->
-<!--  <ng-template #tplVender>-->
-<!--    <div class="cardButton" nz-card-grid [ngStyle]="gridStyle" (click)="cardClick()">Vender</div>-->
-<!--  </ng-template>-->
-
 
 
 

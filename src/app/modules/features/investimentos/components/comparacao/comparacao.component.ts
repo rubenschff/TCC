@@ -21,10 +21,10 @@ export class ComparacaoComponent {
   modelValorFinal = 0;
 
   formatterPercent(value: number): string {
-    return `${value?.toFixed(2).toString().replace('.', ',')}% semana`;
+    return `${value?.toFixed(2).toString().replace('.', ',')}% dia`;
   }
   parserPercent(value: string): string {
-    return value?.replace('% semana', '');
+    return value?.replace('% dia', '');
   }
 
   formatterDollar(value: number): string {

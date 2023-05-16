@@ -45,21 +45,34 @@ export class ContaComponent implements OnInit {
         this.dateOfBirth = data.dateOfBirth;
       },
       error: error => {
-        console.log(error)
+        console.log(error.message)
       }
     });
 
 
     this.form = this.fb.group({
-      name: [this.name, Validators.compose([Validators.required])],
-      dateOfBirth: [this.dateOfBirth, Validators.compose([Validators.required])],
-      password: ['', Validators.compose([Validators.required])],
-      oldPassword: ['', Validators.compose([Validators.required])],
+      name: [this.name],
+      dateOfBirth: [this.dateOfBirth],
+      password: [''],
+      oldPassword: [''],
     });
   }
 
   alterar() {
     let values: EditarDTO = this.form.value;
+
+    if (this.name == values.name){
+      delete values.name
+    }
+    if (this.dateOfBirth == values.dateOfBirth){
+      delete values.dateOfBirth
+    }
+    if (values.password == ''){
+      delete values.password
+    }
+    if (values.oldPassword == ''){
+      delete values.oldPassword
+    }
 
     this.usuarioService.update(values).subscribe({
       next: data => {
@@ -70,6 +83,7 @@ export class ContaComponent implements OnInit {
       }
     })
 
+    this.ngOnInit()
   }
 
 }

@@ -13,6 +13,17 @@ nz-header {
   display: block;
   padding: 0 !important;
   height: auto;
+
+  .formulario {
+    position: fixed;
+    width: 65px;
+    height: 65px;
+    bottom: 20px;
+    right: 10px;
+    text-align: center;
+    font-size: 40px;
+    z-index: 1000;
+  }
 }
 
 nz-content {

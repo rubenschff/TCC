@@ -5,18 +5,18 @@
   height: 100%;
   width: 100%;
   min-width: 1366px;
-  min-height: 768px;
+
 }
 
 nz-header {
   background-color: transparent;
   display: block;
   padding: 0 !important;
-  height: 105px;
+  height: auto;
 }
 
 nz-content {
-  padding: 20px;
+  padding: 0 20px;
 }
 
 nz-layout, nz-content, router-outlet, nz-content > * {

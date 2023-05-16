@@ -3,13 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { EndpointsConstant } from '@static/constants/endpoints.constant';
 import { HttpHelper } from '@static/helpers/http.helper';
+import { FinanceiroDTO } from '@static/models/investimento/financeiro.dto';
 
-
-interface Financeiro {
-  arrecadado: number,
-  acumulado: number,
-  disponivel: number
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +16,7 @@ export class FinanceiroService {
   ) { }
 
 
-  financeiroById(): Observable<Financeiro> {
-    return this.http.get<Financeiro>(EndpointsConstant.INVESTIMENTO.FINANCEIRO, this.utilHelper.getHttpOptions());
+  financeiroById(): Observable<FinanceiroDTO> {
+    return this.http.get<FinanceiroDTO>(EndpointsConstant.INVESTIMENTO.FINANCEIRO, this.utilHelper.getHttpOptions());
   }
 }

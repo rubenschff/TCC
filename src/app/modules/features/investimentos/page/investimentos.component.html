@@ -1,7 +1,7 @@
 <div class="container">
   <div class="investimentos">
     <ng-container *ngFor="let investimento of investimentos">
-      <ac-investimento [investimento]="investimento" (eventCardClick)="adicionarComparar($event)"></ac-investimento>
+      <ac-investimento [investimento]="investimento" (compararCardClick)="adicionarComparar($event)"></ac-investimento>
     </ng-container>
   </div>
 

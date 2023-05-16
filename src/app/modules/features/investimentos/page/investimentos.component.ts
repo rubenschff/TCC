@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
 import { InvestimentoDTO } from '@static/models/investimento/investimento.dto';
-import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import {InvestimentoService} from "../../../../services/http/investimento.service";
 
 @Component({

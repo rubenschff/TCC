@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
 
 @Component({

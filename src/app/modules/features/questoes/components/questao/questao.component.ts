@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { AlternativaDTO } from '@static/models/pergunta/alternativa.dto';
 import { PerguntaRespostaDTO } from '@static/models/pergunta/pergunta-resposta.dto';
-import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import { PerguntaMock } from 'app/mocks/pergunta.mocks';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.component';
@@ -120,7 +119,7 @@ export class QuestaoComponent implements OnInit {
     let tentativas = this.perguntaResposta.respostas.length;
 
     if (tentativas < 3) {
-      InvestimentoMock.addValor(StorageHelper.codigoUsuario, this.perguntaResposta.pergunta.recompensa / tentativas);
+      // InvestimentoMock.addValor(StorageHelper.codigoUsuario, this.perguntaResposta.pergunta.recompensa / tentativas);
     }
   }
 }

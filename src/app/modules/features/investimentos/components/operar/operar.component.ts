@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { InvestimentoDTO } from '@static/models/investimento/investimento.dto';
 import { valorDisponivel } from '../dados-financeiros/dados-financeiros.component';
+import { MathHelper } from '@static/helpers/math.helper';
 
 @Component({
   selector: 'ac-operar',
@@ -13,16 +14,18 @@ export class OperarComponent implements OnInit {
   @Input() flagCompra!: boolean;
   @Input() investimento!: InvestimentoDTO;
 
+  formatMoeda = MathHelper.formatMoeda;
+  parseMoeda = MathHelper.parseMoeda;
+
   valor = 0;
 
   disponivel = 0;
 
   ngOnInit(): void {
-
     if (this.flagCompra) {
       this.disponivel = valorDisponivel;
     } else {
-      //this.disponivel = InvestimentoMock.findTotalizador(StorageHelper.codigoUsuario, this.investimento.id).valorAcumulado;
+      this.disponivel = this.investimento.totalizador.valorAcumulado;
     }
   }
 }

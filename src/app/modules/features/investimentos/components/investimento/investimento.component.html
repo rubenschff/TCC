@@ -1,9 +1,14 @@
-<div class="card">
-    <img [src]="investimento.imagem">
+<div class="card" nz-popover nzPopoverTitle="Dados do Investimento"
+  [nzPopoverContent]="dadosInvestimento"
+  [nzPopoverPlacement]="['left', 'right']"
+  [nzPopoverTrigger]="mostrarDadosInvestimento()"
+>
+  <span>Valor atual: {{ investimento.totalizador.valorAcumulado | moeda }}</span>
+  <img [src]="investimento.imagem">
   <div class="options">
     <div class="button-options">
       <button class="card-button" (click)="cardClick()">Simular</button>
-      <button class="card-button" >Sobre</button>
+      <button class="card-button" (click)="clickSobre()">Sobre</button>
     </div>
     <div class="button-options">
       <button class="card-button" (click)="clickOperar(true)">Comprar</button>
@@ -11,6 +16,12 @@
     </div>
   </div>
 </div>
+
+<ng-template #dadosInvestimento>
+  <h5>Total investido: {{ investimento.totalizador.valorInicial | moeda }}</h5>
+  <h5>Valor atual: {{ investimento.totalizador.valorAcumulado | moeda }}</h5>
+  <h5>Lucro: {{ (investimento.totalizador.valorAcumulado - investimento.totalizador.valorInicial) | moeda }}</h5>
+</ng-template>
 
 
 

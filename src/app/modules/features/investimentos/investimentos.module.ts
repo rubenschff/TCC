@@ -22,6 +22,9 @@ import { OperarComponent } from './components/operar/operar.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { MoedaPipe } from './pipes/moeda.pipe';
+import { PorcentagemPipe } from './pipes/porcentagem.pipe';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 const icons: IconDefinition[] = [ CloseCircleOutline ];
 
 @NgModule({
@@ -42,14 +45,16 @@ const icons: IconDefinition[] = [ CloseCircleOutline ];
       NzTabsModule,
       NzModalModule,
       NzMessageModule,
-      NzDrawerModule
+      NzDrawerModule,
+      NzPopoverModule
     ],
     exports: [
         DadosFinanceirosComponent
     ],
     declarations: [
       InvestimentosComponent, InvestimentoComponent, ComparacaoComponent,
-      DadosFinanceirosComponent, AcompanhamentoComponent, OperarComponent
+      DadosFinanceirosComponent, AcompanhamentoComponent, OperarComponent,
+      MoedaPipe, PorcentagemPipe
     ]
 })
 export class InvestimentosModule {}

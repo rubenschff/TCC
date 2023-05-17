@@ -11,8 +11,8 @@
         (ngModelChange)="ajustarValorTotal()"
         [nzMin]="1"
         [nzStep]="1"
-        [nzFormatter]="formatterDollar"
-        [nzParser]="parserDollar"
+        [nzFormatter]="formatMoeda"
+        [nzParser]="parseMoeda"
       ></nz-input-number>
     </div>
 
@@ -32,8 +32,8 @@
       <nz-input-number
         [(ngModel)]="comparacao.juro"
         [nzReadOnly]="true"
-        [nzFormatter]="formatterPercent"
-        [nzParser]="parserPercent"
+        [nzFormatter]="formatPorcentagem"
+        [nzParser]="parsePorcentagem"
       ></nz-input-number>
     </div>
 
@@ -42,8 +42,8 @@
       <nz-input-number
         [(ngModel)]="modelValorFinal"
         [nzReadOnly]="true"
-        [nzFormatter]="formatterDollar"
-        [nzParser]="parserDollar"
+        [nzFormatter]="formatMoeda"
+        [nzParser]="parseMoeda"
       ></nz-input-number>
     </div>
     <button nz-button nzType="primary" (click)="clickClose()">Fechar</button>

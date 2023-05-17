@@ -33,5 +33,7 @@
   span {
     display: block;
     @extend %font-normal-12;
+    width: 148px;
+    text-align: right;
   }
 }

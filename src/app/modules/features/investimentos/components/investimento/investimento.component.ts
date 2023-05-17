@@ -8,6 +8,8 @@ import { OperarComponent } from '../operar/operar.component';
 import { InvestimentoService } from 'app/services/http/investimento.service';
 import { SituacaoTransacaoEnum } from '@static/enumerators/investimento/situacao-transacao.enum';
 import { TipoTransacaoEnum } from '@static/enumerators/investimento/tipo-transacao.enum';
+import { NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
+
 
 @Component({
   selector: 'ac-investimento',
@@ -75,6 +77,26 @@ export class InvestimentoComponent {
         }
       }]
     });
+  }
+
+  clickSobre() {
+    this.ref = this.modal.create({
+      nzContent: this.investimento.explicacao,
+      nzTitle: this.investimento.descricao,
+      nzWidth: 400,
+      nzBodyStyle: { height: '300px', 'overflow-y': 'scroll' },
+      nzWrapClassName: `operar-popup`,
+      nzFooter: [{
+        label: 'Fechar',
+        onClick: () => {
+          this.ref.destroy();
+        }
+      }]
+    });
+  }
+
+  mostrarDadosInvestimento(): NzTooltipTrigger | undefined {
+    return this.investimento.totalizador.valorInicial ? 'hover' : null;
   }
 }
 

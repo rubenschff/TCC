@@ -15,6 +15,6 @@ registerLocaleData(localePt);
   declarations: [AppComponent],
   imports: [CoreModule, AppRoutingModule, NzSpinModule, HttpClientModule],
   bootstrap: [AppComponent],
-  providers: [LoaderService, {provide: LOCALE_ID, useValue: 'pt-BR' },CookieService]
+  providers: [LoaderService, { provide: LOCALE_ID, useValue: 'pt-BR' }, CookieService]
 })
 export class AppModule { }

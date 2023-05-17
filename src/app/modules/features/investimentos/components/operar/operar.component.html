@@ -1,6 +1,6 @@
 <div class="dados">
   <span>Ativo: {{ investimento.descricao }}</span>
-  <span>Juros: {{ investimento.juro.toFixed(2) }}% dia</span>
+  <span>Juros: {{ investimento.juro | porcentagem }}</span>
 </div>
 
 <div class="coluna">
@@ -10,7 +10,9 @@
         [(ngModel)]="valor"
         [nzMin]="1"
         [nzStep]="10"
+        [nzFormatter]="formatMoeda"
+        [nzParser]="parseMoeda"
       ></nz-input-number>
   </div>
-  <span>Valor disponível: {{ disponivel.toFixed(2) }}</span>
+  <span>Valor disponível: {{ disponivel | moeda }}</span>
 </div>

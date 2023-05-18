@@ -104,92 +104,92 @@ export class PerguntaMock {
     return [q1, q2, q3];
   }
 
-  static find(codigoUsuario: number, codigoPergunta?: number): PerguntaRespostaDTO {
-    let perguntas = this.getPerguntas();
+  // static find(codigoUsuario: number, codigoPergunta?: number): PerguntaRespostaDTO {
+  //   let perguntas = this.getPerguntas();
 
-    let respostas = this.respostas
-      .filter(x => {
-        let filtro = x.codigoUsuario == codigoUsuario
+  //   let respostas = this.respostas
+  //     .filter(x => {
+  //       let filtro = x.codigoUsuario == codigoUsuario
 
-        return filtro;
-      })
-      .sort((x1: RespostaDTO, x2: RespostaDTO) =>
-        new Date(x1.dataCadastro).getTime() - new Date(x2.dataCadastro).getTime()
-      );
+  //       return filtro;
+  //     })
+  //     .sort((x1: RespostaDTO, x2: RespostaDTO) =>
+  //       new Date(x1.dataCadastro).getTime() - new Date(x2.dataCadastro).getTime()
+  //     );
 
-    let codigoRespostas = new Array<number>();
-    let pergunta = perguntas[0];
+  //   let codigoRespostas = new Array<number>();
+  //   let pergunta = perguntas[0];
 
-    if (respostas.length > 0) {
-      if (!codigoPergunta) {
-        codigoPergunta = respostas[respostas.length - 1].codigoPergunta;
-      }
+  //   if (respostas.length > 0) {
+  //     if (!codigoPergunta) {
+  //       codigoPergunta = respostas[respostas.length - 1].codigoPergunta;
+  //     }
 
-      codigoRespostas = respostas.filter(x => x.codigoPergunta == codigoPergunta).map(x => x.codigoAlternativa);
+  //     codigoRespostas = respostas.filter(x => x.codigoPergunta == codigoPergunta).map(x => x.codigoAlternativa);
 
-      pergunta = this.getPerguntas().find(x => x.id == codigoPergunta)!;
-    }
+  //     pergunta = this.getPerguntas().find(x => x.id == codigoPergunta)!;
+  //   }
 
-    if (!pergunta) {
-      throw Error('Pergunta não encontrada!');
-    }
+  //   if (!pergunta) {
+  //     throw Error('Pergunta não encontrada!');
+  //   }
 
-    let perguntaResposta: PerguntaRespostaDTO = {
-      codigoUsuario,
-      pergunta,
-      respostas: codigoRespostas
-    }
+  //   let perguntaResposta: PerguntaRespostaDTO = {
+  //     codigoUsuario,
+  //     pergunta,
+  //     respostas: codigoRespostas
+  //   }
 
-    return perguntaResposta;
-  }
+  //   return perguntaResposta;
+  // }
 
-  static findAll(codigoUsuario: number): Array<ListaRespostaDTO> {
-    let retorno = new Array<ListaRespostaDTO>();
+  // static findAll(codigoUsuario: number): Array<ListaRespostaDTO> {
+  //   let retorno = new Array<ListaRespostaDTO>();
 
-    let ultimaFinalizada = true;
+  //   let ultimaFinalizada = true;
 
-    this.getPerguntas().forEach(pergunta => {
-      let respostas = this.respostas
-      .filter(x => x.codigoUsuario == codigoUsuario && x.codigoPergunta == pergunta.id)
-      .map(x => x.codigoAlternativa);
+  //   this.getPerguntas().forEach(pergunta => {
+  //     let respostas = this.respostas
+  //     .filter(x => x.codigoUsuario == codigoUsuario && x.codigoPergunta == pergunta.id)
+  //     .map(x => x.codigoAlternativa);
 
-      let situacao!: number;
+  //     let situacao!: number;
 
-      if (respostas.includes(pergunta.alternativaCorreta) && respostas.length < 3) {
-        situacao = SituacaoPerguntaEnum.ACERTOU;
-        ultimaFinalizada = true;
-      } else if (respostas.length == 3) {
-        situacao = SituacaoPerguntaEnum.ERROU;
-        ultimaFinalizada = true;
-      } else if (!respostas.includes(pergunta.alternativaCorreta) && ultimaFinalizada) {
-        situacao = SituacaoPerguntaEnum.EM_ABERTO;
-        ultimaFinalizada = false;
-      } else if (!ultimaFinalizada) {
-        situacao = SituacaoPerguntaEnum.BLOQUEADO;
-      }
+  //     if (respostas.includes(pergunta.alternativaCorreta) && respostas.length < 3) {
+  //       situacao = SituacaoPerguntaEnum.ACERTOU;
+  //       ultimaFinalizada = true;
+  //     } else if (respostas.length == 3) {
+  //       situacao = SituacaoPerguntaEnum.ERROU;
+  //       ultimaFinalizada = true;
+  //     } else if (!respostas.includes(pergunta.alternativaCorreta) && ultimaFinalizada) {
+  //       situacao = SituacaoPerguntaEnum.EM_ABERTO;
+  //       ultimaFinalizada = false;
+  //     } else if (!ultimaFinalizada) {
+  //       situacao = SituacaoPerguntaEnum.BLOQUEADO;
+  //     }
 
-      let perguntaRetorno: ListaRespostaDTO = {
-        codigoUsuario: codigoUsuario,
-        respostas,
-        codigoPergunta: pergunta.id,
-        situacao
-      }
+  //     let perguntaRetorno: ListaRespostaDTO = {
+  //       codigoUsuario: codigoUsuario,
+  //       respostas,
+  //       codigoPergunta: pergunta.id,
+  //       situacao
+  //     }
 
-      retorno.push(perguntaRetorno);
-    });
+  //     retorno.push(perguntaRetorno);
+  //   });
 
-    return retorno;
-  }
+  //   return retorno;
+  // }
 
-  static add(codigoUsuario: number, codigoPergunta: number, codigoAlternativa: number): boolean {
-    let respota: RespostaDTO = {
-      codigoUsuario,
-      codigoPergunta,
-      codigoAlternativa,
-      dataCadastro: DateHelper.formatDateTime(new Date())
-    }
+  // static add(codigoUsuario: number, codigoPergunta: number, codigoAlternativa: number): boolean {
+  //   let respota: RespostaDTO = {
+  //     codigoUsuario,
+  //     codigoPergunta,
+  //     codigoAlternativa,
+  //     dataCadastro: DateHelper.formatDateTime(new Date())
+  //   }
 
-    this.respostas.push(respota);
-    return true;
-  }
+  //   this.respostas.push(respota);
+  //   return true;
+  // }
 }

@@ -1,24 +1,33 @@
 @import 'src/sass/_placeholders';
 
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  min-width: 1366px;
+}
+
 nz-header {
   background-color: transparent;
   display: block;
-  justify-content: flex-end;
-  height: 100px;
+  padding: 0 !important;
+  height: auto;
 
-  span {
-    @extend %font-normal-14;
-    display: block;
-    box-sizing: content-box;
-    margin: auto 0px;
-    padding: 5px;
-    color: white;
-    &:hover {
-      cursor: pointer;
-      border: 1px solid white;
-      border-radius: 2px;
-    }
+  .formulario {
+    position: fixed;
+    width: 65px;
+    height: 65px;
+    bottom: 20px;
+    right: 10px;
+    text-align: center;
+    font-size: 40px;
+    z-index: 1000;
   }
+}
+
+nz-content {
+  padding: 0 20px;
+  min-height: 610px;
 }
 
 nz-layout, nz-content, router-outlet, nz-content > * {
@@ -26,18 +35,20 @@ nz-layout, nz-content, router-outlet, nz-content > * {
   width: 100%;
 }
 
-nz-content {
-color: transparent;
-
-
+nz-layout {
+  overflow-x: hidden;
 }
+
 
 nz-layout {
   background: #5e5eb9c7 url('../../../../../assets/universo.jpg') repeat fixed center;
   background-size: cover;
   background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+
+
+
 

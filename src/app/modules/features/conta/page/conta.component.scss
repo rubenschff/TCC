@@ -1,12 +1,18 @@
 @import 'src/sass/_placeholders';
 
+:host {
+  height: 100%;
+  display: block;
+}
+
 .container {
-  padding: 100px 100px;
+  padding: 55px 80px;
   display: flex;
   justify-content: space-between;
 
   .planetas {
     display: flex;
+    width: 350px;
     flex-direction: column;
     justify-content: space-between;
   }

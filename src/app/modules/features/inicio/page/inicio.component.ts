@@ -6,13 +6,14 @@ import {Cookie} from "@static/enumerators/cookie.enum";
 import {RotasConstant} from "@static/constants/rotas.constant";
 
 @Component({
-  selector: 'ac-mapa-jogo',
-  templateUrl: './mapa-jogo.component.html',
-  styleUrls: ['./mapa-jogo.component.scss']
+  selector: 'ac-inicio',
+  templateUrl: './inicio.component.html',
+  styleUrls: ['./inicio.component.scss']
 })
-export class MapaJogoComponent {
+export class InicioComponent {
 
   readonly URL_ASTRONAUTA = './assets/astronauta-pose.png';
+<<<<<<< HEAD:src/app/modules/features/mapa-jogo/page/mapa-jogo.component.ts
 
   constructor(
     private inicio: InicioService,
@@ -31,4 +32,6 @@ export class MapaJogoComponent {
       }
     })
   }
+=======
+>>>>>>> correcoes-front:src/app/modules/features/inicio/page/inicio.component.ts
 }

@@ -11,7 +11,4 @@ import {Router} from "@angular/router";
     templateUrl: './inicio.component.html',
     styleUrls: ['./inicio.component.scss']
 })
-export class InicioComponent {
-
-  constructor() {  }
-}
+export class InicioComponent {}

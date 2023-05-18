@@ -1,18 +1,13 @@
 <div class="container">
-
   <div class="investimentos">
-    <div class="titulos">
-      <ng-container *ngFor="let investimento of investimentos">
-        <ac-investimento [investimento]="investimento" (eventCardClick)="adicionarComparar($event)"></ac-investimento>
-      </ng-container>
-    </div>
-
-    <div class="comparacoes">
-      <ng-container *ngFor="let comparacao of comparacoes">
-        <ac-comparacao [comparacao]="comparacao" (eventCloseClick)="removerComparacao($event)"></ac-comparacao>
-      </ng-container>
-    </div>
+    <ng-container *ngFor="let investimento of investimentos">
+      <ac-investimento [investimento]="investimento" (compararCardClick)="adicionarComparar($event)"></ac-investimento>
+    </ng-container>
   </div>
 
-
+  <div class="comparacoes">
+    <ng-container *ngFor="let comparacao of comparacoes">
+      <ac-comparacao [comparacao]="comparacao" (eventCloseClick)="removerComparacao($event)"></ac-comparacao>
+    </ng-container>
+  </div>
 </div>

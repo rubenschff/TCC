@@ -1,44 +1,39 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { InvestimentoDTO } from '@static/models/investimento/investimento.dto';
-import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import { NzDrawerPlacement } from 'ng-zorro-antd/drawer';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { OperarComponent } from '../operar/operar.component';
+import { InvestimentoService } from 'app/services/http/investimento.service';
+import { SituacaoTransacaoEnum } from '@static/enumerators/investimento/situacao-transacao.enum';
+import { TipoTransacaoEnum } from '@static/enumerators/investimento/tipo-transacao.enum';
+import { NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
+
 
 @Component({
   selector: 'ac-investimento',
   templateUrl: './investimento.component.html',
   styleUrls: ['./investimento.component.scss']
 })
-export class InvestimentoComponent implements OnInit {
+export class InvestimentoComponent {
 
   @Input() investimento!: InvestimentoDTO;
 
-  @Output() eventCardClick = new EventEmitter<InvestimentoDTO>();
-
-  index1 = 0;
+  @Output() compararCardClick = new EventEmitter<InvestimentoDTO>();
 
   ref!: NzModalRef;
 
-  mostrarInvestir!: boolean;
-  mostrarResgatar!: boolean;
-
-  placement: NzDrawerPlacement = 'right';
-  drawerVisivel = false;
+  disponivel = 0;
 
   constructor(
     private modal: NzModalService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private investimentoService: InvestimentoService
   ) {}
 
-  ngOnInit(): void {
-    this.atualizarCard();
-  }
-
   cardClick() {
-    this.eventCardClick.emit(this.investimento);
+    this.compararCardClick.emit(this.investimento);
   }
 
   clickOperar(flagCompra: boolean) {
@@ -61,23 +56,47 @@ export class InvestimentoComponent implements OnInit {
         label: 'Salvar',
         type: 'primary',
         onClick: (comp: OperarComponent) => {
-
           if (comp.valor > comp.disponivel) {
             this.message.error(`Valor da ${ comp.flagCompra ? 'compra' : 'venda'} é maior do que a quantidade disponível!`);
           } else {
-            InvestimentoMock.operar(StorageHelper.codigoUsuario, this.investimento.id, comp.valor, comp.flagCompra);
-            this.ref.destroy();
-            this.message.success(`Operação realizada com sucesso!`);
-            this.atualizarCard();
+            this.investimentoService.operar({
+              investimentoId: comp.investimento.id,
+              situacao: SituacaoTransacaoEnum.ABERTA,
+              tipo: comp.flagCompra ? TipoTransacaoEnum.COMPRA : TipoTransacaoEnum.VENDA,
+              valorTransacao: comp.valor
+            }).subscribe({
+              next: () => {
+                this.ref.destroy();
+                this.message.success(`Operação realizada com sucesso!`);
+              },
+              error: error => {
+                console.log(error);
+              }
+            });
           };
         }
       }]
     });
   }
 
-  atualizarCard() {
-    this.mostrarInvestir = !!InvestimentoMock.findFinanceiro(StorageHelper.codigoUsuario).valorDisponivel;
-    this.mostrarResgatar = !!InvestimentoMock.findTotalizador(StorageHelper.codigoUsuario, this.investimento.id).valorAcumulado;
+  clickSobre() {
+    this.ref = this.modal.create({
+      nzContent: this.investimento.explicacao,
+      nzTitle: this.investimento.descricao,
+      nzWidth: 400,
+      nzBodyStyle: { height: '300px', 'overflow-y': 'scroll' },
+      nzWrapClassName: `operar-popup`,
+      nzFooter: [{
+        label: 'Fechar',
+        onClick: () => {
+          this.ref.destroy();
+        }
+      }]
+    });
+  }
+
+  mostrarDadosInvestimento(): NzTooltipTrigger | undefined {
+    return this.investimento.totalizador.valorInicial ? 'hover' : null;
   }
 }
 

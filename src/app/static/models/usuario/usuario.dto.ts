@@ -5,5 +5,4 @@ export interface UsuarioDTO {
   password: string;
   dateOfBirth: Date;
   accessToken: string;
-  token?: number;
 }

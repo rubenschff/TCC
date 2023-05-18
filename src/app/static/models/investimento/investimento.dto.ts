@@ -1,9 +1,13 @@
+import { TransacaoTotalizadorDTO } from './transacao-totalizador.dto';
+
 export interface InvestimentoDTO {
   id: number;
   descricao: string;
+  explicacao: string;
   risco: number;
-  juro: number;
   liquidez: number;
   imagem: string;
-  explicacao?: string;
+  juro: number;
+  aporteInicial: number;
+  totalizador: TransacaoTotalizadorDTO
 }

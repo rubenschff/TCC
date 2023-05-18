@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RotasConstant } from '@static/constants/rotas.constant';
-import {CookieService} from "ngx-cookie-service";
-import {Cookie} from "@static/enumerators/cookie.enum";
+import { CookieHelper } from '@static/helpers/cookie.helper';
 
 
 @Component({
@@ -24,7 +23,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private Cookie: CookieService
+    private cookieHelper: CookieHelper
     ) {}
 
   ngOnInit(): void {
@@ -51,7 +50,7 @@ export class HeaderComponent implements OnInit {
         break;
       }
       case 4:
-        this.Cookie.delete(Cookie.SESSION_ID)
+        this.cookieHelper.removeSessionId();
         this.router.navigate([RotasConstant.LOGIN]);
         break
     }

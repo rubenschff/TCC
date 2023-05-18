@@ -11,7 +11,8 @@ export class EndpointsConstant {
   }
 
   public static PERGUNTA = {
-    PERGUNTAS: URL_API + 'perguntas'
+    PERGUNTAS: URL_API + 'perguntas',
+    PROXIMA_PERGUNTA: URL_API + 'proxima_pergunta'
   }
 
   public static INVESTIMENTO = {

@@ -16,7 +16,7 @@ export class UsuarioService {
 
   constructor(
     private http: HttpClient,
-    private utilHelper: HttpHelper
+    private httpHelper: HttpHelper
   ) { }
 
   login(loginDTO: LoginDTO): Observable<UsuarioDTO> {
@@ -29,10 +29,10 @@ export class UsuarioService {
   }
 
   get(): Observable<UsuarioDTO> {
-    return this.http.get<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, this.utilHelper.getHttpOptions());
+    return this.http.get<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, this.httpHelper.getHttpOptions());
   }
 
   update(editarDTO: EditarDTO): Observable<UsuarioDTO> {
-    return this.http.put<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, editarDTO, this.utilHelper.getHttpOptions());
+    return this.http.put<UsuarioDTO>(EndpointsConstant.USUARIO.USUARIO, editarDTO, this.httpHelper.getHttpOptions());
   }
 }

@@ -15,22 +15,22 @@ export class InvestimentoService {
 
   constructor(
     private http: HttpClient,
-    private utilHelper: HttpHelper
+    private httpHelper: HttpHelper
   ) {}
 
   getAll(): Observable<Array<InvestimentoDTO>> {
-    return this.http.get<Array<InvestimentoDTO>>(EndpointsConstant.INVESTIMENTO.INVESTIMENTO, this.utilHelper.getHttpOptions());
+    return this.http.get<Array<InvestimentoDTO>>(EndpointsConstant.INVESTIMENTO.INVESTIMENTO, this.httpHelper.getHttpOptions());
   }
 
   operar(transacao: TransacaoDTO) {
-    return this.http.post(EndpointsConstant.INVESTIMENTO.TRANSACAO, transacao, this.utilHelper.getHttpOptions());
+    return this.http.post(EndpointsConstant.INVESTIMENTO.TRANSACAO, transacao, this.httpHelper.getHttpOptions());
   }
 
   totalizadorInvestimento(codigoInvestimento: number): Observable<TransacaoTotalizadorDTO> {
     const params = new HttpParams().set('investimento', codigoInvestimento);
 
     return this.http
-      .get<TransacaoTotalizadorDTO>(EndpointsConstant.INVESTIMENTO.TOTALIZADOR, this.utilHelper.getHttpOptions(params));
+      .get<TransacaoTotalizadorDTO>(EndpointsConstant.INVESTIMENTO.TOTALIZADOR, this.httpHelper.getHttpOptions(params));
   }
 
 }

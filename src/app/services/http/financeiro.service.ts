@@ -12,11 +12,10 @@ export class FinanceiroService {
 
   constructor(
     private http: HttpClient,
-    private utilHelper: HttpHelper
+    private httpHelper: HttpHelper
   ) { }
 
-
   financeiroById(): Observable<FinanceiroDTO> {
-    return this.http.get<FinanceiroDTO>(EndpointsConstant.INVESTIMENTO.FINANCEIRO, this.utilHelper.getHttpOptions());
+    return this.http.get<FinanceiroDTO>(EndpointsConstant.INVESTIMENTO.FINANCEIRO, this.httpHelper.getHttpOptions());
   }
 }

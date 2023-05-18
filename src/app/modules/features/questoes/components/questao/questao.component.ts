@@ -6,6 +6,7 @@ import { PerguntaMock } from 'app/mocks/pergunta.mocks';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.component';
 import { PerguntaService } from 'app/services/http/pergunta.service';
+import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
 
 @Component({
   selector: 'ac-questao',
@@ -39,28 +40,32 @@ export class QuestaoComponent implements OnInit {
   }
 
   atualizar() {
-    this.perguntaResposta =
+    this.perguntaService.proximaPergunta().subscribe({
+      next: perguntaResposta => {
+        debugger
+        this.perguntaResposta = perguntaResposta;
+        this.desabilitarAlternativa = this.perguntaResposta.respostas;
+        let pergunta = this.perguntaResposta.pergunta;
 
-    PerguntaMock.find(StorageHelper.codigoUsuario, this.codigoPergunta);
-    this.desabilitarAlternativa = this.perguntaResposta.respostas;
+        if (!this.codigoPergunta) {
+          this.codigoPergunta = pergunta.id;
+        }
 
-    let pergunta = this.perguntaResposta.pergunta;
-
-    if (!this.codigoPergunta) {
-      this.codigoPergunta = pergunta.id;
-    }
-
-    if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
-      this.alternativaSelecionada = pergunta.alternativaCorreta;
-      this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
-    } else {
-      this.alternativaSelecionada = 0;
-      this.desabilitarResponder = true;
-      this.desabilitarProximo = true;
-    }
+        if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
+          this.alternativaSelecionada = pergunta.alternativaCorreta;
+          this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
+        } else {
+          this.alternativaSelecionada = 0;
+          this.desabilitarResponder = true;
+          this.desabilitarProximo = true;
+        }
+      },
+      error: error => console.log(error)
+    });
   }
 
   changeAlternativa() {
+    debugger
     if (this.desabilitarResponder) {
       this.desabilitarResponder = false;
     } else if (this.alternativaSelecionada == 0) {
@@ -73,23 +78,27 @@ export class QuestaoComponent implements OnInit {
     let alternativa = pergunta.alternativas.find(x => x.id == this.alternativaSelecionada)!;
 
     let respostaCerta = pergunta.alternativaCorreta == alternativa.id;
+    debugger
 
-    PerguntaMock.add(StorageHelper.codigoUsuario, pergunta.id, alternativa.id);
+    this.perguntaService.responder({ codigoPergunta: pergunta.id, codigoAlternativa: alternativa.id }).subscribe({
+      next: perguntaResposta => {
+        debugger
+        this.atualizar();
 
-    this.atualizar();
+        if (respostaCerta) {
+          this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
+          this.desabilitarProximo = false;
+          this.desabilitarResponder = true;
+        } else {
+          this.desabilitarAlternativa.push(this.alternativaSelecionada);
+          this.alternativaSelecionada = 0;
+          this.changeAlternativa();
+        }
 
-    if (respostaCerta) {
-      this.adicionarValor();
-      this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
-      this.desabilitarProximo = false;
-      this.desabilitarResponder = true;
-    } else {
-      this.desabilitarAlternativa.push(this.alternativaSelecionada);
-      this.alternativaSelecionada = 0;
-      this.changeAlternativa();
-    }
-
-    this.abrirPopup(alternativa);
+        this.abrirPopup(alternativa);
+      },
+      error: error => console.log(error)
+    });
   }
 
   abrirPopup(alternativa: AlternativaDTO) {
@@ -113,13 +122,5 @@ export class QuestaoComponent implements OnInit {
   proximo() {
     this.codigoPergunta!++;
     this.atualizar();
-  }
-
-  adicionarValor() {
-    let tentativas = this.perguntaResposta.respostas.length;
-
-    if (tentativas < 3) {
-      // InvestimentoMock.addValor(StorageHelper.codigoUsuario, this.perguntaResposta.pergunta.recompensa / tentativas);
-    }
   }
 }

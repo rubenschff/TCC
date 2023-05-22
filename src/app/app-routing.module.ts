@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-import { RotasConstant } from './static/constants/rotas.constant';
+import { RotasConstant } from '@static/constants/rotas.constant';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: RotasConstant.LOGIN
+    redirectTo: RotasConstant.INICIO
   }, {
     path: RotasConstant.INICIO,
     loadChildren: () => import('./modules/base/inicio/inicio.module').then(m => m.InicioModule),

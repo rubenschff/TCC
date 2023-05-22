@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SituacaoPerguntaEnum } from '@static/enumerators/situacao-pergunta.enum';
-import { StorageHelper } from '@static/helpers/storage.helper';
-import { ListaRespostaDTO } from '@static/models/pergunta/lista-resposta.dto';
-import { PerguntaMock } from 'app/mocks/pergunta.mocks';
+import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
+import { PerguntaService } from 'app/services/http/pergunta.service';
 
 @Component({
   selector: 'ac-lista-questoes',
@@ -13,12 +12,19 @@ export class ListaQuestoesComponent implements OnInit {
 
   @Output() eventPerguntaClick = new EventEmitter<number>();
 
-  listaRespostas!: Array<ListaRespostaDTO>;
+  listaRespostas!: Array<PerguntaDTO>;
 
   situacaoPerguntaEnum = SituacaoPerguntaEnum;
 
+  constructor(private perguntaService: PerguntaService) {}
+
   ngOnInit(): void {
-    this.listaRespostas = PerguntaMock.findAll(StorageHelper.codigoUsuario);
+    this.perguntaService.todas().subscribe({
+      next: listaPerguntaRespostas => {
+        debugger
+        this.listaRespostas = listaPerguntaRespostas.map(x => x.pergunta);
+      }
+    });
   }
 
   clickPergunta(codigoPergunta: number) {

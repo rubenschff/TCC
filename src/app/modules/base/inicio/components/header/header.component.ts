@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RotasConstant } from '@static/constants/rotas.constant';
+import { CookieHelper } from '@static/helpers/cookie.helper';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class HeaderComponent implements OnInit {
   indexNavBarSelecionado = 0;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private cookieHelper: CookieHelper
     ) {}
 
   ngOnInit(): void {
@@ -48,6 +50,7 @@ export class HeaderComponent implements OnInit {
         break;
       }
       case 4:
+        this.cookieHelper.removeSessionId();
         this.router.navigate([RotasConstant.LOGIN]);
         break
     }

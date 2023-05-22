@@ -11,6 +11,6 @@ export class AppComponent implements AfterContentChecked {
   constructor(public loaderService: LoaderService, private cdref: ChangeDetectorRef) {}
 
   ngAfterContentChecked() {
-      this.cdref.detectChanges();
+    this.cdref.detectChanges();
   }
 }

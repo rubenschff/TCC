@@ -1,8 +1,8 @@
 export interface TransacaoDTO {
-  id: number;
-  codigoUsuario: number;
-  codigoInvestimento: number;
-  valor: number;
-  flagCompra: boolean;
-  dataCadastro: string;
+  investimentoId: number;
+  situacao: number;
+  tipo: number;
+  valorTransacao: number;
+  valorCota?: number;
+  quantidadeCotas?: number;
 }

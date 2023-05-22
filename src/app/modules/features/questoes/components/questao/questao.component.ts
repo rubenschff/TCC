@@ -2,10 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StorageHelper } from '@static/helpers/storage.helper';
 import { AlternativaDTO } from '@static/models/pergunta/alternativa.dto';
 import { PerguntaRespostaDTO } from '@static/models/pergunta/pergunta-resposta.dto';
-import { InvestimentoMock } from 'app/mocks/investimento.mocks';
 import { PerguntaMock } from 'app/mocks/pergunta.mocks';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.component';
+import { PerguntaService } from 'app/services/http/pergunta.service';
+import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
+import { DadosFinanceirosService } from 'app/services/dados-financeiros.service';
 
 @Component({
   selector: 'ac-questao',
@@ -28,24 +30,35 @@ export class QuestaoComponent implements OnInit {
 
   desabilitarAlternativa: Array<number> = [];
 
-  perguntaResposta!: PerguntaRespostaDTO;
+  perguntaResposta?: PerguntaRespostaDTO;
 
   constructor(
-    private modal: NzModalService) {}
+    private modal: NzModalService,
+    private perguntaService: PerguntaService,
+    private dadosFinanceirosService: DadosFinanceirosService) {}
 
   ngOnInit(): void {
-    this.atualizar();
+    if (this.codigoPergunta) {
+      this.perguntaService.get(this.codigoPergunta).subscribe({
+        next: this.processarPerguntaResposta,
+        error: error => console.log(error)
+      });
+    } else {
+      this.atualizar();
+    }
   }
 
   atualizar() {
-    this.perguntaResposta = PerguntaMock.find(StorageHelper.codigoUsuario, this.codigoPergunta);
-    this.desabilitarAlternativa = this.perguntaResposta.respostas;
+    this.perguntaService.proximaPergunta().subscribe({
+      next: this.processarPerguntaResposta,
+      error: error => console.log(error)
+    });
+  }
 
+  processarPerguntaResposta = (perguntaResposta: PerguntaRespostaDTO) => {
+    this.perguntaResposta = perguntaResposta;
+    this.desabilitarAlternativa = this.perguntaResposta.respostas.map(x => x.idAlternativa);
     let pergunta = this.perguntaResposta.pergunta;
-
-    if (!this.codigoPergunta) {
-      this.codigoPergunta = pergunta.id;
-    }
 
     if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
       this.alternativaSelecionada = pergunta.alternativaCorreta;
@@ -66,31 +79,34 @@ export class QuestaoComponent implements OnInit {
   }
 
   responder() {
-    let pergunta = this.perguntaResposta.pergunta;
-    let alternativa = pergunta.alternativas.find(x => x.id == this.alternativaSelecionada)!;
+    let pergunta = this.perguntaResposta!.pergunta;
+    let alternativa = pergunta!.alternativas.find(x => x.id == this.alternativaSelecionada)!;
 
-    let respostaCerta = pergunta.alternativaCorreta == alternativa.id;
+    let respostaCerta = pergunta!.alternativaCorreta == alternativa.id;
 
-    PerguntaMock.add(StorageHelper.codigoUsuario, pergunta.id, alternativa.id);
 
-    this.atualizar();
+    this.perguntaService.responder({ idPergunta: pergunta.id, idAlternativa: alternativa.id }).subscribe({
+      next: perguntaResposta => {
+        if (respostaCerta) {
+          this.desabilitarAlternativa = pergunta!.alternativas.map(x => x.id);
+          this.desabilitarProximo = false;
+          this.desabilitarResponder = true;
+          this.dadosFinanceirosService.atualizarFinanceiro();
+        } else {
+          this.processarPerguntaResposta(perguntaResposta);
+          this.desabilitarAlternativa.push(this.alternativaSelecionada);
+          this.alternativaSelecionada = 0;
+          this.changeAlternativa();
+        }
 
-    if (respostaCerta) {
-      this.adicionarValor();
-      this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
-      this.desabilitarProximo = false;
-      this.desabilitarResponder = true;
-    } else {
-      this.desabilitarAlternativa.push(this.alternativaSelecionada);
-      this.alternativaSelecionada = 0;
-      this.changeAlternativa();
-    }
-
-    this.abrirPopup(alternativa);
+        this.abrirPopup(alternativa);
+      },
+      error: error => console.log(error)
+    });
   }
 
   abrirPopup(alternativa: AlternativaDTO) {
-    let respostaCerta = this.perguntaResposta.pergunta.alternativaCorreta == alternativa.id;
+    let respostaCerta = this.perguntaResposta!.pergunta.alternativaCorreta == alternativa.id;
     let classe = respostaCerta ? 'acertou' : 'errou';
 
     this.modal.create({
@@ -105,18 +121,5 @@ export class QuestaoComponent implements OnInit {
       },
       nzFooter: []
     });
-  }
-
-  proximo() {
-    this.codigoPergunta!++;
-    this.atualizar();
-  }
-
-  adicionarValor() {
-    let tentativas = this.perguntaResposta.respostas.length;
-
-    if (tentativas < 3) {
-      InvestimentoMock.addValor(StorageHelper.codigoUsuario, this.perguntaResposta.pergunta.recompensa / tentativas);
-    }
   }
 }

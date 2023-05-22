@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { StorageHelper } from '@static/helpers/storage.helper';
-import { ComparacaoModel } from '@static/models/investimento/comparacao.model';
-import { InvestimentoMock } from 'app/mocks/investimento.mocks';
-import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import {FinanceiroDTO} from "@static/models/investimento/financeiro.dto";
+import {Router} from "@angular/router";
+import {RotasConstant} from "@static/constants/rotas.constant";
+import { FinanceiroService } from 'app/services/http/financeiro.service';
+import { CookieHelper } from '@static/helpers/cookie.helper';
+import { DadosFinanceirosService } from 'app/services/dados-financeiros.service';
+
+export let valorDisponivel = 0;
 
 @Component({
   selector: 'ac-dados-financeiros',
@@ -13,17 +15,32 @@ import {FinanceiroDTO} from "@static/models/investimento/financeiro.dto";
 })
 export class DadosFinanceirosComponent implements OnInit {
 
-  dadosFinanceiros!: FinanceiroDTO;
+  arrecadado = 0;
+  disponivel = 0;
+  acumulado = 0;
 
-  constructor(
-    private modal: NzModalService
-  ) {}
+  constructor(private dadosFinanceirosService: DadosFinanceirosService) {}
 
   ngOnInit(): void {
-    // this.modelValorInicial = this.comparacao?.valorInicial ?? 0;
-    // this.modelTempo = this.comparacao?.tempo;
-    // this.modelJuros = this.comparacao?.juro;
-    // this.modelValorFinal = this.comparacao?.valorFinal();
-    this.dadosFinanceiros = InvestimentoMock.findFinanceiro(StorageHelper.codigoUsuario);
+    this.subscribeEvents();
+
+    this.dadosFinanceirosService.atualizarFinanceiro();
+  }
+
+  subscribeEvents() {
+    this.dadosFinanceirosService.acumulado.subscribe({
+      next: acumulado => this.acumulado = acumulado
+    });
+
+    this.dadosFinanceirosService.arrecadado.subscribe({
+      next: arrecadado => this.arrecadado = arrecadado
+    });
+
+    this.dadosFinanceirosService.disponivel.subscribe({
+      next: disponivel => {
+        this.disponivel = disponivel;
+        valorDisponivel = disponivel;
+      }
+    });
   }
 }

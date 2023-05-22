@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import { ListaRespostaDTO } from '@static/models/pergunta/lista-resposta.dto';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Observable, map} from "rxjs";
 import { EndpointsConstant } from '@static/constants/endpoints.constant';
 import { PerguntaRespostaDTO } from '@static/models/pergunta/pergunta-resposta.dto';
 import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
@@ -18,8 +17,15 @@ export class PerguntaService {
     private httpHelper: HttpHelper
   ) { }
 
-  getAll(): Observable<Array<ListaRespostaDTO>> {
-    return this.http.get<Array<ListaRespostaDTO>>(EndpointsConstant.PERGUNTA.PERGUNTAS);
+  todas(): Observable<Array<PerguntaRespostaDTO>> {
+    return this.http.get<Array<PerguntaRespostaDTO>>(EndpointsConstant.PERGUNTA.PERGUNTAS, this.httpHelper.getHttpOptions());
+  }
+
+  get(codigoPergunta: number): Observable<PerguntaRespostaDTO> {
+    const params = new HttpParams().set('pergunta', codigoPergunta);
+
+    return this.http.get<Array<PerguntaRespostaDTO>>(EndpointsConstant.PERGUNTA.PERGUNTAS, this.httpHelper.getHttpOptions(params))
+    .pipe(map(retorno => retorno[0]));
   }
 
   proximaPergunta(): Observable<PerguntaRespostaDTO> {
@@ -27,7 +33,7 @@ export class PerguntaService {
   }
 
   responder(respostaDTO: RespostaDTO): Observable<PerguntaRespostaDTO> {
-    return this.http.post<PerguntaRespostaDTO>(EndpointsConstant.PERGUNTA.PROXIMA_PERGUNTA, respostaDTO, this.httpHelper.getHttpOptions());
+    return this.http.post<PerguntaRespostaDTO>(EndpointsConstant.PERGUNTA.RESPOSTA, respostaDTO, this.httpHelper.getHttpOptions());
   }
 }
 

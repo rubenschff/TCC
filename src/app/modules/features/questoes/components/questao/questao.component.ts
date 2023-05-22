@@ -7,6 +7,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.component';
 import { PerguntaService } from 'app/services/http/pergunta.service';
 import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
+import { DadosFinanceirosService } from 'app/services/dados-financeiros.service';
 
 @Component({
   selector: 'ac-questao',
@@ -29,43 +30,47 @@ export class QuestaoComponent implements OnInit {
 
   desabilitarAlternativa: Array<number> = [];
 
-  perguntaResposta!: PerguntaRespostaDTO;
+  perguntaResposta?: PerguntaRespostaDTO;
 
   constructor(
     private modal: NzModalService,
-    private perguntaService: PerguntaService) {}
+    private perguntaService: PerguntaService,
+    private dadosFinanceirosService: DadosFinanceirosService) {}
 
   ngOnInit(): void {
-    this.atualizar();
+    if (this.codigoPergunta) {
+      this.perguntaService.get(this.codigoPergunta).subscribe({
+        next: this.processarPerguntaResposta,
+        error: error => console.log(error)
+      });
+    } else {
+      this.atualizar();
+    }
   }
 
   atualizar() {
     this.perguntaService.proximaPergunta().subscribe({
-      next: perguntaResposta => {
-        debugger
-        this.perguntaResposta = perguntaResposta;
-        this.desabilitarAlternativa = this.perguntaResposta.respostas;
-        let pergunta = this.perguntaResposta.pergunta;
-
-        if (!this.codigoPergunta) {
-          this.codigoPergunta = pergunta.id;
-        }
-
-        if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
-          this.alternativaSelecionada = pergunta.alternativaCorreta;
-          this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
-        } else {
-          this.alternativaSelecionada = 0;
-          this.desabilitarResponder = true;
-          this.desabilitarProximo = true;
-        }
-      },
+      next: this.processarPerguntaResposta,
       error: error => console.log(error)
     });
   }
 
+  processarPerguntaResposta = (perguntaResposta: PerguntaRespostaDTO) => {
+    this.perguntaResposta = perguntaResposta;
+    this.desabilitarAlternativa = this.perguntaResposta.respostas.map(x => x.idAlternativa);
+    let pergunta = this.perguntaResposta.pergunta;
+
+    if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
+      this.alternativaSelecionada = pergunta.alternativaCorreta;
+      this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
+    } else {
+      this.alternativaSelecionada = 0;
+      this.desabilitarResponder = true;
+      this.desabilitarProximo = true;
+    }
+  }
+
   changeAlternativa() {
-    debugger
     if (this.desabilitarResponder) {
       this.desabilitarResponder = false;
     } else if (this.alternativaSelecionada == 0) {
@@ -74,22 +79,21 @@ export class QuestaoComponent implements OnInit {
   }
 
   responder() {
-    let pergunta = this.perguntaResposta.pergunta;
-    let alternativa = pergunta.alternativas.find(x => x.id == this.alternativaSelecionada)!;
+    let pergunta = this.perguntaResposta!.pergunta;
+    let alternativa = pergunta!.alternativas.find(x => x.id == this.alternativaSelecionada)!;
 
-    let respostaCerta = pergunta.alternativaCorreta == alternativa.id;
-    debugger
+    let respostaCerta = pergunta!.alternativaCorreta == alternativa.id;
 
-    this.perguntaService.responder({ codigoPergunta: pergunta.id, codigoAlternativa: alternativa.id }).subscribe({
+
+    this.perguntaService.responder({ idPergunta: pergunta.id, idAlternativa: alternativa.id }).subscribe({
       next: perguntaResposta => {
-        debugger
-        this.atualizar();
-
         if (respostaCerta) {
-          this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
+          this.desabilitarAlternativa = pergunta!.alternativas.map(x => x.id);
           this.desabilitarProximo = false;
           this.desabilitarResponder = true;
+          this.dadosFinanceirosService.atualizarFinanceiro();
         } else {
+          this.processarPerguntaResposta(perguntaResposta);
           this.desabilitarAlternativa.push(this.alternativaSelecionada);
           this.alternativaSelecionada = 0;
           this.changeAlternativa();
@@ -102,7 +106,7 @@ export class QuestaoComponent implements OnInit {
   }
 
   abrirPopup(alternativa: AlternativaDTO) {
-    let respostaCerta = this.perguntaResposta.pergunta.alternativaCorreta == alternativa.id;
+    let respostaCerta = this.perguntaResposta!.pergunta.alternativaCorreta == alternativa.id;
     let classe = respostaCerta ? 'acertou' : 'errou';
 
     this.modal.create({
@@ -117,10 +121,5 @@ export class QuestaoComponent implements OnInit {
       },
       nzFooter: []
     });
-  }
-
-  proximo() {
-    this.codigoPergunta!++;
-    this.atualizar();
   }
 }

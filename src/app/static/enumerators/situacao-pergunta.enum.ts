@@ -1,6 +1,6 @@
 export enum SituacaoPerguntaEnum {
-  BLOQUEADO,
-  EM_ABERTO,
-  ACERTOU,
-  ERROU
+  EM_ABERTO = 1,
+  ACERTOU = 2,
+  ERROU = 3,
+  BLOQUEADO = 0
 }

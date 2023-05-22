@@ -1,13 +1,13 @@
 
   <div class="container">
     <button *ngFor="let listaResposta of listaRespostas"
-    (click)="clickPergunta(listaResposta.codigoPergunta)"
+    (click)="clickPergunta(listaResposta.id)"
     class="questao" [class.errou]="listaResposta.situacao == situacaoPerguntaEnum.ERROU"
     [class.acertou]="listaResposta.situacao == situacaoPerguntaEnum.ACERTOU"
     [class.aberto]="listaResposta.situacao == situacaoPerguntaEnum.EM_ABERTO"
     [class.bloqueado]="listaResposta.situacao == situacaoPerguntaEnum.BLOQUEADO">
       <span>
-        Questão {{ listaResposta.codigoPergunta }}
+        Questão {{ listaResposta.id }}
       </span>
     </button>
   </div>

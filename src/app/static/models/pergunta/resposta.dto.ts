@@ -1,4 +1,4 @@
 export interface RespostaDTO {
-  codigoPergunta: number;
-  codigoAlternativa: number;
+  idPergunta: number;
+  idAlternativa: number;
 }

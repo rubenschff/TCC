@@ -7,4 +7,5 @@ export interface PerguntaDTO {
   alternativas: Array<AlternativaDTO>;
   alternativaCorreta: number;
   recompensa: number;
+  situacao: number;
 }

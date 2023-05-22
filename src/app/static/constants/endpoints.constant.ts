@@ -1,4 +1,5 @@
 import {environment} from "@environments/environment";
+import { url } from 'inspector';
 
 const URL_API = environment.api_url + '/';
 
@@ -12,7 +13,8 @@ export class EndpointsConstant {
 
   public static PERGUNTA = {
     PERGUNTAS: URL_API + 'perguntas',
-    PROXIMA_PERGUNTA: URL_API + 'proxima_pergunta'
+    PROXIMA_PERGUNTA: URL_API + 'proxima_pergunta',
+    RESPOSTA: URL_API + 'resposta'
   }
 
   public static INVESTIMENTO = {

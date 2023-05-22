@@ -1,13 +1,13 @@
 <div class="container">
   <div class="conceito">
-    <div class="explicacao" [innerHTML]="perguntaResposta.pergunta.explicacao"></div>
+    <div class="explicacao" [innerHTML]="perguntaResposta?.pergunta?.explicacao"></div>
     <div class="questao">
-      <div [innerHTML]="perguntaResposta.pergunta.descricao"></div>
+      <div [innerHTML]="perguntaResposta?.pergunta?.descricao"></div>
 
       <nz-divider></nz-divider>
       <nz-radio-group [(ngModel)]="alternativaSelecionada" (ngModelChange)="changeAlternativa()">
-        <div *ngFor="let alternativa of perguntaResposta.pergunta.alternativas">
-          <label #label nz-radio [nzValue]="alternativa.id" [nzDisabled]="desabilitarAlternativa.includes(alternativa.id)">
+        <div *ngFor="let alternativa of perguntaResposta?.pergunta?.alternativas">
+          <label #label nz-radio [nzValue]="alternativa.id" [nzDisabled]="parseInt(alternativa.id)">
             {{ alternativa.descricao }}
           </label>
 
@@ -21,7 +21,7 @@
   <div class="inferior">
     <div>
       <button (click)="eventHistoricoClick.emit()"
-        [style.display]="perguntaResposta.pergunta.id == 1 && perguntaResposta.respostas.length == 0 ? 'none' : 'block'">
+        [style.display]="perguntaResposta?.pergunta?.id == 1 && perguntaResposta?.respostas?.length == 0 ? 'none' : 'block'">
         <img [src]="URL_COMETA">
         <span>Histórico de respostas</span>
       </button>
@@ -32,7 +32,7 @@
         <img [src]="URL_TERRA">
         <span>Responder</span>
       </button>
-      <button [disabled]="desabilitarProximo" (click)="proximo()">
+      <button [disabled]="desabilitarProximo" (click)="atualizar()">
         <img [src]="URL_LUA">
         <span>Próxima</span>
       </button>

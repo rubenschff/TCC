@@ -7,7 +7,7 @@
       <nz-divider></nz-divider>
       <nz-radio-group [(ngModel)]="alternativaSelecionada" (ngModelChange)="changeAlternativa()">
         <div *ngFor="let alternativa of perguntaResposta?.pergunta?.alternativas">
-          <label #label nz-radio [nzValue]="alternativa.id" [nzDisabled]="parseInt(alternativa.id)">
+          <label #label nz-radio [nzValue]="alternativa.id" [nzDisabled]="this.desabilitarAlternativa.includes(alternativa.id)">
             {{ alternativa.descricao }}
           </label>
 

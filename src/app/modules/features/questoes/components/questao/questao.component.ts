@@ -7,6 +7,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.component';
 import { PerguntaService } from 'app/services/http/pergunta.service';
 import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
+import { DadosFinanceirosService } from 'app/services/dados-financeiros.service';
 
 @Component({
   selector: 'ac-questao',
@@ -33,7 +34,8 @@ export class QuestaoComponent implements OnInit {
 
   constructor(
     private modal: NzModalService,
-    private perguntaService: PerguntaService) {}
+    private perguntaService: PerguntaService,
+    private dadosFinanceirosService: DadosFinanceirosService) {}
 
   ngOnInit(): void {
     if (this.codigoPergunta) {
@@ -60,7 +62,7 @@ export class QuestaoComponent implements OnInit {
 
     if (this.desabilitarAlternativa.includes(pergunta.alternativaCorreta)) {
       this.alternativaSelecionada = pergunta.alternativaCorreta;
-      this.desabilitarAlternativa = pergunta.alternativas.map(x => +x.id);
+      this.desabilitarAlternativa = pergunta.alternativas.map(x => x.id);
     } else {
       this.alternativaSelecionada = 0;
       this.desabilitarResponder = true;
@@ -69,17 +71,11 @@ export class QuestaoComponent implements OnInit {
   }
 
   changeAlternativa() {
-
     if (this.desabilitarResponder) {
       this.desabilitarResponder = false;
     } else if (this.alternativaSelecionada == 0) {
       this.desabilitarResponder = true;
     }
-  }
-
-  parseInt(id: number): boolean {
-    const idNumerico: number = +id;
-    return this.desabilitarAlternativa.includes(idNumerico);
   }
 
   responder() {
@@ -92,9 +88,10 @@ export class QuestaoComponent implements OnInit {
     this.perguntaService.responder({ idPergunta: pergunta.id, idAlternativa: alternativa.id }).subscribe({
       next: perguntaResposta => {
         if (respostaCerta) {
-          this.desabilitarAlternativa = pergunta!.alternativas.map(x => +x.id);
+          this.desabilitarAlternativa = pergunta!.alternativas.map(x => x.id);
           this.desabilitarProximo = false;
           this.desabilitarResponder = true;
+          this.dadosFinanceirosService.atualizarFinanceiro();
         } else {
           this.processarPerguntaResposta(perguntaResposta);
           this.desabilitarAlternativa.push(this.alternativaSelecionada);

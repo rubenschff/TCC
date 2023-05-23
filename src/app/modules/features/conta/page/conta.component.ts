@@ -61,7 +61,6 @@ export class ContaComponent implements OnInit {
 
   alterar() {
     let values: EditarDTO = {...this.form.value};
-    debugger
 
     if (this.name == values.name){
       delete values.name

@@ -39,7 +39,6 @@ export class ContaComponent implements OnInit {
   ngOnInit() {
     this.usuarioService.get().subscribe({
       next: data => {
-        console.log(data);
         this.name = data.name;
         this.nick = data.nickName;
         this.dateOfBirth = data.dateOfBirth;
@@ -79,7 +78,7 @@ export class ContaComponent implements OnInit {
         this.message.success(`Alteração realizada com sucesso!`);
       },
       error: error => {
-        console.log(error.message);
+        this.message.error(`Informe a <strong>Nova senha</strong> e a <strong>Senha antiga</strong> para trocar de senha`);
       }
     })
 

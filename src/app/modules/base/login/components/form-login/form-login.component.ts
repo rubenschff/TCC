@@ -6,6 +6,7 @@ import { UsuarioDTO } from '@static/models/usuario/usuario.dto';
 import { UsuarioService } from 'app/services/http/usuario.service';
 import { LoginDTO } from '@static/models/usuario/login.dto';
 import { CookieHelper } from '@static/helpers/cookie.helper';
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'ac-form-login',
@@ -24,13 +25,14 @@ export class FormLoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private cookieHelper: CookieHelper
+    private cookieHelper: CookieHelper,
+    private message: NzMessageService
   ) {}
 
   ngOnInit() {
 
     this.form = this.fb.group({
-        nickName: ['', Validators.compose([Validators.required])],
+        nickName: ['', Validators.compose([Validators.required,Validators.minLength(6)])],
         password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
     });
   }
@@ -45,9 +47,9 @@ export class FormLoginComponent implements OnInit {
       },
       error: (error) => {
         if (error.status == 404){
-          console.log('Usuario não encontrado');
+          this.message.error('Usuario não encontrado')
         }else if(error.status == 401){
-          console.log('Senha incorreta');
+          this.message.error('Senha incorreta')
         }
       }
     });

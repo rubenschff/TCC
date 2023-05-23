@@ -8,12 +8,12 @@ export class MathHelper {
   }
 
   static formatMoeda(value: number = 0): string {
-    //debugger
+
     return `R$${defaultNumber(value).toFixed(2).toString().replace('.', ',')}`;
   }
 
   static parseMoeda(value: string = '0'): string {
-    //debugger
+
     return defaulString(value).replace('R$', '').replace(',', '.');
   }
 }

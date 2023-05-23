@@ -38,7 +38,7 @@ export class FormCadastroComponent implements OnInit {
   ngOnInit() {
 
     this.form = this.fb.group({
-        name: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+        name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
         nickName:['', Validators.compose([Validators.required, Validators.minLength(6)])],
         password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
         dateOfBirth: ['', Validators.compose([Validators.required])]

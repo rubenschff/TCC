@@ -50,22 +50,16 @@ export class ContaComponent implements OnInit {
 
 
     this.form = this.fb.group({
-      name: [this.name],
-      dateOfBirth: [this.dateOfBirth],
-      password: [''],
-      oldPassword: [''],
+      name: [this.name, Validators.compose([Validators.required, Validators.minLength(4)])],
+      dateOfBirth: [this.dateOfBirth, Validators.compose([Validators.required])],
+      password: ['',Validators.compose([Validators.required, Validators.minLength(6)])],
+      oldPassword: ['',Validators.compose([Validators.required, Validators.minLength(6)])],
     });
   }
 
   alterar() {
     let values: EditarDTO = this.form.value;
 
-    if (this.name == values.name){
-      delete values.name
-    }
-    if (this.dateOfBirth == values.dateOfBirth){
-      delete values.dateOfBirth
-    }
     if (values.password == ''){
       delete values.password
     }
@@ -77,8 +71,13 @@ export class ContaComponent implements OnInit {
       next: data => {
         this.message.success(`Alteração realizada com sucesso!`);
       },
-      error: error => {
+      error: error => {if (error.status == 400){
+        this.message.error("Preencha os campos corretamente!")
+      }else if(error.status == 401){
         this.message.error(`Informe a <strong>Nova senha</strong> e a <strong>Senha antiga</strong> para trocar de senha`);
+      }else {
+        this.message.error(error.message)
+      }
       }
     })
 

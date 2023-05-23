@@ -25,7 +25,8 @@ export class ContaComponent implements OnInit {
 
   name!: string;
   nick!: string;
-  password!: string;
+  password = '';
+  oldPassword = '';
   dateOfBirth!: Date;
 
   form!: FormGroup;
@@ -53,13 +54,14 @@ export class ContaComponent implements OnInit {
     this.form = this.fb.group({
       name: [this.name],
       dateOfBirth: [this.dateOfBirth],
-      password: [''],
-      oldPassword: [''],
+      password: [this.password],
+      oldPassword: [this.oldPassword],
     });
   }
 
   alterar() {
-    let values: EditarDTO = this.form.value;
+    let values: EditarDTO = {...this.form.value};
+    debugger
 
     if (this.name == values.name){
       delete values.name
@@ -82,8 +84,6 @@ export class ContaComponent implements OnInit {
         console.log(error.message);
       }
     })
-
-    this.ngOnInit()
   }
 
 }

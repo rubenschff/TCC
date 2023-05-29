@@ -58,7 +58,7 @@ export class InvestimentoComponent {
         label: 'Salvar',
         type: 'primary',
         onClick: (comp: OperarComponent) => {
-          
+
           if (comp.valor > comp.disponivel) {
             this.message.error(`Valor da ${ comp.flagCompra ? 'compra' : 'venda'} é maior do que a quantidade disponível!`);
           } else {

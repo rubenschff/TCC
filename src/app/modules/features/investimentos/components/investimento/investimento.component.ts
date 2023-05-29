@@ -8,7 +8,6 @@ import { SituacaoTransacaoEnum } from '@static/enumerators/investimento/situacao
 import { TipoTransacaoEnum } from '@static/enumerators/investimento/tipo-transacao.enum';
 import { NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
 import {DadosFinanceirosService} from "../../../../../services/dados-financeiros.service";
-import {InvestimentosComponent} from "@modules/features/investimentos/page/investimentos.component";
 
 
 @Component({
@@ -30,8 +29,7 @@ export class InvestimentoComponent {
     private modal: NzModalService,
     private message: NzMessageService,
     private investimentoService: InvestimentoService,
-    private dadosFinanceirosService : DadosFinanceirosService,
-    private investimentoComponent : InvestimentosComponent
+    private dadosFinanceirosService : DadosFinanceirosService
   ) {}
 
   cardClick() {
@@ -58,7 +56,7 @@ export class InvestimentoComponent {
         label: 'Salvar',
         type: 'primary',
         onClick: (comp: OperarComponent) => {
-          
+
           if (comp.valor > comp.disponivel) {
             this.message.error(`Valor da ${ comp.flagCompra ? 'compra' : 'venda'} é maior do que a quantidade disponível!`);
           } else {
@@ -69,8 +67,7 @@ export class InvestimentoComponent {
               valorTransacao: comp.valor
             }).subscribe({
               next: () => {
-                this.investimentoComponent.ngOnInit()
-                this.dadosFinanceirosService.atualizarFinanceiro() //atualiza financeiro
+                this.dadosFinanceirosService.atualizarFinanceiro(); //atualiza financeiro
                 this.ref.destroy();
                 this.message.success(`Operação realizada com sucesso!`);
               },

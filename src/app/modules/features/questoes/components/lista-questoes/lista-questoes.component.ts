@@ -21,7 +21,6 @@ export class ListaQuestoesComponent implements OnInit {
   ngOnInit(): void {
     this.perguntaService.todas().subscribe({
       next: listaPerguntaRespostas => {
-        debugger
         this.listaRespostas = listaPerguntaRespostas.map(x => x.pergunta);
       }
     });

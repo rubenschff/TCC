@@ -7,6 +7,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { UsuarioService } from 'app/services/http/usuario.service';
 import { CadastroDTO } from '@static/models/usuario/cadastro.dto';
 import { CookieHelper } from '@static/helpers/cookie.helper';
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'ac-form-cadastro',
@@ -30,14 +31,15 @@ export class FormCadastroComponent implements OnInit {
     private cookieHelper: CookieHelper,
     private usuarioService: UsuarioService,
     private fb: FormBuilder,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private message: NzMessageService
   ) {}
 
   ngOnInit() {
 
     this.form = this.fb.group({
-        name: ['', Validators.compose([Validators.required])],
-        nickName:['', Validators.compose([Validators.required])],
+        name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+        nickName:['', Validators.compose([Validators.required, Validators.minLength(6)])],
         password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
         dateOfBirth: ['', Validators.compose([Validators.required])]
     });
@@ -52,10 +54,12 @@ export class FormCadastroComponent implements OnInit {
         this.abrirPopup(usarioDTO);
       },
       error: (error) => {
-        console.log(error.message)
         if (error.status == 401){
-          console.log("Usuário ja cadastrado")
-          return error.message
+          this.message.error("Nickname não disponível!")
+        }else if (error.status == 400){
+          this.message.error("Preencha todos os campos!")
+        }else {
+          this.message.error("Houve um erro realizar o cadastro")
         }
       }
     });

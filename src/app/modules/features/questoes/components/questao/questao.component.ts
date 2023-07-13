@@ -8,6 +8,7 @@ import { ExplicacaoPopupComponent } from '../explicacao-popup/explicacao-popup.c
 import { PerguntaService } from 'app/services/http/pergunta.service';
 import { PerguntaDTO } from '@static/models/pergunta/pergunta.dto';
 import { DadosFinanceirosService } from 'app/services/dados-financeiros.service';
+import { ImageHelper } from '@static/helpers/image.helper';
 
 @Component({
   selector: 'ac-questao',
@@ -117,7 +118,7 @@ export class QuestaoComponent implements OnInit {
       nzMaskClosable: false,
       nzComponentParams: {
         explicacao: alternativa?.explicacao,
-        img: alternativa.imagem,
+        img: ImageHelper.urlImagemAcertouErrou(respostaCerta),
       },
       nzFooter: []
     });
